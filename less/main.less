@@ -101,12 +101,12 @@ textarea {
 /* ==========================================================================
    LESS large rules
    ========================================================================== */
-.transition( @property: all ) {
-  transition: @property .8s ease;
-  -webkit-transition: @property .8s ease;
-  -moz-transition: @property .8s ease;
-  -o-transition: @property .8s ease;
-  -ms-transition: @property .8s ease;
+.transition( @property: all, @time: .8s ) {
+  transition: @property @time ease;
+  -webkit-transition: @property @time ease;
+  -moz-transition: @property @time ease;
+  -o-transition: @property @time ease;
+  -ms-transition: @property @time ease;
 }
 .radius( @radius: 100px ) {
   -webkit-border-radius: @radius;
@@ -125,9 +125,8 @@ textarea {
 @myriad: "myriad-pro",sans-serif;
 @tahoma:  Tahoma, sans-serif;
 
-.font-main ( @size: .875em ) {
+.font-main ( @size: .875em) {
   font: @size @pt-serif;
-  color: @font-main-color;
 }
 
 /* ==========================================================================
@@ -135,17 +134,19 @@ textarea {
    ========================================================================== */
 @lang-color: #707070;
 @active-link: #9a092b;
+@active-link-hover: #e60a3b;
 @nav-color: #4d4a48;
 @font-main-color: #222;
+@gray: #888;
 
 /* ==========================================================================
    Author's custom styles
    ========================================================================== */
-html, body { font: 1em "pt-serif"; }
+html, body { font: 1em @pt-serif; }
 .wrapper { width: 933px; margin: 1.5em auto 0; }
 .logo { float: left; width: 234px; height: 132px; margin: 1.5em 0 0; }
 .logo-icon { display: inline-block; width: 51px; height: 87px; border: 2px solid #4b4b4b; background: url(../img/logo.png) no-repeat; }
-.r-head-content { margin: 0 0 0 234px; }
+.r-head-content { height: 184px; margin: 0 0 0 234px; }
 
 .lang { margin: 1.5em 0 0;
   .lang-list { margin: 0; padding: 0; list-style-type: none;
@@ -162,10 +163,11 @@ html, body { font: 1em "pt-serif"; }
 //Issue
 
 .issue { width: 138px; height: 138px; background-color: @active-link; float: right; text-align: center; color: #fff;
-         .radius;
+         .radius; .transition( all, .4s );
   .issue-text { font: italic 700 .875em @pt-serif; margin: 2.25em 0 0; }
   .issue-num { font: 700 3.281875em e('/') 1em @proxima; }       
 }
+.issue:hover { background-color: #e60a3b; }
 
 //Navigation
 
@@ -181,27 +183,49 @@ nav { float: left; width: 234px; }
 
 //Article
 
-article { margin: 0 0 0 234px; }
+article { margin: 0 0 0 234px; 
+  .authors { width: 567px; margin: 148px 0 66px;  
+    .font-main; color: @gray; font-style: italic;
+  }
+  .biblio-link { line-height: 1.5em;
+    .font-main( .875em );
+    a { color: @gray; text-decoration: none; border-bottom: 1px solid transparent; 
+      .transition;
+    }
+    a:hover { border-bottom: 1px solid @gray; }
+  }
+  .key-words { margin: 1em 0 0; 
+    .font-main;
+    a { text-decoration: none; color: @gray; }
+  }
+}
 
 article header { 
-  .article-h1 { position: relative; top: -6px; font: 700 2.25em e('/') 1.194em @proxima; color: @font-main-color; 
+  .article-h1 { position: relative; top: -6px; margin-bottom: 0; font: 700 2.25em e('/') 1.194em @proxima; color: @font-main-color; 
     .uppercase;
   }
-  .desc {      
-    .font-main;  
+  .delicate-design-stroke { display: inline-block; width: 70px; margin: 0 0 1.5em; border-bottom: 5px solid @active-link; }
+  .article-h2 { width: 567px; font: 700 1.375em e('/') 1.22727272em @proxima;
+    .uppercase;
+  }
+  .desc { margin: 3.2857em 0 5em 0;     
+    .font-main; line-height: 2.3571em; 
+  }
+  .all-pubs-link { position: relative; float: right; font: 13px @myriad; z-index: 5;
+    a { display: block; line-height: 1em; color: @font-main-color; }
   }
 }
 
 // Unordered list
 
-.themes-list { margin: 5em 0 3.2em;
-  .themes-item { margin: 0 0 1.85em;
-    .font-main;
+.themes-list { margin: 0 0 3.2em;
+  .themes-item { margin: 0 0 1.85em; line-height: 1em;
+    .font-main( .875em);
   }
 }
 
 .freq-div { 
-   margin: 0 0 3.5em; .font-main; line-height: 3.3em;
+   margin: 0 0 3.5em; .font-main;
 }
 
 footer { padding: 1.125em 0 3.5em; font: .8125em @myriad; text-align: right; }
@@ -215,14 +239,233 @@ footer { padding: 1.125em 0 3.5em; font: .8125em @myriad; text-align: right; }
   .age p { display: inline; color: #000; border-bottom: 2px solid #a3a3a3; }  
 }  
 
+// PDF Download link
+.pdf-dl-link { float: right; text-align: center;
+  a { display: block; color: @font-main-color; text-decoration: none; font: .8125em e('/') 2.4615em @myriad;
+    .uppercase;
+    img { display: block; margin: 0 auto; }
+  }
+  a:hover { color: @font-main-color + #444444; }
+}
 
+// Sections styles
+section { width: 600px; margin: 50px 0 0;
+  header {
+    h3 { margin: 0 0 28px; font: 700 1.125em e('/') 1.1666em @proxima;
+      .uppercase;
+    }
+  }
+  .unord-list { margin: 0; padding: 0; list-style-type: none;
+    .unord-item { font: .875em @pt-serif; 
+      line-height: 1.125em;
+      .list-item-icon { float: left; width: 27px; height: 34px; margin: 0 20px 31px 0; 
+        a { display: block; height: 100%; }
+      }      
+      .list-item-icon.video { background: url(../img/sprites/files_types.png) no-repeat left 0; }
+      .list-item-icon.video:hover { background-position: left -54px; }
+      .list-item-icon.audio { background: url(../img/sprites/files_types.png) no-repeat -57px 0; }
+      .list-item-icon.audio:hover { background-position: -57px -54px; }
+      .list-item-icon.text { background: url(../img/sprites/files_types.png) no-repeat -113px 0; }
+      .list-item-icon.text:hover { background-position: -113px -54px; }
+      
+      .list-item-desc { 
+        .list-dl-link { color: @gray; border-bottom: 1px solid transparent; text-decoration: none;
+          .transition;
+        }
+        .list-dl-link:hover { border-bottom: 1px solid @gray; }
+      }
+    }
+    .unord-item:last-child .list-item-icon{ margin-bottom: 0; }
+  }
+  .ord-list { margin: 0; padding: 0;
+    .ord-item { margin: 0 0 1.2em; padding: 0 0 0 .5em; 
+      span { color: @font-main-color;
+        .gray { color: @gray - #161616; }
+      }
+      .font-main( .875em); line-height: 1em; color: @gray;
+    }
+  }
+}
 
+// section comments
+.comments-section {
+  header {
+    h3 { margin-bottom: .75em; }
+  }
+  .comments { 
+    .auth-to-comment { margin: 0 0 .75em; }
+    .auth-icons { margin: 0 0 .75em;
+      div { display: inline-block; height: 26px; width: 27px; 
+        a { display: block; height: 100%; }
+      }
+      .facebook { background: url(../img/sprites/social_icons.png) no-repeat left top; }
+      .twitter { background: url(../img/sprites/social_icons.png) no-repeat center top; }
+      .vk { background: url(../img/sprites/social_icons.png) no-repeat right top; }
+      .facebook:hover { background-position: left bottom; }
+      .twitter:hover { background-position: center bottom; }
+      .vk:hover { background-position: right bottom; }
+    }
+    form { width: 500px;
+      textarea { width: 500px; height: 104px; border: 1px solid @font-main-color; }
+      input[type="submit"] { float: right; width: 99px; height: 35px; background: @active-link; color: #fff; border: none; .radius(2px); .transition( all, .4s ); }
+      input[type="submit"]:hover { background-color: @active-link-hover; }
+      .comment-from-form { margin: 1em 0 65px;
+        figure { float: left; width: 61px; height: 61px;
+          img { max-width: 100%; .radius; }
+        }
+        .comment-from-info { margin: 0 105px 0 72px; 
+          .name { font: italic 18px e('/') 21px @pt-serif; }
+          .social-addr { margin: .5em 0 0; color: @gray; }
+        }
+      }
+    }
+    .comments-list { margin: 0; padding: 0; list-style-type: none;
+      li { margin: 0 0 38px;
+        .comment-from { position: relative; left: -72px;
+          figure { float: left; width: 61px; height: 61px;
+            img { max-width: 100%; .radius; }
+          }
+          .comment-from-info { margin: 0 0 0 72px;
+            .name { font: italic 18px e('/') 21px @pt-serif; }
+            .comment-text { margin: .5em 0 0; }
+            .answer { display: inline-block; margin: .75em 0 0; color: @active-link; letter-spacing: 2px; cursor: pointer; }
+          }  
+        }
+      }
+      .answer-elem {
+        position: relative;
+        left: 72px;          
+      }
+    }
+    .font-main( .875em); 
+  }
+}
 
+//All issues-list
+.section-all-issues { width: 750px; }
+.production-years {
+  .production-years-list { margin: 0; padding: 0; list-style-type: none;
+    li { display: inline-block; margin: 0 1em 0 0;
+      a { display: block; font: 22px e('/') 27px @pt-serif; color: @nav-color; border-bottom: 1px dashed @nav-color; text-decoration: none;
+      .transition;
+      }
+      a:hover { color: @font-main-color; border-color: transparent; }
+    }     
+  }
+}
+.month-issues { margin: 0; padding: 0; list-style-type: none; color: #fff;
+  .month-issues-item { display: inline-block; position: relative; width: 150px; height: 196px; margin: 0 33px 53px 0; background: #f5f5f5;
+    -webkit-perspective: 600px;  
+       -moz-perspective: 600px;  
+        -ms-perspective: 600px; 
+            perspective: 600px;     
+    .panel.flipped { transform: rotateY( 180deg ); }        
+    .panel { position: absolute; width: 100%; height: 100%; 
+        -webkit-transform-style: preserve-3d;
+        -moz-transform-style: preserve-3d;
+        -ms-transform-style: preserve-3d;
+        transform-style: preserve-3d;
+        
+        .transition( transform, 1s );             
+      figure {
+        display: block;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
+        -moz-backface-visibility:    hidden;
+        -ms-backface-visibility:     hidden;
+      }
+      .front {
+        background: @active-link;
+        div { position: absolute; top: 20%; left: 5px; font: 15px @proxima;
+          .uppercase;
+          .big { font: 93px @proxima; }
+        }
+      }
+      .back { text-align: center;
+        color: @active-link;
+        -webkit-transform: rotateY( 180deg );
+        -moz-transform: rotateY( 180deg );
+        -ms-transform: rotateY( 180deg );
+        transform: rotateY( 180deg );
+        a{ display: block; color: @active-link; text-decoration: none;
+          .back-date { font: 22px e('/') 27px @proxima; text-align: center;
+            .back-month { font-weight: 700; display: block; margin: 33px auto 0; }
+            .back-year { display: block; margin: 0 auto; }
+            .delicate-design-stroke { display: inline-block; width: 33px; height: 10px; margin: 0 0 48px; border-bottom: 1px solid @active-link; }
+          }
+          .publication-num { font-size: 13px; }
+        }
+      }
+    }
+  }
+}
 
+//month-issues
+.month-list { margin: 0; padding: 0; color: @gray;
+  li { margin: 0 0 66px;
+    h2 { width: 567px; margin-bottom: .4em; font: 700 1.375em e('/') 1.22727272em @proxima; 
+    .uppercase;    
+    a { color: @font-main-color; text-decoration: none; border-bottom: 1px solid transparent; .transition; }
+    a:hover { border-color: @font-main-color; }  
+    }
+    .authors { width: 567px; margin: 0; }
+  }
+}
 
+//search - page
+.month-list.search-page { list-style-type: none; } 
+.search-page-form { 
+  .form-header { margin: 0 0 1em; font: 700 22px e('/') 27px @proxima; .uppercase;  }
+  input[type="text"] { display: block; width: 280px; height: 27px; margin: 0 0 1em; padding: 0 0 0 .5em; font: 13px e('/') 32px @myriad; border: 1px solid @font-main-color; }
+  input[type="submit"] { display: block; width: 99px; height: 35px; margin: 0 0 4.5em; background: @active-link; color: #fff; border: none; .radius(2px); .transition( all, .4s ); }
+  input[type="submit"]:hover { background-color: @active-link-hover; }
+  .year-select, .num-select { display: inline-block; margin: 0 1.3em 2em 0; }
+  .year-select select { width: 144px; }
+  .num-select select { width: 112px; }
+  select {
+    padding:3px;
+    margin: 0;  
+    border: 1px solid @font-main-color;     
+    background: #f8f8f8;
+    color:#888;
+    outline:none;
+    display: inline-block;
+    -webkit-appearance:none;
+    -moz-appearance:none;
+    appearance:none;
+    cursor:pointer;
+  }
 
+  /* Targetting Webkit browsers only. FF will show the dropdown arrow with so much padding. */
+  @media screen and (-webkit-min-device-pixel-ratio:0) {
+      select {padding-right:18px}
+  }
 
-
+  label {position:relative}
+  label:after {
+      content:'▼';
+      color:#fff;
+      right:6px; top:2px;
+      padding:0 0 2px;
+      position:absolute;
+      pointer-events:none;
+      font-size: 12px;
+  }
+  label:before {
+    background:#C2C2C2;
+    content: "";
+    display: block;
+    height: 27px;
+    pointer-events: none;
+    position: absolute;
+    right: 1px;
+    top: -2px;
+    width: 23px;
+  }
+}
 
 /* ==========================================================================
    Helper classes
