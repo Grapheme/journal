@@ -183,7 +183,7 @@ nav { float: left; width: 234px; }
 
 //Article
 
-article { margin: 0 0 0 234px; 
+article { margin: 0 0 0 234px; min-height: 20em;
   .authors { width: 567px; margin: 148px 0 66px;  
     .font-main; color: @gray; font-style: italic;
   }
@@ -204,7 +204,7 @@ article header {
   .article-h1 { position: relative; top: -6px; margin-bottom: 0; font: 700 2.25em e('/') 1.194em @proxima; color: @font-main-color; 
     .uppercase;
   }
-  .delicate-design-stroke { display: inline-block; width: 70px; margin: 0 0 1.5em; border-bottom: 5px solid @active-link; }
+  .delicate-design-stroke { display: inline-block; width: 70px; margin: 0 0 2em; border-bottom: 5px solid @active-link; }
   .article-h2 { width: 567px; font: 700 1.375em e('/') 1.22727272em @proxima;
     .uppercase;
   }
@@ -213,6 +213,7 @@ article header {
   }
   .all-pubs-link { position: relative; float: right; font: 13px @myriad; z-index: 5;
     a { display: block; line-height: 1em; color: @font-main-color; }
+    a:hover { text-decoration: none; }
   }
 }
 
@@ -416,54 +417,60 @@ section { width: 600px; margin: 50px 0 0;
 }
 
 //search - page
-.month-list.search-page { list-style-type: none; } 
+.month-list.search-page { list-style-type: none;   
+  .publications-date { margin: 0 0 1.6em; font: 13px @pt-serif; color: @gray; }
+  .article-h2 { margin-bottom: 0; }
+} 
 .search-page-form { 
   .form-header { margin: 0 0 1em; font: 700 22px e('/') 27px @proxima; .uppercase;  }
-  input[type="text"] { display: block; width: 280px; height: 27px; margin: 0 0 1em; padding: 0 0 0 .5em; font: 13px e('/') 32px @myriad; border: 1px solid @font-main-color; }
+  input[type="text"] { display: block; width: 280px; height: 27px; margin: 0 0 .6em; padding: 0 0 0 .5em; font: 13px e('/') 32px @myriad; border: 1px solid @font-main-color; }
   input[type="submit"] { display: block; width: 99px; height: 35px; margin: 0 0 4.5em; background: @active-link; color: #fff; border: none; .radius(2px); .transition( all, .4s ); }
   input[type="submit"]:hover { background-color: @active-link-hover; }
   .year-select, .num-select { display: inline-block; margin: 0 1.3em 2em 0; }
   .year-select select { width: 144px; }
-  .num-select select { width: 112px; }
-  select {
-    padding:3px;
-    margin: 0;  
-    border: 1px solid @font-main-color;     
-    background: #f8f8f8;
-    color:#888;
-    outline:none;
-    display: inline-block;
-    -webkit-appearance:none;
-    -moz-appearance:none;
-    appearance:none;
-    cursor:pointer;
-  }
+  .num-select select { width: 112px; } 
+  .publications-num { margin: 1.6em 0; font: 14px @pt-serif; } 
+}
 
-  /* Targetting Webkit browsers only. FF will show the dropdown arrow with so much padding. */
-  @media screen and (-webkit-min-device-pixel-ratio:0) {
-      select {padding-right:18px}
-  }
+//author
 
-  label {position:relative}
-  label:after {
-      content:'▼';
-      color:#fff;
-      right:6px; top:2px;
-      padding:0 0 2px;
-      position:absolute;
-      pointer-events:none;
-      font-size: 12px;
+section.author { margin-top: 0; 
+  header {
+    .article-h2 { margin: 0; }
   }
-  label:before {
-    background:#C2C2C2;
-    content: "";
-    display: block;
-    height: 27px;
-    pointer-events: none;
-    position: absolute;
-    right: 1px;
-    top: -2px;
-    width: 23px;
+  div { margin-bottom: 1.6em;
+    .font-main;     
+    .gray { color: @gray; }
+  }
+  address { font-style: normal; .font-main; }
+  a[href^="mailto"] { display: inline-block; margin: 0 0 1.6em; text-decoration: none; color: @active-link; .transition; .font-main; }
+  a[href^="mailto"]:hover { color: @active-link-hover; }
+  .go-to-author-pubs { margin: 4em 0 2em; .font-main( 13px );  
+    a { display: inline-block; color: @gray; border-bottom: 1px solid transparent; text-decoration: none; .transition;}
+    a:hover { border-bottom: 1px solid @gray } 
+  }
+}
+
+//authors
+.alphabet { margin: 0 0 4em;
+  .alphabet-list, .alphabet-list-eng { margin: 0 0 1.5em; padding: 0; .uppercase;
+    .alphabet-item { display: inline-block; margin: 0 .6em 0 0;
+      a { display: block; font: 18px e('/') 22px @proxima; color: @nav-color; border-bottom: 1px dashed @nav-color; text-decoration: none;
+      .transition;
+      }
+      a:hover { color: @font-main-color; border-color: transparent; }
+    }
+  }
+}
+
+.authors-full-list { margin: 0 0 2em;
+  .left { float: left; width: 48%; }
+  .right { float: left; width: 48%; }
+  ul { margin: 0; padding: 0; list-style-type: none;
+    li {
+      a { font: 14px @pt-serif; text-decoration: none; color: @gray; }
+      a:hover { text-decoration: underline; }
+    }
   }
 }
 
