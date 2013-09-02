@@ -217,6 +217,14 @@ article header {
   }
 }
 
+article.to-authors {
+  .ord-list { padding: 0 0 0 40px; }
+  .themes-item { 
+    .ord-list { 
+      .ord-item { font-size: 1em; margin: .5em 0 0; }  
+    }  
+  }
+}
 // Unordered list
 
 .themes-list { margin: 0 0 3.2em;
@@ -252,6 +260,9 @@ footer { padding: 1.125em 0 3.5em; font: .8125em @myriad; text-align: right; }
 // Sections styles
 section { width: 600px; margin: 50px 0 0;
   header {
+    h2 { margin: 0 0 28px; font: 700 1.375em e('/') 1.22727272em @proxima;
+      .uppercase;
+    }
     h3 { margin: 0 0 28px; font: 700 1.125em e('/') 1.1666em @proxima;
       .uppercase;
     }
@@ -286,6 +297,7 @@ section { width: 600px; margin: 50px 0 0;
       .font-main( .875em); line-height: 1em; color: @gray;
     }
   }
+  .theme-header { margin: 0 0 1.5em; }
 }
 
 // section comments
@@ -471,6 +483,30 @@ section.author { margin-top: 0;
       a { font: 14px @pt-serif; text-decoration: none; color: @gray; }
       a:hover { text-decoration: underline; }
     }
+  }
+}
+
+//editorial
+section.editorial {
+  .ed-position { margin: 0; padding: 0; list-style-type: none;
+    li { margin: 50px 0 0;
+      .position-header { font: 700 22px e('/') 27px @proxima; .uppercase; }
+        .name-prof {
+          dt { font: normal 22px e('/') 27px @pt-serif; color: @font-main-color; }
+          dd { margin: 0 0 20px 0; font: 18px e('/') 27px @pt-serif; color: @gray - #444444; }
+      }
+    }  
+  }
+}
+
+//useful links
+section.useful-links {
+  dl {
+    dt { float: left; margin: 0 .35em 0 0; 
+      a { color: @font-main-color; text-decoration: none; border-bottom: 1px solid @font-main-color; font-weight: 700; .transition; }
+      a:hover { border-color: transparent; }
+    }
+    dd { margin: 0 0 1em;  }
   }
 }
 
