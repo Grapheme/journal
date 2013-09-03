@@ -34,6 +34,18 @@ class Guests_interface extends MY_Controller{
 		$this->load->view("guests_interface/pages/index",$pagevar);
 	}
 	
+	public function issues(){
+		
+		$this->load->model(array('pages','page_resources'));
+		$pagevar = array(
+			'page_content' => $this->pages->getWhere(NULL,array('page_url'=>'home')),
+			'images' => $this->page_resources->getWhere(NULL,array('page_url'=>'home'),TRUE),
+		);
+		$this->load->view("guests_interface/pages/issues",$pagevar);
+	}
+	
+	
+	
 	/********************************************************************************************************************/
 	
 	

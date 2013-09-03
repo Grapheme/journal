@@ -14,6 +14,7 @@ $route['redactor/get-uploaded-images'] = "general_interface/redactorUploadedImag
 /*************************************************** GUEST INTRERFACE ***********************************************/
 
 $route['issues'] = "guests_interface/issues";
+$route['authors'] = "guests_interface/authors";
 
 $route['reviews(\/:any)*?'] = "guests_interface/reviews";
 $route[':any'] = "guests_interface/pages";
