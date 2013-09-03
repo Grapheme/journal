@@ -1,26 +1,17 @@
-<header class="clearfix">
-	<div class="raccoon-header">
-		<a href="<?=site_url();?>" title="Вернуться на главную"></a>
+<header>
+	<div class="logo">
+		<div class="logo-icon"></div>
 	</div>
-	<div class="contact-us">
-		<address>
-			+7 495 <span class="number-wo-code">565-54-54</span>
-		</address>
-		<div class="contact-call-link summon-call-form">
-		 	<div class="contact-icon contact-icon-call"></div>
-		 	<a class="no-clickable" href="#">Заказать звонок</a>
+	<div class="r-head-content clearfix">
+		<div class="lang">
+			<ul class="lang-list">
+				<li class="lang-item"><a class="active" href="#">Ru</a></li>
+				<li class="lang-item"><a href="#">En</a></li>
+			</ul>
 		</div>
-		<div class="contact-call-link">
-			<div class="contact-icon contact-icon-cons"></div>
-			<a href="<?=site_url('consultation');?>">Консультация специалиста</a>
+		<div class="issue">
+			<div class="issue-text">Выпуск №</div>
+			<div class="issue-num"><?=$issue_number;?></div>
 		</div>
-	</div>
-	<div class="description">
-		<h2>
-			Производство и продажа<br>моющих средств, очистка загрязнений
-		</h2>
-		<span class="slogan">
-			Прогрессивные технологии на страже природы
-		</span>
 	</div>
 </header>
