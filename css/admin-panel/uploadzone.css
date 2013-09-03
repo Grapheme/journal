@@ -1,0 +1,23 @@
+#dropZone{
+	border: 10px dashed #ccc;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 25px;
+	text-align: center;
+	padding: 50px 0;
+	font-size: 16px;
+}
+#dropZone.hover {
+	background: #eaeaea;
+}
+#dropZone img {display: block; margin: 10px auto;}
+#dropZone p {margin: 10px; font-size: 14px;}
+progress {width: 100%;}
+.failUpload {background:#c00; padding:2px; color:#fff;}
+
+/* File upload styles */
+.resources-items { margin: 0; padding: 0; list-style: none; }
+.resources-items .img-rounded { border-radius: 0; }
+	.resources-items li { float: left; margin: 0 1.5em 1.5em 0;overflow: hidden; }
+	.resources-items li img { max-height: 14em; width: auto; }
+.delete-resource-item { font-size: 2em; border: 0 none !important; display: block; text-decoration: none !important; background: #fff; padding: 0.25em; border-radius: 2px; }

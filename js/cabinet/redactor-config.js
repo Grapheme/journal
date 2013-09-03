@@ -154,7 +154,7 @@ $(function(){
 		fullscreen: 'Во весь экран',deleted: 'Зачеркнутый',anchor: 'Якорь',link_new_tab: 'Открывать в новой вкладке',underline: 'Подчеркнутый',
 		alignment: 'Выравнивание',filename: 'Название (необязательно)',edit: 'Ред.'
 	};
-	var buttons = ['bold','italic','|','unorderedlist','orderedlist','|','alignleft','aligncenter','alignright','justify','|','image','file','|','fontcolor','|'];
+	var buttons = ['html','|','bold','italic','formatting','|','unorderedlist','orderedlist','|','alignleft','aligncenter','alignright','justify','|','image','file','|','fontcolor','|'];
 	var buttonsCustom = {
 		button_undo:{title: 'Назад',callback: function(buttonName,buttonDOM,buttonObject){this.execCommand('undo',false,false);}},
 		button_redo:{title: 'Вперед',callback: function(buttonName,buttonDOM,buttonObject){this.execCommand('redo', false, false);}}
@@ -163,8 +163,8 @@ $(function(){
 		buttons: buttons,
 		autoresize: false,
 		minHeight: true,
-		buttonsAdd: ['button_undo','button_redo','|'],
-		buttonsCustom: buttonsCustom,
+		//buttonsAdd: ['button_undo','button_redo','|'],
+		//buttonsCustom: buttonsCustom,
 		lang: 'ru',
 		plugins: ['fontsize','fullscreen'],
 		imageUpload: mt.baseURL+'redactor/upload',
@@ -183,28 +183,4 @@ $(function(){
 		}
 	}
 	$("textarea.redactor").redactor(mainConfig);
-	
-	var LessonDescription = {
-		buttons: buttons,
-		autoresize: false,
-		minHeight: true,
-		buttonsCustom: buttonsCustom,
-		lang: 'ru',
-		plugins: ['fontsize','fullscreen'],
-		imageUpload: mt.baseURL+'redactor/upload',
-		imageGetJson: mt.baseURL+'redactor/get-uploaded-images',
-		imageUploadErrorCallback: function(response){alert(response.error);},
-		changeCallback: function(){
-			mt.inputChanged = true;
-			$("textarea.redactor-lesson-description").hideToolTip();
-		},
-		blurCallback: function(e){
-			var redactor = $("textarea.redactor-lesson-description");
-			$(redactor).html(this.get());
-			if($(redactor).hasClass('valid-required') && $(redactor).emptyValue()){
-				$(redactor).setValidationErrorStatus('Поле не заполнено');
-			}
-		}
-	};
-	$("textarea.redactor-lesson-description").redactor(LessonDescription);
 });

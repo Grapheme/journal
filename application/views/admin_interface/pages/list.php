@@ -23,9 +23,6 @@
 				</ul>
 				<div class="clear"></div>
 				<h2>Страницы</h2>
-				<blockquote>
-					<a href="<?=site_url(ADMIN_START_PAGE.'/pages/add?mode=insert');?>" class="btn btn-small" type="button">Добавить страницу</a>
-				</blockquote>
 				<table class="table table-bordered" data-action="<?=site_url(ADMIN_START_PAGE.'/pages/remove');?>">
 					<thead>
 						<tr>
@@ -41,9 +38,6 @@
 							<td><?=$pages[$i]['title'];?></td>
 							<td>
 								<a href="<?=site_url(ADMIN_START_PAGE.'/pages/'.$pages[$i]['page_url'].'/edit?mode=text&id='.$pages[$i]['id'])?>" class="btn btn-link" ><i class="icon-edit"></i></a>
-							<?php if($pages[$i]['manage'] == 1):?>
-								<a href="" data-item="<?=$pages[$i]['id']?>" class="no-clickable btn-remove-page" ><i class="icon-remove"></i></a>
-							<?php endif;?>
 							</td>
 						</tr>
 					<?php endfor;?>

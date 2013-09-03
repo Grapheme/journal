@@ -13,40 +13,42 @@
 		<?php $this->load->view('guests_interface/includes/navigation');?>
 		<article>
 			<header>
-				<h1 class="article-h1">Выпуски</h1>
+				<h1 class="article-h1">Ключевые слова</h1>
 				<div class="delicate-design-stroke"></div>
 			</header>
-			<div class="production-years">
-				<ul class="production-years-list">
-				<?php $year = date("Y");?>
-				<?php for($i=$year;$i>=$year-7;$i--):?>
-					<li><a href="#"><?=$i?></a></li>
+			<div class="alphabet">
+				<?=$this->load->helper('text');?>
+				<ul class="alphabet-list">
+			<?php for($i=1040;$i<=1071;$i++):?>
+				<?php if(array_search($i,array(1049,1066,1067)) === FALSE):?>
+					<li class="alphabet-item"><a data-code="<?=$i;?>" href="#"><?=unichr($i);?></a>
+				<?php endif;?>
+			<?php endfor;?>
+				</ul>
+				<ul class="alphabet-list-eng">
+				<?php for($i=65;$i<91;$i++):?>
+					<li class="alphabet-item"><a data-code="<?=$i;?>" href="#"><?=unichr($i);?></a>
 				<?php endfor;?>
 				</ul>
 			</div>
-			<section class="section-all-issues">
-				<ul class="month-issues">
-				<?php for($i=0;$i<count($issues);$i++):?>
-					<li class="month-issues-item">
-						<div class="panel">
-							<figure class="front">
-								<div><span class="big"><?=$issues[$i]['number']?></span>номер</div>
-							</figure>
-							<figure class="back">
-								<a href="<?=site_url('issue/'.$issues[$i]['id'])?>">
-									<div class="back-date">
-										<span class="back-month">декабрь</span>
-										<span class="back-year">2013</span>
-										<div class="delicate-design-stroke"></div>
-									</div>
-									<div class="publications-num">6 публикаций</div>
-								</a>
-							</figure>
-						</div>
-					</li>
-				<?php endfor;?>
-				</ul>
-			</section>
+		<?php if(!empty($keywords)):?>
+			<div class="authors-full-list clearfix">
+				<div class="left">
+					<ul>
+					<?php for($i=0;$i<(count($keywords)/2);$i++):?>
+						<li><a href="#"><?=$$keywords[$i]['name'];?></a></li>
+					<?php endfor;?>
+					</ul>
+				</div>
+				<div class="right">
+					<ul>
+					<?php for($i=(count($keywords)/2);$i<count($keywords);$i++):?>
+						<li><a href="#"><?=$keywords[$i]['name'];?></a></li>
+					<?php endfor;?>
+					</ul>
+				</div>
+			</div>
+		<?php endif;?>
 		</article>
 		<?php $this->load->view('guests_interface/includes/footer');?>
 	</div>

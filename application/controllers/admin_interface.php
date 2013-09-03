@@ -30,14 +30,7 @@ class Admin_interface extends MY_Controller{
 		$this->load->view("admin_interface/cabinet/profile",$pagevar);
 	}
 	/********************************************* menu **********************************************************/
-	public function menuList(){
-		
-		$this->load->model('menu');
-		$pagevar = array(
-			'menu' => $this->menu->getAll(),
-		);
-		$this->load->view("admin_interface/menu/list",$pagevar);
-	}
+
 	/********************************************* pages *********************************************************/
 	public function pagesList(){
 		
@@ -50,11 +43,7 @@ class Admin_interface extends MY_Controller{
 
 	public function insertPage(){
 		
-		$this->load->model(array('menu'));
-		$pagevar = array(
-			'menu' => $this->menu->getAll()
-		);
-		$this->load->view("admin_interface/pages/add",$pagevar);
+		$this->load->view("admin_interface/pages/add");
 	}
 
 	public function editPages(){
@@ -62,12 +51,11 @@ class Admin_interface extends MY_Controller{
 		if($this->input->get('id') === FALSE || is_numeric($this->input->get('id')) === FALSE):
 			redirect(ADMIN_START_PAGE);
 		endif;
-		$this->load->model(array('pages','page_resources','menu'));
+		$this->load->model(array('pages','page_resources'));
 		$pagevar = array(
 			'content' => $this->pages->getWhere($this->input->get('id')),
 			'images' => array(),
 			'pageTitle' => '',
-			'menu' => $this->menu->getAll()
 		);
 		if($pagevar['content']):
 			$pagevar['pageTitle'] = $pagevar['content']['title'];
