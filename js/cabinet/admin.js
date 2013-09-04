@@ -10,4 +10,21 @@ $(function(){
 		$(this).addClass('loading');
 		$(_form).formSubmitInServer();
 	})
+	
+	$("button.remove-item").click(function(){
+		var _this = this;
+		var itemID = $(this).attr('data-item');
+		var action = $(this).parents('table').attr('data-action');
+		$.ajax({
+			url: action,type: 'POST',dataType: 'json',data:{'id':itemID},
+			beforeSend: function(){
+				return confirm('Удалить запись?');
+			},
+			success: function(response,textStatus,xhr){
+				if(response.status){$(_this).parents('tr').remove();}
+			},
+			error: function(xhr,textStatus,errorThrown){}
+		});
+	});
+	
 });

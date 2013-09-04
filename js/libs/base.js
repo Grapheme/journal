@@ -8,7 +8,6 @@ var mt = mt || {};
 mt.baseURL = window.location.protocol+'//'+window.location.hostname+'/';
 mt.currentURL = window.location.href;
 mt.languageSegment = 1;
-//mt.currentLanguage = mt.getLanguageURL(); // для мультиязычных сайтов если используется в гостевом интерфейсе
 mt.currentLanguage = 'ru'; //Установка языка для панели администрирования так как там не используется сегмент указывающий на язык
 mt.toltipPlacement = 'right'; // Возможные значения top | bottom | left | right | auto
 mt.toltipTrigger = 'manual'; // Возможные значения click | hover | focus | manual
@@ -21,16 +20,17 @@ mt.getLanguageURL = function(){
 	if(segments[mt.languageSegment]){
 		return segments[mt.languageSegment];
 	}else{
-		return 'en';
+		return 'ru';
 	}
 };
+mt.getLangBaseURL = function(url){
+	return mt.baseURL+mt.getLanguageURL()+'/'+url;
+}
+//mt.currentLanguage = mt.getLanguageURL(); // для мультиязычных сайтов если используется в гостевом интерфейсе
 mt.isValidEmailAddress = function(emailAddress){
 	var pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
-	if(emailAddress == ''){
-		return false;
-	}else{
-		return pattern.test(emailAddress);
-	}
+	if(emailAddress != ''){return pattern.test(emailAddress);}
+	return true;
 };
 mt.isValidPhone = function(phoneNumber){
 	var pattern = new RegExp(/^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/i);

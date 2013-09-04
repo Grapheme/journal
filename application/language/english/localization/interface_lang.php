@@ -10,4 +10,6 @@ $lang['menu_editorial'] = "Editorial";
 $lang['menu_keywords'] = "Keywords";
 $lang['menu_usefull_links'] = "Usefull links";
 $lang['menu_institutions'] = "Institutions";
+
+$lang['not_found_authors'] = "Authors Not Found!";
 ?>

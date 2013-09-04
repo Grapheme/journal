@@ -67,7 +67,32 @@ class Admin_interface extends MY_Controller{
 			redirect(ADMIN_START_PAGE);
 		endif;
 	}
-
+	/******************************************** authors ********************************************************/
+	
+	public function authorsList(){
+		
+		$this->load->model('authors');
+		$pagevar = array(
+			'authors' => $this->authors->getAll(),
+		);
+		$this->load->view("admin_interface/authors/list",$pagevar);
+	}
+	
+	public function insertAuthor(){
+		
+		$this->load->view("admin_interface/authors/add");
+	}
+	
+	public function editAuthor(){
+		
+		$this->load->model('authors');
+		$pagevar = array(
+			'author' => $this->authors->getWhere($this->input->get('id'))
+		
+		);
+		$this->load->view("admin_interface/authors/edit",$pagevar);
+	}
+	
 	/*************************************************************************************************************/
 	
 }

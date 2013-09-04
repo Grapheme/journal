@@ -10,4 +10,6 @@ $lang['menu_editorial'] = "Редколлегия";
 $lang['menu_keywords'] = "Ключевые слова";
 $lang['menu_usefull_links'] = "Полезные ссылки";
 $lang['menu_institutions'] = "Учреждения";
+
+$lang['not_found_authors'] = "Авторы не найдены!";
 ?>

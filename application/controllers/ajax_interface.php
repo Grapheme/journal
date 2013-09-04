@@ -23,8 +23,30 @@ class Ajax_interface extends MY_Controller{
 		echo json_encode($statusval);
 	}
 	
+	public function getAuthorsList(){
+		
+		if(!$this->input->is_ajax_request()):
+			show_error('В доступе отказано');
+		endif;
+		$json_request = array('status'=>FALSE,'responseText'=>'');
+		if($this->postDataValidation('char')):
+			$this->load->model('authors');
+			if($authors = $this->authors->getAuthorsByChar($this->input->post('char'),$this->input->post('lang'))):
+				$this->load->helper('text');
+				$this->config->set_item('base_url',baseURL($this->uri->language_string.'/'));
+				$json_request['responseText'] = $this->load->view('html/authors-list',array('authors'=>$authors,'langName'=>$this->input->post('lang')),TRUE);
+			else:
+				$this->lang->load('localization/interface',$this->languages[$this->input->post('lang')]);
+				$this->load->helper('language');
+				$json_request['responseText'] = lang('not_found_authors');
+			endif;
+			$json_request['status'] = TRUE;
+		endif;
+		echo json_encode($json_request);
+	}
+	
 	/******************************************** admin interface *******************************************************/
-
+	/* ------------- Pages ----------------- */
 	public function updatePage(){
 		
 		if(!$this->input->is_ajax_request()):
@@ -126,7 +148,69 @@ class Ajax_interface extends MY_Controller{
 			return '';
 		endif;
 	}
+	/* ------------- authors ----------------- */
+	public function insertAuthor(){
 		
+		if(!$this->input->is_ajax_request()):
+			show_error('В доступе отказано');
+		endif;
+		$json_request = array('status'=>FALSE,'responseText'=>'','redirect'=>site_url(ADMIN_START_PAGE));
+		if($this->postDataValidation('author')):
+			if($this->ExecuteInsertingAuthor($_POST)):
+				$json_request['status'] = TRUE;
+				$json_request['responseText'] = 'Автор добавлен';
+				$json_request['redirect'] = site_url(ADMIN_START_PAGE.'/authors');
+			endif;
+		else:
+			$json_request['responseText'] = $this->load->view('html/validation-errors',array('alert_header'=>FALSE),TRUE);
+		endif;
+		echo json_encode($json_request);
+	}
+	
+	public function updateAuthor(){
+		
+		if(!$this->input->is_ajax_request()):
+			show_error('В доступе отказано');
+		endif;
+		$json_request = array('status'=>FALSE,'responseText'=>'','redirect'=>site_url(ADMIN_START_PAGE));
+		if($this->postDataValidation('author')):
+			if($this->ExecuteUpdatingAuthor($this->input->get('id'),$_POST)):
+				$json_request['status'] = TRUE;
+				$json_request['responseText'] = 'Автор cохранен';
+				$json_request['redirect'] = site_url(ADMIN_START_PAGE.'/authors');
+			endif;
+		else:
+			$json_request['responseText'] = $this->load->view('html/validation-errors',array('alert_header'=>FALSE),TRUE);
+		endif;
+		echo json_encode($json_request);
+	}
+	
+	public function removeAuthor(){
+		
+		if(!$this->input->is_ajax_request()):
+			show_error('В доступе отказано');
+		endif;
+		$json_request = array('status'=>FALSE,'responseText'=>'');
+		$this->load->model('authors');
+		$this->authors->delete($this->input->post('id'));
+		$json_request['status'] = TRUE;
+		echo json_encode($json_request);
+	}
+	
+	private function ExecuteInsertingAuthor($post){
+		
+		return $this->insertItem(array('insert'=>$post,'model'=>'authors'));
+		return TRUE;
+	}
+	
+	private function ExecuteUpdatingAuthor($id,$post){
+		
+		$post['id'] = $id;
+		$this->updateItem(array('update'=>$post,'model'=>'authors'));
+		return TRUE;
+	}
+	
+	/* ------------- keywords ----------------- */
 	private function setKeyWords($productID,$keywords){
 		
 		if($KeyWordsList = explode(',',$keywords)):

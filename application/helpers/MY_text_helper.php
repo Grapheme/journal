@@ -1,12 +1,18 @@
 <?php if(!defined('BASEPATH')) exit('No direct script access allowed');
-
+	
 	function unichr($symbol){
 		return mb_convert_encoding('&#'.intval($symbol).';','UTF-8','HTML-ENTITIES');
 	}
 	
+	function getTranslit($text){
+		
+		$CI = & get_instance();
+		return $CI->translite($text);
+	}
+	
 	function pluralBrends($n,$langURL){
 		
-		$language[RUSLAN] = array('фабрика','фабрики','фабрик');
+		$language[RUSLAN] = array('','','');
 		$language[ENGLAN] = array('factory','factories','factories');
 		
 		$n = abs($n) % 100;

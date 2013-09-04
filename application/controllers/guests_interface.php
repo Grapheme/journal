@@ -15,7 +15,6 @@ class Guests_interface extends MY_Controller{
 		endif;
 		$this->load->helper('language');
 		$this->lang->load('localization/interface',$this->languages[$this->uri->language_string]);
-//		$this->load->library('meta_titles');
 	}
 	
 	public function pages($page_url = NULL){
@@ -53,14 +52,39 @@ class Guests_interface extends MY_Controller{
 	
 	public function authors(){
 		
-		$this->load->model(array('pages','page_resources'));
+		$this->load->model(array('pages','page_resources','authors'));
 		$pagevar = array(
 			'page_content' => $this->pages->getWhere(NULL,array('page_url'=>uri_string())),
 			'images' => $this->page_resources->getWhere(NULL,array('page_url'=>uri_string()),TRUE),
-			'authors' => array()
+			'authors' => NULL
 		);
+		$char = 'А';
+		if($this->uri->language_string == ENGLAN):
+			$char = 'A';
+		endif;
+		if($authors = $this->authors->getAuthorsByChar($char,$this->uri->language_string)):
+			$this->load->helper('text');
+			$pagevar['authors'] = $this->load->view('html/authors-list',array('authors'=>$authors,'langName'=>$this->uri->language_string),TRUE);
+		else:
+			$pagevar['authors'] =lang('not_found_authors');
+		endif;
 		$this->load->view("guests_interface/pages/authors",$pagevar);
 	}
+	
+	public function author(){
+		
+		$this->load->model('authors');
+		$pagevar = array(
+			'page_content' => $this->authors->getWhere($this->uri->segment(3)),
+		);
+		if(empty($pagevar['page_content'])):
+			show_404();
+		endif;
+		$this->load->view("guests_interface/pages/author",$pagevar);
+	}
+	
+	
+	
 	
 	public function keywords(){
 		
