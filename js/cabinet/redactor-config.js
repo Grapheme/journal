@@ -172,7 +172,9 @@ $(function(){
 		imageUploadErrorCallback: function(response){alert(response.error);},
 		changeCallback: function(){
 			mt.inputChanged = true;
-			$("textarea.redactor").hideToolTip();
+			var redactor = $("textarea.redactor");
+			$(redactor).html(this.get());
+			$(redactor).hideToolTip();
 		},
 		blurCallback: function(e){
 			var redactor = $("textarea.redactor");

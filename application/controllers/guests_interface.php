@@ -7,7 +7,15 @@ class Guests_interface extends MY_Controller{
 	function __construct(){
 
 		parent::__construct();
-		$this->load->library('meta_titles');
+		if($this->uri->language_string === FALSE):
+			$this->config->set_item('base_url',baseURL($this->baseLanguageURL.'/'));
+			redirect();
+		else:
+			$this->config->set_item('base_url',baseURL($this->uri->language_string.'/'));
+		endif;
+		$this->load->helper('language');
+		$this->lang->load('localization/interface',$this->languages[$this->uri->language_string]);
+//		$this->load->library('meta_titles');
 	}
 	
 	public function pages($page_url = NULL){
@@ -69,8 +77,8 @@ class Guests_interface extends MY_Controller{
 		
 		$this->load->model(array('pages','page_resources'));
 		$pagevar = array(
-			'page_content' => $this->pages->getWhere(NULL,array('page_url'=>'home')),
-			'images' => $this->page_resources->getWhere(NULL,array('page_url'=>'home'),TRUE),
+			'page_content' => $this->pages->getWhere(NULL,array('page_url'=>uri_string())),
+			'images' => $this->page_resources->getWhere(NULL,array('page_url'=>uri_string()),TRUE),
 			'issues' => array()
 		);
 		$this->load->view("guests_interface/pages/search",$pagevar);

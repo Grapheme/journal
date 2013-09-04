@@ -41,11 +41,6 @@ class Admin_interface extends MY_Controller{
 		$this->load->view("admin_interface/pages/list",$pagevar);
 	}
 
-	public function insertPage(){
-		
-		$this->load->view("admin_interface/pages/add");
-	}
-
 	public function editPages(){
 		
 		if($this->input->get('id') === FALSE || is_numeric($this->input->get('id')) === FALSE):

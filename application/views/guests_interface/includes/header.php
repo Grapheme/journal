@@ -3,12 +3,7 @@
 		<div class="logo-icon"><a href="<?=site_url();?>"></a></div>
 	</div>
 	<div class="r-head-content clearfix">
-		<div class="lang">
-			<ul class="lang-list">
-				<li class="lang-item"><a class="active" href="#">Ru</a></li>
-				<li class="lang-item"><a href="#">En</a></li>
-			</ul>
-		</div>
+		<?php $this->load->view('guests_interface/includes/languages');?>
 	<?php if(uri_string()== ''):?>
 		<div class="issue">
 			<div class="issue-text">Выпуск №</div>

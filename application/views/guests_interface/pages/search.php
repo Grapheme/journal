@@ -12,10 +12,7 @@
 		<?php $this->load->view('guests_interface/includes/header',array('issue_number'=>'5/13'));?>
 		<?php $this->load->view('guests_interface/includes/navigation');?>
 		<article>
-			<header>
-				<h1 class="article-h1">Поиск</h1>
-				<div class="delicate-design-stroke"></div>
-			</header>
+			<?=(isset($page_content[$this->uri->language_string.'_content']))?$page_content[$this->uri->language_string.'_content']:'';?>
 			<?php $this->load->view('guests_interface/forms/search');?>
 		<?php if(!empty($issues)):?>
 			<div class="search-page-form">

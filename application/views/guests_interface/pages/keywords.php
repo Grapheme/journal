@@ -12,10 +12,7 @@
 		<?php $this->load->view('guests_interface/includes/header',array('issue_number'=>'5/13'));?>
 		<?php $this->load->view('guests_interface/includes/navigation');?>
 		<article>
-			<header>
-				<h1 class="article-h1">Ключевые слова</h1>
-				<div class="delicate-design-stroke"></div>
-			</header>
+			<?=(isset($page_content[$this->uri->language_string.'_content']))?$page_content[$this->uri->language_string.'_content']:'';?>
 			<div class="alphabet">
 				<?=$this->load->helper('text');?>
 				<ul class="alphabet-list">

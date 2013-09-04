@@ -12,7 +12,7 @@
 		<?php $this->load->view('guests_interface/includes/header',array('issue_number'=>'5/13'));?>
 		<?php $this->load->view('guests_interface/includes/navigation');?>
 		<article>
-			<?=$page_content['content']?>
+			<?=(isset($page_content[$this->uri->language_string.'_content']))?$page_content[$this->uri->language_string.'_content']:'';?>
 		</article>
 		<?php $this->load->view('guests_interface/includes/footer');?>
 	</div>

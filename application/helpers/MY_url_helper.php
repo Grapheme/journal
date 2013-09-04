@@ -14,7 +14,7 @@
 		return preg_replace('/(www\.)/','',$parse);
 	}
 
-	function getUrlLink(){
+	function urlGETParameters(){
 		
 		$CI = & get_instance();
 		$get = $CI->input->get();
@@ -27,6 +27,17 @@
 			$getLink = '?'.implode('&',$temp);
 		endif;
 		return $getLink;
+	}
+	
+	function baseURL($url = NULL){
+		
+		$CI = & get_instance();
+		if(!is_null($url)):
+			return $CI->baseURL.$url;
+		else:
+			return $CI->baseURL;
+		endif;
+		
 	}
 
 ?>
