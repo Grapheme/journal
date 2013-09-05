@@ -5,6 +5,7 @@
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
 <head>
 	<?php $this->load->view('guests_interface/includes/head');?>
+	<link rel="stylesheet" href="<?=baseURL('css/styled-select.css');?>" />
 </head>
 <body>
 	<?php $this->load->view('guests_interface/includes/ie7');?>
@@ -19,7 +20,7 @@
 				<div class="form-header">Результаты поиска</div>
 				<div class="publications-num">Найдено публикаций: <?=count($issues);?></div>
 			</div>
-			<ul class="month-list search-page">
+			<ol class="month-list search-page">
 			<?php for($i=0;$i<count($issues);$i++):?>
 				<li>
 					<div class="pdf-dl-link">
@@ -38,12 +39,14 @@
 					</div>
 				</li>
 			<?php endfor;?>
-			</ul>
+			</ol>
 		<?php endif;?>
 		</article>
 		<?php $this->load->view('guests_interface/includes/footer');?>
 	</div>
 	<?php $this->load->view('guests_interface/includes/scripts');?>
+	<script src="<?=baseURL('js/vendor/jquery.customSelect.min.js');?>"></script>
+	<script src="<?=baseURL('js/cabinet/styled-select-init.js');?>"></script>	
 	<?php $this->load->view('guests_interface/includes/typekit');?>
 	<?php $this->load->view('guests_interface/includes/google-analytics');?>
 </body>
