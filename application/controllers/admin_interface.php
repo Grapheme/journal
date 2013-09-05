@@ -119,6 +119,34 @@ class Admin_interface extends MY_Controller{
 		);
 		$this->load->view("admin_interface/issues/edit",$pagevar);
 	}
+	/******************************************** publications ********************************************************/
+	public function publicationsList(){
+		
+		$this->load->model(array('publications','issues'));
+		$issue = $this->issues->getWhere();
+		if($this->input->get('issue') !== FALSE && is_numeric($this->input->get('issue'))):
+			$issue = $this->input->get('issue');
+		endif;
+		$pagevar = array(
+			'publications' => $this->publications->getWhere(NULL,array('issue'=>$issue),TRUE)
+		);
+		$this->load->view("admin_interface/publications/list",$pagevar);
+	}
+	
+	public function insertPublications(){
+		
+		$this->load->view("admin_interface/publications/add");
+	}
+	
+	public function editPublications(){
+		
+		$this->load->model('publications');
+		$pagevar = array(
+			'publication' => $this->publications->getWhere($this->input->get('id'))
+		
+		);
+		$this->load->view("admin_interface/publications/edit",$pagevar);
+	}
 	/*************************************************************************************************************/
 	
 }

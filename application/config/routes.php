@@ -34,10 +34,14 @@ $route[ADMIN_START_PAGE.'/pages/:any/edit'] = "admin_interface/editPages";
 $route[ADMIN_START_PAGE.'/authors'] = "admin_interface/authorsList";
 $route[ADMIN_START_PAGE.'/authors/add'] = "admin_interface/insertAuthor";
 $route[ADMIN_START_PAGE.'/authors/edit'] = "admin_interface/editAuthor";
-/* ----------------------------------------------- Authors ---------------------------------------------------------- */
+/* ----------------------------------------------- Issues ---------------------------------------------------------- */
 $route[ADMIN_START_PAGE.'/issues'] = "admin_interface/issuesList";
 $route[ADMIN_START_PAGE.'/issues/add'] = "admin_interface/insertIssue";
 $route[ADMIN_START_PAGE.'/issues/edit'] = "admin_interface/editIssue";
+/* --------------------------------------------- Publications ---------------------------------------------------------- */
+$route[ADMIN_START_PAGE.'/publications'] = "admin_interface/publicationsList";
+$route[ADMIN_START_PAGE.'/publications/add'] = "admin_interface/insertPublications";
+$route[ADMIN_START_PAGE.'/publications/edit'] = "admin_interface/editPublications";
 /*************************************************** GUEST INTRERFACE ***********************************************/
 
 /*************************************************** GUEST INTRERFACE ***********************************************/

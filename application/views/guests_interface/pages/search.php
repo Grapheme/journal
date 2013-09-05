@@ -30,7 +30,7 @@
 						<a href="<?=site_url('issue/'.$issues[$i]['id']);?>"><?=$issues[$i]['title']?></a>
 					</h2>
 					<div class="publications-date">
-						<?=$issues[$i]['date'];?>
+						<?=$issues[$i]['date'];?> (стр. 3)
 					</div>
 					<div class="authors">
 					<?php for($j=0;$j<count($issues[$i]['authors']);$j++):?>

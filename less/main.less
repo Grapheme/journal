@@ -223,17 +223,15 @@ article header {
 
 article.to-authors {
   .ord-list { padding: 0; }
-  .themes-item { 
-    .ord-list { padding: 0 0 0 40px;
-      .ord-item { font-size: 1em; margin: .5em 0 0; }  
-    }  
-  }
 }
 // Unordered list
 
 .themes-list { margin: 0 0 3.2em;
   .themes-item {  
     .font-main( 1.1em); line-height: 1.2em/*1.6em*/; margin-bottom: 0.75em;
+    .ord-list { padding: 0 0 0 40px;
+      .ord-item { font-size: 1em; margin: .5em 0 0; }  
+    }
   }
 }
 
@@ -328,11 +326,14 @@ section { width: 698px; margin: 50px 0 0;
       input[type="submit"] { float: right; width: 99px; height: 35px; background: @active-link; color: #fff; border: none; .radius(2px); .transition( all, .4s ); }
       input[type="submit"]:hover { background-color: @active-link-hover; }
       .comment-from-form { margin: 1em 0 65px;
-        figure { float: left; width: 61px; height: 61px;
+        figure { float: left; width: 61px; height: 61px;          
           img { max-width: 100%; .radius; }
         }
         .comment-from-info { margin: 0 105px 0 72px; 
-          .name { font: italic 18px e('/') 21px @pt-serif; }
+          .name { 
+            a { font: italic 18px e('/') 21px @pt-serif; color: @font-main-color; text-decoration: none; }
+            a:hover { color: #000; }
+          }
           .social-addr { margin: .5em 0 0; color: @gray; }
         }
       }
@@ -344,7 +345,10 @@ section { width: 698px; margin: 50px 0 0;
             img { max-width: 100%; .radius; }
           }
           .comment-from-info { margin: 0 0 0 72px;
-            .name { font: italic 18px e('/') 21px @pt-serif; }
+            .name { 
+              a { font: italic 18px e('/') 21px @pt-serif; color: @font-main-color; text-decoration: none; }
+              a:hover { color: #000; }
+            }
             .comment-text { margin: .5em 0 0; }
             .answer { display: inline-block; margin: .75em 0 0; color: @active-link; letter-spacing: 1px; cursor: pointer; }
           }  
@@ -395,9 +399,9 @@ section { width: 698px; margin: 50px 0 0;
         -moz-backface-visibility:    hidden;
         -ms-backface-visibility:     hidden;
       }
-      .front {
+      .front { text-align: center;
         background: @active-link;
-        div { position: absolute; top: 20%; left: 5px; font: 15px @proxima;
+        div { display: inline-block; position: relative; top: 20%; font: 15px @proxima;
           .uppercase;
           .big { font: 93px @proxima; }
         }
@@ -510,7 +514,7 @@ section.editorial {
 section.useful-links {
   dl {
     dt { float: left; margin: 0 .35em 0 0; 
-      a { color: @gray; text-decoration: none; border-bottom: 1px solid transparent; font-weight: 700; .transition; }
+      a { color: @gray; text-decoration: none; border-bottom: 1px solid transparent; /*font-weight: 700;*/ .transition; }
       a:hover { border-color: @gray + #333333; }
     }
     dd { margin: 0 0 1.75em;  }

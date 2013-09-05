@@ -64,9 +64,6 @@ class Guests_interface extends MY_Controller{
 			$pagevar['issues'] = $this->getCountPublication($pagevar['issues']);
 			$pagevar['issues'] = array_reverse($pagevar['issues']);
 		endif;
-		
-//		print_r($pagevar['issues']);exit;
-		
 		$this->load->view("guests_interface/pages/issues",$pagevar);
 	}
 	
