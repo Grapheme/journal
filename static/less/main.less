@@ -223,17 +223,15 @@ article header {
 
 article.to-authors {
   .ord-list { padding: 0; }
-  .themes-item { 
-    .ord-list { padding: 0 0 0 40px;
-      .ord-item { font-size: 1em; margin: .5em 0 0; }  
-    }  
-  }
 }
 // Unordered list
 
 .themes-list { margin: 0 0 3.2em;
   .themes-item {  
     .font-main( 1.1em); line-height: 1.2em/*1.6em*/; margin-bottom: 0.75em;
+    .ord-list { padding: 0 0 0 40px;
+      .ord-item { font-size: 1em; margin: .5em 0 0; }  
+    }
   }
 }
 
@@ -401,9 +399,9 @@ section { width: 698px; margin: 50px 0 0;
         -moz-backface-visibility:    hidden;
         -ms-backface-visibility:     hidden;
       }
-      .front {
+      .front { text-align: center;
         background: @active-link;
-        div { position: absolute; top: 20%; left: 5px; font: 15px @proxima;
+        div { display: inline-block; position: relative; top: 20%; font: 15px @proxima;
           .uppercase;
           .big { font: 93px @proxima; }
         }
