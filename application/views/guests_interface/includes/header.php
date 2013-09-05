@@ -6,8 +6,10 @@
 		<?php $this->load->view('guests_interface/includes/languages');?>
 	<?php if(uri_string()== ''):?>
 		<div class="issue">
-			<div class="issue-text">Выпуск №</div>
-			<div class="issue-num"><?=$issue_number;?></div>
+			<a href="#">
+				<span class="issue-text">Выпуск №</span>
+				<span class="issue-num"><?=$issue_number;?></span>
+			</a>
 		</div>
 	<?php endif;?>
 	</div>
