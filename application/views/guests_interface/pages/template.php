@@ -9,7 +9,12 @@
 <body>
 	<?php $this->load->view('guests_interface/includes/ie7');?>
 	<div class="wrapper">
-		<?php $this->load->view('guests_interface/includes/header',array('issue_number'=>'5/13'));?>
+		<?php 
+			if(!isset($issue_number) || is_null($issue_number)):
+				$issue_number = FALSE;
+			endif;
+		?>
+		<?php $this->load->view('guests_interface/includes/header',array('issue_number'=>$issue_number));?>
 		<?php $this->load->view('guests_interface/includes/navigation');?>
 		<article>
 			<?=(isset($page_content[$this->uri->language_string.'_content']))?$page_content[$this->uri->language_string.'_content']:'';?>

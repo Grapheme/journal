@@ -18,6 +18,17 @@
 		return $html;
 	}
 	
+	function getMonthName($month_number,$langURL = RUSLAN){
+		
+		$months[RUSLAN] = array("","Январь","Февраль","Март","Апрель","Май","Июнь","Июль","Август","Сентябрь","Октябрь","Ноябрь","Декабрь");
+		$months[ENGLAN] = array("","January","Fabruary","March","April","May","June","July","August","September","October","November","December");
+		if(is_numeric($month_number) && isset($months[$langURL][$month_number])):
+			return $months[$langURL][$month_number];
+		else:
+			return '';
+		endif;
+	}
+	
 	function getYearsList($begin,$end,$reverse = FALSE,$value = NULL){
 		
 		$html = '<label>Год:</label>';

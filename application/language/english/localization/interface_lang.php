@@ -12,4 +12,5 @@ $lang['menu_usefull_links'] = "Usefull links";
 $lang['menu_institutions'] = "Institutions";
 
 $lang['not_found_authors'] = "Authors Not Found!";
+$lang['issue_number'] = "number";
 ?>

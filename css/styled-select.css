@@ -1,5 +1,5 @@
 span.customSelect {
-	font-size: 15px;
+	font-size: 12px;
 	background-color: #fff;
 	color:#7c7c7c;
 	padding:5px 7px;
@@ -7,7 +7,6 @@ span.customSelect {
 	-moz-border-radius: 1px;
 	-webkit-border-radius: 1px;
 	border-radius: 1px;
-	font-family: "myriad-pro", sans-serif;
 	}
 span.customSelect.changed {
 	background-color: #f0dea4;

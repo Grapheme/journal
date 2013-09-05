@@ -9,27 +9,28 @@
 <body>
 	<?php $this->load->view('guests_interface/includes/ie7');?>
 	<div class="wrapper">
-		<?php $this->load->view('guests_interface/includes/header',array('issue_number'=>'5/13'));?>
+		<?php $this->load->view('guests_interface/includes/header');?>
 		<?php $this->load->view('guests_interface/includes/navigation');?>
 		<article>
 			<?=(isset($page_content[$this->uri->language_string.'_content']))?$page_content[$this->uri->language_string.'_content']:'';?>
 			<?php $this->load->view('html/select-years');?>
 			<section class="section-all-issues">
 				<ul class="month-issues">
+				<?php $this->load->helper(array('date','text'));?>
 				<?php for($i=0;$i<count($issues);$i++):?>
 					<li class="month-issues-item">
 						<div class="panel">
 							<figure class="front">
-								<div><span class="big"><?=$issues[$i]['number']?></span>номер</div>
+								<div><?=lang('issue_number')?><span class="big"><?=$issues[$i]['number']?></span></div>
 							</figure>
 							<figure class="back">
 								<a href="<?=site_url('issue/'.$issues[$i]['id'])?>">
 									<div class="back-date">
-										<span class="back-month">декабрь</span>
-										<span class="back-year">2013</span>
+										<span class="back-month"><?=mb_strtolower(getMonthName($issues[$i]['month'],$this->uri->language_string),'UTF-8');?></span>
+										<span class="back-year"><?=$issues[$i]['year']?></span>
 										<div class="delicate-design-stroke"></div>
 									</div>
-									<div class="publications-num">6 публикаций</div>
+									<div class="publications-num"><?=$issues[$i]['publication'].' '.pluralPublications($issues[$i]['publication'],$this->uri->language_string);?></div>
 								</a>
 							</figure>
 						</div>

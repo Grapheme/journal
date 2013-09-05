@@ -17,17 +17,21 @@ class Guests_interface extends MY_Controller{
 		$this->lang->load('localization/interface',$this->languages[$this->uri->language_string]);
 	}
 	
-	public function pages($page_url = NULL){
+	public function pages($page_url = NULL,$params = NULL){
 		
 		if(is_null($page_url)):
 			$page_url = uri_string();
 		endif;
-		
 		$this->load->model(array('pages','page_resources'));
 		$pagevar = array(
 			'page_content' => $this->pages->getWhere(NULL,array('page_url'=>$page_url)),
 			'images' => $this->page_resources->getWhere(NULL,array('page_url'=>$page_url),TRUE),
 		);
+		if(!is_null($params)):
+			foreach($params as $key => $value):
+				$pagevar[$key] = $value;
+			endforeach;
+		endif;
 		if(empty($pagevar['page_content'])):
 			show_404();
 		endif;
@@ -36,17 +40,33 @@ class Guests_interface extends MY_Controller{
 	
 	public function index(){
 		
-		$this->pages('home');
+		$this->load->model('issues');
+		$issue_number = FALSE;
+		if($issue = $this->issues->getWhere()):
+			$issue_number = $issue['number'].'/'.substr($issue['year'],2,2);
+		endif;
+		$this->pages('home',array('issue_number'=>$issue_number));
 	}
 	
 	public function issues(){
 		
-		$this->load->model(array('pages','page_resources'));
+		$year = date('Y');
+		if($this->input->get('year') !== FALSE && is_numeric($this->input->get('year'))):
+			$year = $this->input->get('year');
+		endif;
+		$this->load->model(array('pages','page_resources','issues'));
 		$pagevar = array(
 			'page_content' => $this->pages->getWhere(NULL,array('page_url'=>uri_string())),
 			'images' => $this->page_resources->getWhere(NULL,array('page_url'=>uri_string()),TRUE),
-			'issues' => array()
+			'issues' => $this->issues->getWhere(NULL,array('year'=>$year),TRUE)
 		);
+		if(!empty($pagevar['issues'])):
+			$pagevar['issues'] = $this->getCountPublication($pagevar['issues']);
+			$pagevar['issues'] = array_reverse($pagevar['issues']);
+		endif;
+		
+//		print_r($pagevar['issues']);exit;
+		
 		$this->load->view("guests_interface/pages/issues",$pagevar);
 	}
 	
@@ -83,9 +103,6 @@ class Guests_interface extends MY_Controller{
 		$this->load->view("guests_interface/pages/author",$pagevar);
 	}
 	
-	
-	
-	
 	public function keywords(){
 		
 		$this->load->model(array('pages','page_resources'));
@@ -110,4 +127,20 @@ class Guests_interface extends MY_Controller{
 
 	/********************************************************************************************************************/
 	
+	private function getCountPublication($issues){
+		
+		if($issuesIDs = $this->getDBRecordsIDs($issues)):
+			$this->load->model('publications');
+			$publications = $this->publications->countPublicationOnIssues($issuesIDs);
+			for($i=0;$i<count($issues);$i++):
+				$issues[$i]['publication'] = 0;
+				for($p=0;$p<count($publications);$p++):
+					if($issues[$i]['id'] == $publications[$p]['issue']):
+						$issues[$i]['publication'] = $publications[$p]['publications'];
+					endif;
+				endfor;
+			endfor;
+		endif;
+		return $issues;
+	}
 }

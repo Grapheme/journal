@@ -10,10 +10,10 @@
 		return $CI->translite($text);
 	}
 	
-	function pluralBrends($n,$langURL){
+	function pluralPublications($n,$langURL){
 		
-		$language[RUSLAN] = array('','','');
-		$language[ENGLAN] = array('factory','factories','factories');
+		$language[RUSLAN] = array('публикация','публикации','публикаций');
+		$language[ENGLAN] = array('publication','publications','publications');
 		
 		$n = abs($n) % 100;
 		$n1 = $n % 10;

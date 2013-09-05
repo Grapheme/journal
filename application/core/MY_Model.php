@@ -49,6 +49,8 @@ class MY_Model extends CI_Model{
 				$this->db->where($where);
 				$query = $this->db->get($this->table);
 		else:
+			$this->db->select($this->_fields());
+			$this->db->order_by($this->order_by);
 			$query = $this->db->get($this->table);
 		endif;
 		if(isset($query) && !empty($query)):

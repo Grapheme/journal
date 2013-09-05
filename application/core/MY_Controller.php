@@ -427,6 +427,15 @@ class MY_Controller extends CI_Controller{
 		return '';
 	}
 	
+	public function getDBRecordsIDs($courses,$field = 'id'){
+		
+		$ids = array();
+		for($i=0;$i<count($courses);$i++):
+			$ids[] = $courses[$i][$field];
+		endfor;
+		return $ids;
+	}
+	
 	/* -------------------------------------------------------------------------------------------- */
 	
 	public function getProductKeyWords($product){
