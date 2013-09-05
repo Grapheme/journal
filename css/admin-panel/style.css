@@ -39,3 +39,25 @@ div.loading { background: url('../../img/dots-white.gif') center 20px no-repeat 
 		padding-right: 5px;
 	}
 }
+
+.production-years .production-years-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+.production-years .production-years-list li {
+    display: inline-block;
+    margin: 0 1em 0 0;
+}
+.production-years .production-years-list li a {
+    border-bottom: 1px dashed #4D4A48;
+    color: #4D4A48;
+    display: block;
+    font: 22px/27px "pt-serif",serif;
+    text-decoration: none;
+    transition: all 0.8s ease 0s;
+}
+.production-years .production-years-list li a:hover {
+    border-color: rgba(0, 0, 0, 0);
+    color: #333333;
+}

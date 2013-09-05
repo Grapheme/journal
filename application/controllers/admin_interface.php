@@ -68,7 +68,6 @@ class Admin_interface extends MY_Controller{
 		endif;
 	}
 	/******************************************** authors ********************************************************/
-	
 	public function authorsList(){
 		
 		$this->load->model('authors');
@@ -92,7 +91,34 @@ class Admin_interface extends MY_Controller{
 		);
 		$this->load->view("admin_interface/authors/edit",$pagevar);
 	}
+	/******************************************** issues ********************************************************/
+	public function issuesList(){
+		
+		$year = date('Y');
+		if($this->input->get('year') !== FALSE && is_numeric($this->input->get('year'))):
+			$year = $this->input->get('year');
+		endif;
+		$this->load->model('issues');
+		$pagevar = array(
+			'issues' => $this->issues->getWhere(NULL,array('year'=>$year),TRUE)
+		);
+		$this->load->view("admin_interface/issues/list",$pagevar);
+	}
 	
+	public function insertIssue(){
+		
+		$this->load->view("admin_interface/issues/add");
+	}
+	
+	public function editIssue(){
+		
+		$this->load->model('issues');
+		$pagevar = array(
+			'issue' => $this->issues->getWhere($this->input->get('id'))
+		
+		);
+		$this->load->view("admin_interface/issues/edit",$pagevar);
+	}
 	/*************************************************************************************************************/
 	
 }

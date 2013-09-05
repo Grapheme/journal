@@ -21,15 +21,23 @@ $route[ADMIN_START_PAGE.'/page/caption/resource'] = "ajax_interface/pageCaptionS
 $route[ADMIN_START_PAGE.'/authors/insert'] = "ajax_interface/insertAuthor";
 $route[ADMIN_START_PAGE.'/authors/update'] = "ajax_interface/updateAuthor";
 $route[ADMIN_START_PAGE.'/authors/remove'] = "ajax_interface/removeAuthor";
+/****************** issues ********************/
+$route[ADMIN_START_PAGE.'/issues/insert'] = "ajax_interface/insertIssue";
+$route[ADMIN_START_PAGE.'/issues/update'] = "ajax_interface/updateIssue";
+$route[ADMIN_START_PAGE.'/issues/remove'] = "ajax_interface/removeIssue";
 /*************************************************** ADMIN INTRERFACE ***********************************************/
 $route[ADMIN_START_PAGE] = "admin_interface/controlPanel";
 /* ----------------------------------------------- Pages ---------------------------------------------------------- */
 $route[ADMIN_START_PAGE.'/pages'] = "admin_interface/pagesList";
 $route[ADMIN_START_PAGE.'/pages/:any/edit'] = "admin_interface/editPages";
-/* ----------------------------------------------- Pages ---------------------------------------------------------- */
+/* ----------------------------------------------- Authors ---------------------------------------------------------- */
 $route[ADMIN_START_PAGE.'/authors'] = "admin_interface/authorsList";
 $route[ADMIN_START_PAGE.'/authors/add'] = "admin_interface/insertAuthor";
 $route[ADMIN_START_PAGE.'/authors/edit'] = "admin_interface/editAuthor";
+/* ----------------------------------------------- Authors ---------------------------------------------------------- */
+$route[ADMIN_START_PAGE.'/issues'] = "admin_interface/issuesList";
+$route[ADMIN_START_PAGE.'/issues/add'] = "admin_interface/insertIssue";
+$route[ADMIN_START_PAGE.'/issues/edit'] = "admin_interface/editIssue";
 /*************************************************** GUEST INTRERFACE ***********************************************/
 
 /*************************************************** GUEST INTRERFACE ***********************************************/
@@ -39,6 +47,6 @@ $route['keywords'] = "guests_interface/keywords";
 $route['search'] = "guests_interface/search";
 $route['author/:any/:num'] = "guests_interface/author";
 
-$route['/|for-authors|editorial|institutions'] = "guests_interface/pages";
+$route['/|for-authors|editorial|institutions|usefull-links'] = "guests_interface/pages";
 
 //$route['reviews(\/:any)*?'] = "guests_interface/reviews";

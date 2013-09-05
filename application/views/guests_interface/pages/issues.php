@@ -13,14 +13,7 @@
 		<?php $this->load->view('guests_interface/includes/navigation');?>
 		<article>
 			<?=(isset($page_content[$this->uri->language_string.'_content']))?$page_content[$this->uri->language_string.'_content']:'';?>
-			<div class="production-years">
-				<ul class="production-years-list">
-				<?php $year = date("Y");?>
-				<?php for($i=$year;$i>=$year-7;$i--):?>
-					<li><a href="#"><?=$i?></a></li>
-				<?php endfor;?>
-				</ul>
-			</div>
+			<?php $this->load->view('html/select-years');?>
 			<section class="section-all-issues">
 				<ul class="month-issues">
 				<?php for($i=0;$i<count($issues);$i++):?>

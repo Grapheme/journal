@@ -209,6 +209,67 @@ class Ajax_interface extends MY_Controller{
 		$this->updateItem(array('update'=>$post,'model'=>'authors'));
 		return TRUE;
 	}
+	/* ------------- Issues ----------------- */
+	public function insertIssue(){
+		
+		if(!$this->input->is_ajax_request()):
+			show_error('В доступе отказано');
+		endif;
+		$json_request = array('status'=>FALSE,'responseText'=>'','redirect'=>site_url(ADMIN_START_PAGE));
+		if($this->postDataValidation('issues')):
+			if($this->ExecuteInsertingIssue($_POST)):
+				$json_request['status'] = TRUE;
+				$json_request['responseText'] = 'Выпуск добавлен';
+				$json_request['redirect'] = site_url(ADMIN_START_PAGE.'/issues');
+			endif;
+		else:
+			$json_request['responseText'] = $this->load->view('html/validation-errors',array('alert_header'=>FALSE),TRUE);
+		endif;
+		echo json_encode($json_request);
+	}
+	
+	public function updateIssue(){
+		
+		if(!$this->input->is_ajax_request()):
+			show_error('В доступе отказано');
+		endif;
+		$json_request = array('status'=>FALSE,'responseText'=>'','redirect'=>site_url(ADMIN_START_PAGE));
+		if($this->postDataValidation('issues')):
+			if($this->ExecuteUpdatingIssue($this->input->get('id'),$_POST)):
+				$json_request['status'] = TRUE;
+				$json_request['responseText'] = 'Выпуск cохранен';
+				$json_request['redirect'] = site_url(ADMIN_START_PAGE.'/issues');
+			endif;
+		else:
+			$json_request['responseText'] = $this->load->view('html/validation-errors',array('alert_header'=>FALSE),TRUE);
+		endif;
+		echo json_encode($json_request);
+	}
+	
+	public function removeIssue(){
+		
+		if(!$this->input->is_ajax_request()):
+			show_error('В доступе отказано');
+		endif;
+		$json_request = array('status'=>FALSE,'responseText'=>'');
+		$this->load->model('issues');
+		$this->issues->delete($this->input->post('id'));
+		$json_request['status'] = TRUE;
+		echo json_encode($json_request);
+	}
+	
+	private function ExecuteInsertingIssue($post){
+		
+		return $this->insertItem(array('insert'=>$post,'model'=>'issues'));
+		return TRUE;
+	}
+	
+	private function ExecuteUpdatingIssue($id,$post){
+		
+		$post['id'] = $id;
+		$this->updateItem(array('update'=>$post,'model'=>'issues'));
+		return TRUE;
+	}
 	
 	/* ------------- keywords ----------------- */
 	private function setKeyWords($productID,$keywords){

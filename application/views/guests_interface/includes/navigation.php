@@ -13,7 +13,7 @@
 		<li class="nav-item"><a <?=($posNav == 3)?'class="active"':''?> href="<?=site_url('search');?>"><?=lang('menu_search');?></a></li>
 		<li class="nav-item"><a <?=($posNav == 4)?'class="active"':''?> href="<?=site_url('editorial');?>"><?=lang('menu_editorial');?></a></li>
 		<li class="nav-item"><a <?=($posNav == 5)?'class="active"':''?> href="<?=site_url('keywords');?>"><?=lang('menu_keywords');?></a></li>
-		<li class="nav-item"><a <?=($posNav == 6)?'class="active"':''?> href="<?=site_url('usefull-links');?>"><?=lang('menu_usefull_linksissues');?></a></li>
+		<li class="nav-item"><a <?=($posNav == 6)?'class="active"':''?> href="<?=site_url('usefull-links');?>"><?=lang('menu_usefull_links');?></a></li>
 		<li class="nav-item"><a <?=($posNav == 7)?'class="active"':''?> href="<?=site_url('institutions');?>"><?=lang('menu_institutions');?></a></li>
 	</ul>
 </nav>

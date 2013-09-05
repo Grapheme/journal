@@ -31,6 +31,19 @@
 			array('field'=>'email','label'=>'Email','rules'=>'valid_email|trim|xss_clean'),
 			array('field'=>'ru_address','label'=>'Адрес','rules'=>'trim|xss_clean'),
 			array('field'=>'en_address','label'=>'address','rules'=>'trim|xss_clean')
+		),
+		'issues' =>array(
+			array('field'=>'ru_page_title','label'=>'Title страницы','rules'=>'trim|xss_clean'),
+			array('field'=>'ru_page_description','label'=>'Description страницы','rules'=>'trim|xss_clean'),
+			array('field'=>'ru_page_h1','label'=>'H1 страницы','rules'=>'trim|xss_clean'),
+			array('field'=>'ru_name','label'=>'Имя','rules'=>'trim|xss_clean'),
+			array('field'=>'en_page_title','label'=>'Title page','rules'=>'trim|xss_clean'),
+			array('field'=>'en_page_description','label'=>'Description page','rules'=>'trim|xss_clean'),
+			array('field'=>'en_page_h1','label'=>'H1 page','rules'=>'trim|xss_clean'),
+			array('field'=>'en_name','label'=>'Name','rules'=>'trim|xss_clean'),
+			array('field'=>'number','label'=>'Номер','rules'=>'required|trim|numeric'),
+			array('field'=>'year','label'=>'Год','rules'=>'required|trim|numeric'),
+			array('field'=>'month','label'=>'Месяц','rules'=>'required|trim|numeric'),
 		)
 		
 	);

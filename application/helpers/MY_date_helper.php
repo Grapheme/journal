@@ -1,5 +1,50 @@
 <?php if(!defined('BASEPATH')) exit('No direct script access allowed');
 	
+	function getMonthList($begin = 0,$end = 12,$value = NULL){
+		
+		$months = array("Январь","Февраль","Март","Апрель","Май","Июнь","Июль","Август","Сентябрь","Октябрь","Ноябрь","Декабрь");
+		$html = '<label>Месяц:</label>';
+		$html .= '<select name="month" class="span2">';
+		for($i=$begin;$i<$end;$i++):
+			$html .= '<option value="'.($i+1).'"';
+			if(is_null($value) && ($i+1)==date('m')):
+				$html .= ' selected ';
+			elseif(!is_null($value) && ($i+1) == $value):
+				$html .= ' selected ';
+			endif;
+			$html .= '>'.$months[$i].'</option>';
+		endfor;
+		$html .= '</select>';
+		return $html;
+	}
+	
+	function getYearsList($begin,$end,$reverse = FALSE,$value = NULL){
+		
+		$html = '<label>Год:</label>';
+		$html .= '<select name="year" class="span2">';
+		if($reverse == FALSE):
+			for($i=$begin;$i<$end;$i++):
+				$html .= '<option value="'.$i.'"';
+				if(is_null($value) && $i==date('Y')):
+					$html .= ' selected ';
+				elseif(!is_null($value) && $i == $value):
+					$html .= ' selected ';
+				endif;
+				$html .= '>'.$i.'</option>';
+			endfor;
+		else:
+			for($i=$begin;$i>=$end;$i--):
+				$html .= '<option value="'.$i.'"';
+				if($i==date('Y')):
+					$html .= ' selected ';
+				endif;
+				$html .= '>'.$i.'</option>';
+			endfor;
+		endif;
+		$html .= '</select>';
+		return $html;
+	}
+	
 	function seconds2times($seconds){
 		$times = array();
 		$count_zero = false;
@@ -39,7 +84,7 @@
 		return $count.' '.$result;
 	}
 	
-	function current_date($time = FALSE){
+	function currentDate($time = FALSE){
 		
 		if($time):
 			return strtotime(date('Y-m-d H:i:s'));
@@ -62,36 +107,38 @@
 		endif;
 	}
 	
-	function dialog_date($user_date){
+	function commentsDate($userDate = NULL){
 		
-		if(!$user_date):
-			return '';
-		endif;
-		$date = strtotime(date_without_time($user_date));
-		if($date == current_date()):
-			return $string = 'cегодня в '.date_time($user_date);
-		elseif(yesterday($user_date)):
-			return $string = 'вчера в '.date_time($user_date);
+		if(!is_null($userDate)):
+			$date = strtotime(date_without_time($userDate));
+			if($date == current_date()):
+				return $string = 'cегодня в '.date_time($userDate);
+			elseif(yesterday($userDate)):
+				return $string = 'вчера в '.date_time($userDate);
+			else:
+				return $string = month_date_with_time($userDate);
+			endif;
 		else:
-			return $string = month_date_with_time($user_date);
-		endif;
-	}
-	
-	function dialog_time($user_date){
-		
-		if(!$user_date):
 			return '';
 		endif;
 		
-		$date = strtotime(date_without_time($user_date));
-		if($date == current_date()):
-			return $string = date_full_time($user_date);
+	}
+	
+	function commentsDateTime($userDate = NULL){
+		
+		if(!is_null($userDate)):
+			$date = strtotime(date_without_time($userDate));
+			if($date == current_date()):
+				return $string = date_full_time($userDate);
+			else:
+				return $string = date("d.m.y",strtotime(swap_dot_date_without_time($userDate)));
+			endif;
 		else:
-			return $string = date("d.m.y",strtotime(swap_dot_date_without_time($user_date)));
+			return '';
 		endif;
 	}
 	
-	function month_date($field){
+	function monthDate($field){
 		
 		$months = array("01"=>"января","02"=>"февраля","03"=>"марта","04"=>"апреля","05"=>"мая","06"=>"июня","07"=>"июля","08"=>"августа","09"=>"сентября","10"=>"октября","11"=>"ноября","12"=>"декабря");
 		$list = explode("-",$field);
@@ -103,7 +150,7 @@
 		return preg_replace($pattern, $replacement,$field);
 	}
 	
-	function month_date_with_time($field){
+	function monthDateTime($field){
 		
 		$months = array("01"=>"января","02"=>"февраля","03"=>"марта","04"=>"апреля","05"=>"мая","06"=>"июня","07"=>"июля","08"=>"августа","09"=>"сентября","10"=>"октября","11"=>"ноября","12"=>"декабря");
 		$list = explode("-",$field);
@@ -116,7 +163,7 @@
 		return preg_replace($pattern, $replacement,$field);
 	}
 	
-	function month_dot_date($field){
+	function monthDotDate($field){
 		
 		$months = array("01"=>"янв","02"=>"фев","03"=>"мар","04"=>"апр","05"=>"мая","06"=>"июня","07"=>"июля","08"=>"авг","09"=>"сен","10"=>"окт","11"=>"ноя","12"=>"дек");
 		$list = preg_split("/\./",$field);
@@ -126,7 +173,7 @@
 		return preg_replace($pattern, $replacement,$field);
 	}
 	
-	function split_date($field){
+	function splitDate($field){
 	
 		$list = preg_split("/-/",$field);
 		$pattern = "/(\d+)(-)(\w+)(-)(\d+)/i";
@@ -134,7 +181,7 @@
 		return preg_replace($pattern, $replacement,$field);
 	}
 	
-	function date_without_time($field){
+	function dateWithoutTime($field){
 	
 		$list = preg_split("/-/",$field);
 		$pattern = "/(\d+)(-)(\w+)(-)(\d+) (\d+)(:)(\d+)(:)(\d+)/i";
@@ -142,7 +189,7 @@
 		return preg_replace($pattern, $replacement,$field);
 	}
 	
-	function date_time($field){
+	function getTime($field){
 	
 		$list = preg_split("/-/",$field);
 		$pattern = "/(\d+)(-)(\w+)(-)(\d+) (\d+)(:)(\d+)(:)(\d+)/i";
@@ -150,7 +197,7 @@
 		return preg_replace($pattern, $replacement,$field);
 	}
 	
-	function date_full_time($field){
+	function getFullTime($field){
 	
 		$list = preg_split("/-/",$field);
 		$pattern = "/(\d+)(-)(\w+)(-)(\d+) (\d+)(:)(\d+)(:)(\d+)/i";
@@ -158,7 +205,7 @@
 		return preg_replace($pattern, $replacement,$field);
 	}
 	
-	function swap_dot_date($field){
+	function swapDotDate($field){
 		
 		if($field != '0000-00-00'):
 			$list = preg_split("/-/",$field);
@@ -171,7 +218,7 @@
 		
 	}
 	
-	function swap_dot_date_without_time($field){
+	function swapDotDateWithoutTime($field){
 		
 		$list = preg_split("/-/",$field);
 		$pattern = "/(\d+)(-)(\w+)(-)(\d+) (\d+)(:)(\d+)(:)(\d+)/i";
@@ -179,7 +226,7 @@
 		return preg_replace($pattern, $replacement,$field);
 	}
 	
-	function swap_dot_date_with_time($field){
+	function swapDotDateWithTime($field){
 			
 		$list = preg_split("/-/",$field);
 		$pattern = "/(\d+)(-)(\w+)(-)(\d+) (\d+)(:)(\d+)(:)(\d+)/i";
@@ -187,7 +234,7 @@
 		return preg_replace($pattern, $replacement,$field);
 	}
 
-	function future_days($days = 1,$date = NULL){
+	function futureDays($days = 1,$date = NULL){
 		
 		if(is_null($date)):
 			return (time()+($days*24*60*60));
