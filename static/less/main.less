@@ -134,7 +134,7 @@ textarea {
    ========================================================================== */
 @lang-color: #707070;
 @active-link: #9a092b;
-@active-link-hover: #e60a3b;
+@active-link-hover: #c81c2c;
 @nav-color: #4d4a48;
 @font-main-color: #333;
 @gray: #999;
@@ -143,10 +143,12 @@ textarea {
    Author's custom styles
    ========================================================================== */
 html, body { font: 1em @pt-serif; }
-p { line-height: 1.85em; }
+p { line-height: 1.4em/*1.8em*/; }
 .wrapper { width: 933px; margin: 1.5em auto 0; }
 .logo { float: left; width: 234px; height: 132px; margin: 1.5em 0 0; }
-.logo-icon { display: inline-block; width: 51px; height: 87px; border: 2px solid #4b4b4b; background: url(../img/logo.png) no-repeat; }
+.logo-icon { display: inline-block; width: 51px; height: 87px; border: 2px solid #4b4b4b; background: url(../img/logo.png) no-repeat; 
+  a { display: block; height: 100%; }
+}
 .r-head-content { height: 184px; margin: 0 0 0 234px; }
 
 .lang { margin: 1.5em 0 0;
@@ -168,14 +170,14 @@ p { line-height: 1.85em; }
   .issue-text { font: italic 400 .875em @pt-serif; margin: 2.25em 0 0; }
   .issue-num { font: 700 3.281875em e('/') 1em @proxima; }       
 }
-.issue:hover { background-color: #e60a3b; }
+.issue:hover { background-color: #c81c2c; }
 
 //Navigation
 
 nav { float: left; width: 234px; }
 .nav-list { text-decoration: none; padding: 0;
   .nav-item {
-    a { border-bottom: 1px solid #C8C8C7; color: @nav-color; .uppercase; font: .9em e('/') 2.7em @pt-sans; text-decoration: none;
+    a { border-bottom: 1px solid #C8C8C7; color: @nav-color; .uppercase; font: .9em e('/') 2.45em @pt-sans; text-decoration: none;
       .transition;
     }
     a.active, a:hover { border-color: transparent; color: @active-link; text-decoration: none; }
@@ -192,6 +194,7 @@ article { margin: 0 0 0 234px; min-height: 20em;
     .font-main( 1.1em ); line-height: 1.8em;
     a { color: @gray; text-decoration: none; border-bottom: 1px solid transparent; 
       .transition;
+      .lower { vertical-align: -.25em; }
     }
     a:hover { border-bottom: 1px solid @gray; }
   }
@@ -209,19 +212,19 @@ article header {
   .article-h2 { width: 567px; font: 700 1.375em e('/') 1.22727272em @proxima;
     .uppercase;
   }
-  .desc { margin: 3.2857em 0 2em 0;     
-    .font-main; line-height: 1.9em; 
+  .desc { margin: 2.7857em 0 2em 0/*3.2857em 0 2.5em 0*/;     
+    .font-main; line-height: 1.2571em/* 1.9571em */; 
   }
   .all-pubs-link { position: relative; float: right; font: 16px @myriad; z-index: 5;
-    a { display: block; line-height: 1em; color: @font-main-color; border-bottom: 1px solid; line-height: 1.1em; text-decoration: none; }
-    a:hover { text-decoration: none; }
+    a { display: block; line-height: 1em; color: @font-main-color; border-bottom: 1px solid; line-height: 1.1em; text-decoration: none; .transition; }
+    a:hover { border-color: transparent; }
   }
 }
 
 article.to-authors {
-  .ord-list { padding: 0 0 0 40px; }
+  .ord-list { padding: 0; }
   .themes-item { 
-    .ord-list { 
+    .ord-list { padding: 0 0 0 40px;
       .ord-item { font-size: 1em; margin: .5em 0 0; }  
     }  
   }
@@ -230,7 +233,7 @@ article.to-authors {
 
 .themes-list { margin: 0 0 3.2em;
   .themes-item {  
-    .font-main( 1.1em); line-height: 1.75em; margin-bottom: 0.75em;
+    .font-main( 1.1em); line-height: 1.2em/*1.6em*/; margin-bottom: 0.75em;
   }
 }
 
@@ -255,7 +258,7 @@ footer { padding: 1.125em 0 3.5em; font: .95em @myriad; text-align: right; }
     .uppercase;
     img { display: block; margin: 0 auto; }
   }
-  a:hover { color: @font-main-color + #444444; }
+  a:hover { opacity: .75; }
 }
 .pdf-dl-link.single { margin: 3.75em 0 0; }
 
@@ -293,13 +296,13 @@ section { width: 698px; margin: 50px 0 0;
   }
   .ord-list { margin: 0; padding: 0;
     .ord-item { margin: 0 0 0.5em;  
-      span { color: @font-main-color;
+      span { color: @font-main-color; font-family: @pt-serif;
         .gray { color: @gray - #161616; }
       }
-      .font-main( 1.1em); line-height: 1.9em; color: @gray;
+      .font-main(1.1em); font-family: @proxima; line-height: 1.6em; color: #c2c2c2;
     }
   }
-  .theme-header { margin: 0 0 1em; font-size: 1.1em; line-height: 1.9em; }
+  .theme-header { margin: 0 0 1.5em; font-size: 1.1em; line-height: 1.6em; }
 }
 
 // section comments
@@ -325,11 +328,14 @@ section { width: 698px; margin: 50px 0 0;
       input[type="submit"] { float: right; width: 99px; height: 35px; background: @active-link; color: #fff; border: none; .radius(2px); .transition( all, .4s ); }
       input[type="submit"]:hover { background-color: @active-link-hover; }
       .comment-from-form { margin: 1em 0 65px;
-        figure { float: left; width: 61px; height: 61px;
+        figure { float: left; width: 61px; height: 61px;          
           img { max-width: 100%; .radius; }
         }
         .comment-from-info { margin: 0 105px 0 72px; 
-          .name { font: italic 18px e('/') 21px @pt-serif; }
+          .name { 
+            a { font: italic 18px e('/') 21px @pt-serif; color: @font-main-color; text-decoration: none; }
+            a:hover { color: #000; }
+          }
           .social-addr { margin: .5em 0 0; color: @gray; }
         }
       }
@@ -341,7 +347,10 @@ section { width: 698px; margin: 50px 0 0;
             img { max-width: 100%; .radius; }
           }
           .comment-from-info { margin: 0 0 0 72px;
-            .name { font: italic 18px e('/') 21px @pt-serif; }
+            .name { 
+              a { font: italic 18px e('/') 21px @pt-serif; color: @font-main-color; text-decoration: none; }
+              a:hover { color: #000; }
+            }
             .comment-text { margin: .5em 0 0; }
             .answer { display: inline-block; margin: .75em 0 0; color: @active-link; letter-spacing: 1px; cursor: pointer; }
           }  
@@ -419,7 +428,7 @@ section { width: 698px; margin: 50px 0 0;
 }
 
 //month-issues
-.month-list { margin: 0; padding: 0; color: @gray;
+.month-list { margin: 0; padding: 0; color: @gray; font-family: @proxima;
   li { margin: 0 0 66px;
     h2 { width: 567px; margin-bottom: .4em; font: 700 1.375em e('/') 1.22727272em @proxima; 
     .uppercase;    
@@ -431,16 +440,18 @@ section { width: 698px; margin: 50px 0 0;
 }
 
 //search - page
-.month-list.search-page { list-style-type: none;   
+.month-list.search-page { /*list-style-type: none;*/   
   .publications-date { margin: 0 0 1.6em; font: 13px @pt-serif; color: @gray; }
   .article-h2 { margin-bottom: 0; }
 } 
 .search-page-form { 
   .form-header { margin: 0 0 1em; font: 700 22px e('/') 27px @proxima; .uppercase;  }
-  input[type="text"] { display: block; width: 280px; height: 27px; margin: 0 0 .6em; padding: 0.3em 0 0.3em .5em; font: 15px e('/') 32px @myriad; border: 1px solid @font-main-color; }
+  input[type="text"] { display: block; width: 280px; height: 27px; margin: 0 0 1.2em; padding: 0.3em 0 0.3em .5em; font: 15px e('/') 32px @myriad; border: 1px solid @font-main-color; }
   input[type="submit"] { display: block; width: 99px; height: 35px; margin: 0 0 4.5em; background: @active-link; color: #fff; border: none; .radius(2px); .transition( all, .4s ); }
   input[type="submit"]:hover { background-color: @active-link-hover; }
-  .year-select, .num-select { display: inline-block; margin: 0 1.3em 2em 0; }
+  .year-select, .num-select { display: inline-block; margin: 0 1.3em 2em 0; 
+    .select-caption { margin: 0 0 .5em; }
+  }
   .year-select select { width: 144px; }
   .num-select select { width: 112px; } 
   .publications-num { margin: 1.6em 0; font: 14px @pt-serif; } 
@@ -457,7 +468,7 @@ section.author { margin-top: 0;
     .gray { color: @gray; }
   }
   address { font-style: normal; .font-main; }
-  a[href^="mailto"] { display: inline-block; margin: 0 0 1.6em; text-decoration: none; color: @active-link; .transition; .font-main; }
+  a[href^="mailto"] { display: inline-block; margin: 0 0 .8em; text-decoration: none; color: @active-link; .transition; .font-main; }
   a[href^="mailto"]:hover { color: @active-link-hover; }
   .go-to-author-pubs { margin: 2em 0; .font-main( 1em );  
     a { display: inline-block; color: @gray; border-bottom: 1px solid transparent; text-decoration: none; .transition;}
@@ -469,10 +480,10 @@ section.author { margin-top: 0;
 .alphabet { margin: 0 0 4em;
   .alphabet-list, .alphabet-list-eng { margin: 0 0 1.5em; padding: 0; .uppercase;
     .alphabet-item { display: inline-block; margin: 0 .6em 0 0;
-      a { display: block; font: 18px e('/') 22px @proxima; color: @nav-color; border-bottom: 1px dashed @nav-color; text-decoration: none;
+      a { display: block; font: 18px e('/') 22px @proxima; color: @nav-color; /*border-bottom: 1px dashed @nav-color;*/ text-decoration: none;
       .transition;
       }
-      a:hover { color: @font-main-color; border-color: transparent; }
+      a:hover { color: @active-link-hover/*font-main-color*/; /*border-color: transparent;*/ }
     }
   }
 }
@@ -482,7 +493,7 @@ section.author { margin-top: 0;
   .right { float: left; width: 48%; }
   ul { margin: 0; padding: 0; list-style-type: none;
     li {
-      a { font: 16px e('/') 1.1em @pt-serif; text-decoration: none; color: @gray; display: inline-block; margin: 0 0 0.75em; border-bottom: 1px solid transparent; }
+      a { font: 16px e('/') 1.1em @pt-serif; text-decoration: none; color: @gray; display: inline-block; margin: 0 0 0.75em; border-bottom: 1px solid transparent; .transition; }
       a:hover { border-bottom: 1px solid; }
     }
   }
@@ -495,7 +506,7 @@ section.editorial {
       .position-header { font: 700 22px e('/') 27px @proxima; .uppercase; }
         .name-prof {
           dt { font: normal 20px e('/') 32px @pt-serif; color: @font-main-color; }
-          dd { margin: 0 0 20px 0; font: 18px e('/') 27px @pt-serif; color: @gray - #444444; }
+          dd { margin: 0 0 20px 0; font: 18px e('/') 27px @pt-serif; color: @active-link/*gray - #444444*/; }
       }
     }  
   }
@@ -505,8 +516,8 @@ section.editorial {
 section.useful-links {
   dl {
     dt { float: left; margin: 0 .35em 0 0; 
-      a { color: @font-main-color; text-decoration: none; border-bottom: 1px solid @font-main-color; font-weight: 700; .transition; }
-      a:hover { border-color: transparent; }
+      a { color: @gray; text-decoration: none; border-bottom: 1px solid transparent; /*font-weight: 700;*/ .transition; }
+      a:hover { border-color: @gray + #333333; }
     }
     dd { margin: 0 0 1.75em;  }
   }
