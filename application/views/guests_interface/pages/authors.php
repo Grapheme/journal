@@ -28,7 +28,7 @@
 				<?php endfor;?>
 				</ul>
 			</div>
-			<div id="authors-list">
+			<div class="authors-full-list clearfix" id="authors-list">
 				<?=$authors;?>
 			</div>
 		</article>

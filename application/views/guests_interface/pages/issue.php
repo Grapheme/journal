@@ -20,8 +20,8 @@
 					<li>
 					<?php if(empty($publications[$i][$this->uri->language_string.'_document']) === FALSE):?>
 						<div class="pdf-dl-link">
-							<a href="<?=site_url($publications[$i][$this->uri->language_string.'_document']);?>">
-								<img src="<?=BaseURL('img/pdf.png');?>">Скачать
+							<a href="<?=BaseURL('download/'.$publications[$i][$this->uri->language_string.'_document']);?>">
+								<img src="<?=BaseURL('img/pdf.png');?>"><?=lang('publication_download');?>
 							</a>
 						</div>
 					<?php endif;?>

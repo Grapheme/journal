@@ -5,6 +5,7 @@
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
 <head>
 <?php $this->load->view("admin_interface/includes/head");?>
+<link rel="stylesheet" href="<?=site_url('css/admin-panel/redactor.css');?>" />
 </head>
 <body>
 <!--[if lt IE 7]>
@@ -23,11 +24,13 @@
 					<li class="active">Редактирование публикации</li>
 				</ul>
 				<div class="clear"></div>
-				<?php $this->load->view('admin_interface/forms/manage-$publications/edit');?>
+				<?php $this->load->view('admin_interface/forms/manage-publications/edit');?>
 			</div>
 		</div>
 	</div>
 	<?php $this->load->view("admin_interface/includes/footer");?>
 	<?php $this->load->view("admin_interface/includes/scripts");?>
+	<script type="text/javascript" src="<?=site_url('js/vendor/redactor.min.js');?>"></script>
+	<script type="text/javascript" src="<?=site_url('js/cabinet/redactor-config.js');?>"></script>
 </body>
 </html>
