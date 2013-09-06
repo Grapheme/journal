@@ -272,6 +272,34 @@ class MY_Controller extends CI_Controller{
 		return $uploadStatus;
 	}
 	
+	public function uploadSingleDocument($uploadPath = NULL,$document){
+		
+		$uploadStatus = array('status'=>FALSE,'message'=>'','uploadData'=>array());
+		if(is_null($uploadPath) || ($this->createDir($uploadPath) === FALSE)):
+			$uploadPath = NULL;
+		endif;
+		if(!is_null($uploadPath)):
+			if(!empty($_FILES)):
+				$this->load->library('upload');
+				$config = array();
+				$config['upload_path'] = $uploadPath.'/';
+				$config['allowed_types'] = ALLOWED_TYPES_DOCUMENTS;
+				$config['remove_spaces'] = TRUE;
+				$config['overwrite'] = TRUE;
+				$config['max_size'] = 5120;
+				$config['file_name'] = $this->translite(substr($_FILES[$document]['name'],0,strripos($_FILES[$document]['name'],'.'))).'.'.substr(strrchr($_FILES[$document]['name'],'.'),1);
+				$this->upload->initialize($config);
+				if(!$this->upload->do_upload($document)):
+					$uploadStatus['message'] = $this->load->view('html/print-error',array('alert_header'=>'Файл: '.$_FILES[$document]['name'],'message'=>$this->upload->display_errors()),TRUE);
+				else:
+					$uploadStatus['uploadData'] = $this->upload->data();
+					$uploadStatus['status'] = TRUE;
+				endif;
+			endif;
+		endif;
+		return $uploadStatus;
+	}
+	
 	public function filedelete($file = NULL){
 		
 		if(!is_null($file) && is_file($file)):

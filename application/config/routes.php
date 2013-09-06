@@ -25,6 +25,10 @@ $route[ADMIN_START_PAGE.'/authors/remove'] = "ajax_interface/removeAuthor";
 $route[ADMIN_START_PAGE.'/issues/insert'] = "ajax_interface/insertIssue";
 $route[ADMIN_START_PAGE.'/issues/update'] = "ajax_interface/updateIssue";
 $route[ADMIN_START_PAGE.'/issues/remove'] = "ajax_interface/removeIssue";
+/*************** publications *****************/
+$route[ADMIN_START_PAGE.'/publications/insert'] = "ajax_interface/insertPublication";
+$route[ADMIN_START_PAGE.'/publications/update'] = "ajax_interface/updatePublication";
+$route[ADMIN_START_PAGE.'/publications/remove'] = "ajax_interface/removePublication";
 /*************************************************** ADMIN INTRERFACE ***********************************************/
 $route[ADMIN_START_PAGE] = "admin_interface/controlPanel";
 /* ----------------------------------------------- Pages ---------------------------------------------------------- */
@@ -46,6 +50,8 @@ $route[ADMIN_START_PAGE.'/publications/edit'] = "admin_interface/editPublication
 
 /*************************************************** GUEST INTRERFACE ***********************************************/
 $route['issues'] = "guests_interface/issues";
+$route['issue/:num/:num/:num'] = "guests_interface/issue";
+
 $route['authors'] = "guests_interface/authors";
 $route['keywords'] = "guests_interface/keywords";
 $route['search'] = "guests_interface/search";

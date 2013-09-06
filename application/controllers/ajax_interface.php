@@ -270,6 +270,101 @@ class Ajax_interface extends MY_Controller{
 		$this->updateItem(array('update'=>$post,'model'=>'issues'));
 		return TRUE;
 	}
+	/* ------------- Publications ----------------- */
+	public function insertPublication(){
+		
+		if(!$this->input->is_ajax_request()):
+			show_error('В доступе отказано');
+		endif;
+		$json_request = array('status'=>FALSE,'responseText'=>'','redirect'=>site_url(ADMIN_START_PAGE));
+		if($this->postDataValidation('publication')):
+			if($publicationID = $this->ExecuteInsertingPublication($_POST)):
+				if(isset($_FILES['ru_document']['tmp_name'])):
+					$resutl['ru'] = $this->uploadPublicationDocument($publicationID,'ru_document');
+				endif;
+				if(isset($_FILES['en_document']['tmp_name'])):
+					$resutl['en'] = $this->uploadPublicationDocument($publicationID,'en_document');
+				endif;
+				$json_request['status'] = TRUE;
+				$json_request['responseText'] = 'Публикация добавлена.';
+				if($resutl['ru'] !== TRUE || $resutl['en'] !== TRUE):
+					$json_request['responseText'] .= $resutl['ru']['message'];
+					$json_request['responseText'] .= $resutl['en']['message'];
+					$json_request['redirect'] = FALSE;
+				else:
+					$json_request['redirect'] = site_url(ADMIN_START_PAGE.'/publications?issue='.$this->input->get('issue'));
+				endif;
+			endif;
+		else:
+			$json_request['responseText'] = $this->load->view('html/validation-errors',array('alert_header'=>FALSE),TRUE);
+		endif;
+		echo json_encode($json_request);
+	}
+	
+	public function updatePublication(){
+		
+		if(!$this->input->is_ajax_request()):
+			show_error('В доступе отказано');
+		endif;
+		$json_request = array('status'=>FALSE,'responseText'=>'','redirect'=>site_url(ADMIN_START_PAGE));
+		if($this->postDataValidation('issues')):
+			if($this->ExecuteUpdatingPublication($this->input->get('id'),$_POST)):
+				$json_request['status'] = TRUE;
+				$json_request['responseText'] = 'Выпуск cохранен';
+				$json_request['redirect'] = site_url(ADMIN_START_PAGE.'/issues?issue='.$this->input->get('issue'));
+			endif;
+		else:
+			$json_request['responseText'] = $this->load->view('html/validation-errors',array('alert_header'=>FALSE),TRUE);
+		endif;
+		echo json_encode($json_request);
+	}
+	
+	public function removePublication(){
+		
+		if(!$this->input->is_ajax_request()):
+			show_error('В доступе отказано');
+		endif;
+		$json_request = array('status'=>FALSE,'responseText'=>'');
+		$this->load->model('issues');
+		$this->issues->delete($this->input->post('id'));
+		$json_request['status'] = TRUE;
+		echo json_encode($json_request);
+	}
+	
+	private function ExecuteInsertingPublication($post){
+		
+		$post['issue'] = $this->input->get('issue');
+		unset($post['ru_document'],$post['en_document']);
+		return $this->insertItem(array('insert'=>$post,'model'=>'publications'));
+	}
+	
+	private function ExecuteUpdatingPublication($id,$post){
+		
+		$post['id'] = $id;
+		$this->updateItem(array('update'=>$post,'model'=>'issues'));
+		return TRUE;
+	}
+	
+	private function uploadPublicationDocument($publicationID,$document){
+		
+		$uploadPath = getcwd().'/download';
+		$this->load->model(array('issues','publications'));
+		if($this->input->get('issue') !== FALSE):
+			if($issue = $this->issues->getWhere($this->input->get('issue'))):
+				$uploadPath .= '/'.$issue['year'].'/'.$issue['month'];
+			endif;
+		endif;
+		$resultUpload = $this->uploadSingleDocument($uploadPath,$document);
+		if($resultUpload['status'] == TRUE):
+			$responseDocumentSrc = 'download/'.$resultUpload['uploadData']['file_name'];
+			$this->publications->updateField($publicationID,$document,$responseDocumentSrc);
+			return TRUE;
+		else:
+			return $resultUpload['message'];
+		endif;
+		
+		
+	}
 	
 	/* ------------- keywords ----------------- */
 	private function setKeyWords($productID,$keywords){

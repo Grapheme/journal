@@ -67,6 +67,24 @@ class Guests_interface extends MY_Controller{
 		$this->load->view("guests_interface/pages/issues",$pagevar);
 	}
 	
+	public function issue(){
+		
+		$this->load->model(array('issues','publications'));
+		$pagevar = array(
+			'page_content' => $this->issues->getWhere($this->uri->segment(4)),
+			'publications' => $this->publications->getWhere(NULL,array('issue'=>$this->uri->segment(4)),TRUE)
+		);
+		
+//		print_r($pagevar['publications']);exit;
+		
+		/*if(!empty($pagevar['page_content'])):
+			$pagevar['page_content'] = $this->getCountPublication($pagevar['issues']);
+			$pagevar['page_content'] = array_reverse($pagevar['issues']);
+		endif;*/
+		$this->load->helper(array('date','text'));
+		$this->load->view("guests_interface/pages/issue",$pagevar);
+	}
+	
 	public function authors(){
 		
 		$this->load->model(array('pages','page_resources','authors'));

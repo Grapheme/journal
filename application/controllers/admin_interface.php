@@ -123,13 +123,21 @@ class Admin_interface extends MY_Controller{
 	public function publicationsList(){
 		
 		$this->load->model(array('publications','issues'));
-		$issue = $this->issues->getWhere();
+		$issue = 0;
+		if($issues = $this->issues->getAll()):
+			$issue = $issues[0]['id'];
+		endif;
 		if($this->input->get('issue') !== FALSE && is_numeric($this->input->get('issue'))):
 			$issue = $this->input->get('issue');
 		endif;
 		$pagevar = array(
-			'publications' => $this->publications->getWhere(NULL,array('issue'=>$issue),TRUE)
+			'publications' => $this->publications->getWhere(NULL,array('issue'=>$issue),TRUE),
+			'issues' => $issues
 		);
+		if(!empty($pagevar['issues'])):
+			$pagevar['issues'] = array_reverse($pagevar['issues']);
+		endif;
+		
 		$this->load->view("admin_interface/publications/list",$pagevar);
 	}
 	

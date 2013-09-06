@@ -24,7 +24,7 @@
 								<div><?=lang('issue_number')?><span class="big"><?=$issues[$i]['number']?></span></div>
 							</figure>
 							<figure class="back">
-								<a href="<?=site_url('issue/'.$issues[$i]['id'])?>">
+								<a href="<?=site_url('issue/'.$issues[$i]['year'].'/'.$issues[$i]['month'].'/'.$issues[$i]['id'])?>">
 									<div class="back-date">
 										<span class="back-month"><?=mb_strtolower(getMonthName($issues[$i]['month'],$this->uri->language_string),'UTF-8');?></span>
 										<span class="back-year"><?=$issues[$i]['year']?></span>

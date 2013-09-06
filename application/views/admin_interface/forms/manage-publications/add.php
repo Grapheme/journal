@@ -1,4 +1,4 @@
-<?=form_open(ADMIN_START_PAGE.'/publications/insert',array('class'=>'form-manage-publications')); ?>
+<?=form_open(ADMIN_START_PAGE.'/publications/insert?issue='.$this->input->get('issue'),array('class'=>'form-manage-publications')); ?>
 	<ul id="ProductTab" class="nav nav-tabs">
 		<li class="active"><a href="#ru" data-toggle="tab">Русский</a></li>
 		<li><a href="#en" data-toggle="tab">English</a></li>
@@ -17,6 +17,21 @@
 				<label>Название:</label>
 				<input type="text" name="ru_title" class="span6" value="" placeholder="" />
 			</div>
+			<div class="controls">
+				<label>Документ:</label>
+				<input type="file" autocomplete="off" name="ru_document" size="52">
+				<p class="help-block">Поддерживаются форматы: PDF</p>
+			</div>
+			<div class="control-group">
+				<label>Аннотация:</label>
+				<textarea class="redactor" rows="4" name="ru_annotation"></textarea>
+				<label>Текст статьи:</label>
+				<textarea class="redactor" rows="12" name="ru_content"></textarea>
+				<label>При поддержке:</label>
+				<textarea class="redactor" rows="4" name="ru_support"></textarea>
+				<label>Библиографический список:</label>
+				<textarea class="redactor" rows="4" name="ru_bibliography"></textarea>
+			</div>
 		</div>
 		<div class="tab-pane fade" id="en">
 			<div class="control-group">
@@ -31,17 +46,24 @@
 				<label>Title:</label>
 				<input type="text" name="en_title" class="span6" value="" placeholder="" />
 			</div>
+			<div class="controls">
+				<label>Documenet:</label>
+				<input type="file" autocomplete="off" name="en_document" size="52">
+				<p class="help-block">Supported formats: PDF</p>
+			</div>
+			<div class="control-group">
+				<label>Annotation:</label>
+				<textarea class="redactor redactor-row4" name="en_annotation"></textarea>
+				<label>Text of the publication:</label>
+				<textarea class="redactor redactor-row12" name="en_content"></textarea>
+				<label>With support:</label>
+				<textarea class="redactor redactor-row4" name="en_support"></textarea>
+				<label>Bibliographic list:</label>
+				<textarea class="redactor redactor-row4" name="en_bibliography"></textarea>
+			</div>
 		</div>
 	</div>
-	<hr/>
-	<div class="control-group">
-		<label>Номер выпуска:</label>
-		<input type="text" name="number" class="span1 valid-required valid-numeric" value="" placeholder="" />
-		<?php $this->load->helper('date');?>
-		<?=getMonthList();?>
-		<?=getYearsList(2013,2006,TRUE);?>
-	</div>
 	<div class="div-form-operation">
-		<button type="submit" value="" name="submit" class="btn btn-success btn-submit no-clickable btn-loading">Добавить</button>
+		<button type="submit" value="" name="submit" class="btn btn-success btn-publication-submit no-clickable btn-loading">Добавить</button>
 	</div>
 <?=form_close();?>

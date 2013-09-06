@@ -20,7 +20,7 @@
 			<div class="span9">
 				<ul class="breadcrumb">
 					<li><a href="<?=site_url(ADMIN_START_PAGE);?>">Панель управления</a> <span class="divider">/</span></li>
-					<li><a href="<?=site_url(ADMIN_START_PAGE.'/publications');?>">Публикации</a> <span class="divider">/</span></li>
+					<li><a href="<?=site_url(ADMIN_START_PAGE.'/publications?issue='.$this->input->get('issue'));?>">Публикации</a> <span class="divider">/</span></li>
 					<li class="active">Добавление публикации</li>
 				</ul>
 				<div class="clear"></div>

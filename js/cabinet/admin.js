@@ -27,4 +27,10 @@ $(function(){
 		});
 	});
 	
+	$("button.btn-publication-submit").click(function(){
+		$(this).addClass('loading');
+		var _form = $(this).parents('form');
+		$(_form).ajaxSubmit(uploadDocuments.multyDocuments);
+		return false;
+	});
 });

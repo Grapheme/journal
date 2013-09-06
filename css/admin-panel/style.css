@@ -61,3 +61,10 @@ div.loading { background: url('../../img/dots-white.gif') center 20px no-repeat 
     border-color: rgba(0, 0, 0, 0);
     color: #333333;
 }
+
+.redactor-row4{
+	height:97px;
+}
+.redactor-row12{
+	height:257px;
+}

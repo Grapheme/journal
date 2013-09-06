@@ -1,4 +1,4 @@
-<?=form_open(ADMIN_START_PAGE.'/publications/update?mode=edit&id='.$this->input->get('id'),array('class'=>'form-manage-publications')); ?>
+<?=form_open(ADMIN_START_PAGE.'/publications/update?issue='.$this->input->get('issue').'&id='.$this->input->get('id'),array('class'=>'form-manage-publications')); ?>
 	<ul id="ProductTab" class="nav nav-tabs">
 		<li class="active"><a href="#ru" data-toggle="tab">Русский</a></li>
 		<li><a href="#en" data-toggle="tab">English</a></li>
@@ -42,6 +42,6 @@
 		<?=getYearsList(2013,2006,TRUE,$issue['year']);?>
 	</div>
 	<div class="div-form-operation">
-		<button type="submit" value="" name="submit" class="btn btn-success btn-submit no-clickable btn-loading">Сохранить</button>
+		<button type="submit" value="" name="submit" class="btn btn-success btn-publication-submit no-clickable btn-loading">Сохранить</button>
 	</div>
 <?=form_close();?>

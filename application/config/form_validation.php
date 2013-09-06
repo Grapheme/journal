@@ -44,6 +44,24 @@
 			array('field'=>'number','label'=>'Номер','rules'=>'required|trim|numeric'),
 			array('field'=>'year','label'=>'Год','rules'=>'required|trim|numeric'),
 			array('field'=>'month','label'=>'Месяц','rules'=>'required|trim|numeric'),
+		),
+		'publication' =>array(
+			array('field'=>'ru_page_title','label'=>'Title страницы','rules'=>'trim|xss_clean'),
+			array('field'=>'ru_page_description','label'=>'Description страницы','rules'=>'trim|xss_clean'),
+			array('field'=>'ru_page_h1','label'=>'H1 страницы','rules'=>'trim|xss_clean'),
+			array('field'=>'ru_title','label'=>'Имя','rules'=>'trim|xss_clean'),
+			array('field'=>'en_page_title','label'=>'Title page','rules'=>'trim|xss_clean'),
+			array('field'=>'en_page_description','label'=>'Description page','rules'=>'trim|xss_clean'),
+			array('field'=>'en_page_h1','label'=>'H1 page','rules'=>'trim|xss_clean'),
+			array('field'=>'en_title','label'=>'Name','rules'=>'trim|xss_clean'),
+			array('field'=>'ru_annotation','label'=>'Аннотация','rules'=>'trim|xss_clean'),
+			array('field'=>'ru_content','label'=>'Текст статьи','rules'=>'trim|xss_clean'),
+			array('field'=>'ru_support','label'=>'При поддержке','rules'=>'trim|xss_clean'),
+			array('field'=>'ru_bibliography','label'=>'Библиографический список','rules'=>'trim|xss_clean'),
+			array('field'=>'en_annotation','label'=>'Annotation','rules'=>'trim|xss_clean'),
+			array('field'=>'en_content','label'=>'Text of the publication','rules'=>'trim|xss_clean'),
+			array('field'=>'en_support','label'=>'With support','rules'=>'trim|xss_clean'),
+			array('field'=>'en_bibliography','label'=>'Bibliographic list','rules'=>'trim|xss_clean')
 		)
 		
 	);

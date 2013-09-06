@@ -23,10 +23,12 @@
 				</ul>
 				<div class="clear"></div>
 				<div class="inline">
-					<a href="<?=site_url(ADMIN_START_PAGE.'/publications/add')?>" class="btn">Добавить публикацию</a>
+					<?php $this->load->view('html/select-issues');?>
+					<?php if($this->input->get('issue') !== FALSE):?>
+					<a href="<?=site_url(ADMIN_START_PAGE.'/publications/add?issue='.$this->input->get('issue'))?>" class="btn">Добавить публикацию</a>
+					<?php endif;?>
 				</div>
 				<h2>Публикации</h2>
-				<?php $this->load->view('html/select-years');?>
 				<table class="table table-bordered" data-action="<?=site_url(ADMIN_START_PAGE.'/publications/remove');?>">
 					<thead>
 						<tr>
@@ -54,5 +56,7 @@
 	</div>
 	<?php $this->load->view("admin_interface/includes/footer");?>
 	<?php $this->load->view("admin_interface/includes/scripts");?>
+	<script type="text/javascript" src="<?=site_url('js/cabinet/selects.js');?>"></script>
+	<script type="text/javascript" src="<?=site_url('js/libs/upload-document.js');?>"></script>
 </body>
 </html>

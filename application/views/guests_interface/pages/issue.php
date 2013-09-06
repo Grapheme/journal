@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+	<?php $this->load->view('guests_interface/includes/head');?>
+</head>
+<body>
+	<?php $this->load->view('guests_interface/includes/ie7');?>
+	<div class="wrapper">
+		<?php $this->load->view('guests_interface/includes/header');?>
+		<?php $this->load->view('guests_interface/includes/navigation');?>
+		<article>
+			<header>
+				<h1 class="article-h1"><?=mb_strtoupper(getMonthName($page_content['month'],$this->uri->language_string));?>. <?=$page_content['year'];?></h1>
+				<div class="delicate-design-stroke"> </div>
+				<ol class="month-list">
+				<?php for($i=0;$i<count($publications);$i++):?>
+					<li>
+					<?php if(empty($publications[$i][$this->uri->language_string.'_document']) === FALSE):?>
+						<div class="pdf-dl-link">
+							<a href="<?=site_url($publications[$i][$this->uri->language_string.'_document']);?>">
+								<img src="<?=BaseURL('img/pdf.png');?>">Скачать
+							</a>
+						</div>
+					<?php endif;?>
+						<h2 class="article-h2">
+							<a href="<?=site_url('issue/'.$page_content['year'].'/'.$page_content['month'].'/'.$page_content['id'].'/publication/'.$publications[$i]['id'])?>"><?=$publications[$i][$this->uri->language_string.'_title']?></a>
+						</h2>
+						<div class="authors">
+							Чежина Н. В., Королев Д. А., Холмичева Н. Н.
+						</div>
+					</li>
+				<?php endfor;?>
+				</ol>
+			</header>
+		</article>
+		<?php $this->load->view('guests_interface/includes/footer');?>
+	</div>
+	<?php $this->load->view('guests_interface/includes/scripts');?>
+	<?php $this->load->view('guests_interface/includes/typekit');?>
+	<?php $this->load->view('guests_interface/includes/google-analytics');?>
+</body>
+</html>
