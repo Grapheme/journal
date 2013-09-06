@@ -1,6 +1,7 @@
 <div class="well sidebar-nav">
 	<ul class="nav nav-list">
 		<li class="nav-header">Справочники</li>
+		<li><a href="<?=site_url(ADMIN_START_PAGE.'/institutions');?>">Учреждения</a></li>
 		<li class="nav-header">Списки</li>
 		<li><a href="<?=site_url(ADMIN_START_PAGE.'/authors');?>">Авторы</a></li>
 		<li><a href="<?=site_url(ADMIN_START_PAGE.'/issues');?>">Выпуски</a></li>

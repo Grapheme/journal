@@ -148,6 +148,67 @@ class Ajax_interface extends MY_Controller{
 			return '';
 		endif;
 	}
+	/* ------------- Institution ----------------- */
+	public function insertInstitution(){
+		
+		if(!$this->input->is_ajax_request()):
+			show_error('В доступе отказано');
+		endif;
+		$json_request = array('status'=>FALSE,'responseText'=>'','redirect'=>site_url(ADMIN_START_PAGE));
+		if($this->postDataValidation('institution')):
+			if($this->ExecuteInsertingInstitution($_POST)):
+				$json_request['status'] = TRUE;
+				$json_request['responseText'] = 'Учреждение добавлено';
+				$json_request['redirect'] = site_url(ADMIN_START_PAGE.'/institutions');
+			endif;
+		else:
+			$json_request['responseText'] = $this->load->view('html/validation-errors',array('alert_header'=>FALSE),TRUE);
+		endif;
+		echo json_encode($json_request);
+	}
+	
+	public function updateInstitution(){
+		
+		if(!$this->input->is_ajax_request()):
+			show_error('В доступе отказано');
+		endif;
+		$json_request = array('status'=>FALSE,'responseText'=>'','redirect'=>site_url(ADMIN_START_PAGE));
+		if($this->postDataValidation('institution')):
+			if($this->ExecuteUpdatingInstitution($this->input->get('id'),$_POST)):
+				$json_request['status'] = TRUE;
+				$json_request['responseText'] = 'Учреждение cохранено';
+				$json_request['redirect'] = site_url(ADMIN_START_PAGE.'/institutions');
+			endif;
+		else:
+			$json_request['responseText'] = $this->load->view('html/validation-errors',array('alert_header'=>FALSE),TRUE);
+		endif;
+		echo json_encode($json_request);
+	}
+	
+	public function removeInstitution(){
+		
+		if(!$this->input->is_ajax_request()):
+			show_error('В доступе отказано');
+		endif;
+		$json_request = array('status'=>FALSE,'responseText'=>'');
+		$this->load->model('institutions');
+		$this->institutions->delete($this->input->post('id'));
+		$json_request['status'] = TRUE;
+		echo json_encode($json_request);
+	}
+	
+	private function ExecuteInsertingInstitution($post){
+		
+		return $this->insertItem(array('insert'=>$post,'model'=>'institutions'));
+		return TRUE;
+	}
+	
+	private function ExecuteUpdatingInstitution($id,$post){
+		
+		$post['id'] = $id;
+		$this->updateItem(array('update'=>$post,'model'=>'institutions'));
+		return TRUE;
+	}
 	/* ------------- authors ----------------- */
 	public function insertAuthor(){
 		

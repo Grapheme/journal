@@ -18,12 +18,6 @@
 				<input type="text" name="ru_name" class="span3" value="" placeholder="Имя" />
 				<label>Должность:</label>
 				<input type="text" name="ru_position" class="span3" value="" placeholder="Должность" />
-				<label>Аббревиатура учреждения:</label>
-				<input type="text" name="ru_abbreviation_institution" class="span3" value="" placeholder="Аббревиатура" />
-				<label>Раcшифровка учреждения:</label>
-				<textarea rows="2" class="span6" name="ru_decipher_institution" placeholder="Раcшифровка"></textarea>
-				<label>Адрес:</label>
-				<textarea rows="2" class="span6" name="ru_address" placeholder="Адрес"></textarea>
 			</div>
 		</div>
 		<div class="tab-pane fade" id="en">
@@ -40,10 +34,6 @@
 				<input type="text" name="en_name" class="span3" value="" placeholder="Name" />
 				<label>Position:</label>
 				<input type="text" name="en_position" class="span3" value="" placeholder="Position" />
-				<label>Abbreviation institutions:</label>
-				<input type="text" name="en_abbreviation_institution" class="span3" value="" placeholder="Abbreviation" />
-				<label>Deciphering institutions:</label>
-				<textarea rows="2" class="span6" placeholder="Deciphering" name="en_decipher_institution"></textarea>
 				<label>Address:</label>
 				<textarea rows="2" class="span6" name="en_address" placeholder="Address"></textarea>
 			</div>
@@ -53,6 +43,15 @@
 	<div class="control-group">
 		<label>Email автора:</label>
 		<input type="text" name="email" class="span3 valid-email" value="" placeholder="Email" />
+	</div>
+	<div class="control-group">
+		<label>Учреждение:</label>
+		<select name="institution" class="span4">
+			<option value="0">Укажите учреждение автора</option>
+		<?php for($i=0;$i<count($institutions);$i++):?>
+			<option value="<?=$institutions[$i]['id']?>"><?=$institutions[$i]['ru_small_title'];?></option>
+		<?php endfor;?>
+		</select>
 	</div>
 	<div class="div-form-operation">
 		<button type="submit" value="" name="submit" class="btn btn-success btn-submit no-clickable btn-loading">Добавить</button>

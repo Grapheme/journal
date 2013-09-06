@@ -79,17 +79,45 @@ class Admin_interface extends MY_Controller{
 	
 	public function insertAuthor(){
 		
+		$this->load->model('institutions');
+		$pagevar = array(
+			'institutions' => $this->institutions->getAll()
+		);
 		$this->load->view("admin_interface/authors/add");
 	}
 	
 	public function editAuthor(){
 		
-		$this->load->model('authors');
+		$this->load->model(array('authors','institutions'));
 		$pagevar = array(
-			'author' => $this->authors->getWhere($this->input->get('id'))
-		
+			'author' => $this->authors->getWhere($this->input->get('id')),
+			'institutions' => $this->institutions->getAll()
 		);
 		$this->load->view("admin_interface/authors/edit",$pagevar);
+	}
+	/******************************************* Institution ******************************************************/
+	public function institutionsList(){
+		
+		$this->load->model('institutions');
+		$pagevar = array(
+			'institutions' => $this->institutions->getAll(),
+		);
+		$this->load->view("admin_interface/institutions/list",$pagevar);
+	}
+	
+	public function insertInstitution(){
+		
+		$this->load->view("admin_interface/institutions/add");
+	}
+	
+	public function editInstitution(){
+		
+		$this->load->model('institutions');
+		$pagevar = array(
+			'institution' => $this->institutions->getWhere($this->input->get('id'))
+		
+		);
+		$this->load->view("admin_interface/institutions/edit",$pagevar);
 	}
 	/******************************************** issues ********************************************************/
 	public function issuesList(){

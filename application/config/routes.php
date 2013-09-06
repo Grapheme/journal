@@ -17,6 +17,10 @@ $route[ADMIN_START_PAGE.'/page/:any/update'] = "ajax_interface/updatePage";
 $route[ADMIN_START_PAGE.'/pages/:any/upload/resource'] = "ajax_interface/pageUploadResources";
 $route[ADMIN_START_PAGE.'/page/remove/resource'] = "ajax_interface/removePageResource";
 $route[ADMIN_START_PAGE.'/page/caption/resource'] = "ajax_interface/pageCaptionSave";
+/***************institutions *******************/
+$route[ADMIN_START_PAGE.'/institutions/insert'] = "ajax_interface/insertInstitution";
+$route[ADMIN_START_PAGE.'/institutions/update'] = "ajax_interface/updateInstitution";
+$route[ADMIN_START_PAGE.'/institutions/remove'] = "ajax_interface/removeInstitution";
 /****************** authors ********************/
 $route[ADMIN_START_PAGE.'/authors/insert'] = "ajax_interface/insertAuthor";
 $route[ADMIN_START_PAGE.'/authors/update'] = "ajax_interface/updateAuthor";
@@ -34,6 +38,10 @@ $route[ADMIN_START_PAGE] = "admin_interface/controlPanel";
 /* ----------------------------------------------- Pages ---------------------------------------------------------- */
 $route[ADMIN_START_PAGE.'/pages'] = "admin_interface/pagesList";
 $route[ADMIN_START_PAGE.'/pages/:any/edit'] = "admin_interface/editPages";
+/* --------------------------------------------- Institutions ------------------------------------------------------ */
+$route[ADMIN_START_PAGE.'/institutions'] = "admin_interface/institutionsList";
+$route[ADMIN_START_PAGE.'/institutions/add'] = "admin_interface/insertInstitution";
+$route[ADMIN_START_PAGE.'/institutions/edit'] = "admin_interface/editInstitution";
 /* ----------------------------------------------- Authors ---------------------------------------------------------- */
 $route[ADMIN_START_PAGE.'/authors'] = "admin_interface/authorsList";
 $route[ADMIN_START_PAGE.'/authors/add'] = "admin_interface/insertAuthor";

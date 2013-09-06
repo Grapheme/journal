@@ -24,8 +24,7 @@
 					<?=$page_content[$this->uri->language_string.'_position'];?>
 				</div>
 				<div>
-					<span class="gray"><?=$page_content[$this->uri->language_string.'_abbreviation_institution'];?></span> 
-					(<?=$page_content[$this->uri->language_string.'_decipher_institution'];?>)
+					<span class="gray"><?=$page_content['institution'][$this->uri->language_string.'_title'];?></span> 
 				</div>
 				<address>
 					<?=$page_content[$this->uri->language_string.'_address'];?>

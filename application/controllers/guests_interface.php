@@ -126,13 +126,14 @@ class Guests_interface extends MY_Controller{
 	
 	public function author(){
 		
-		$this->load->model('authors');
+		$this->load->model(array('authors','institutions'));
 		$pagevar = array(
 			'page_content' => $this->authors->getWhere($this->uri->segment(3)),
 		);
 		if(empty($pagevar['page_content'])):
 			show_404();
 		endif;
+		$pagevar['page_content']['institution'] = $this->institutions->getWhere($pagevar['page_content']['institution']);
 		$this->load->view("guests_interface/pages/author",$pagevar);
 	}
 	
