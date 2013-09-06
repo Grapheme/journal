@@ -93,10 +93,12 @@ class Guests_interface extends MY_Controller{
 			'keywords' => array(),
 			'authors' => array(),
 		);
-		/*if(!empty($pagevar['page_content'])):
-			$pagevar['page_content'] = $this->getCountPublication($pagevar['issues']);
-			$pagevar['page_content'] = array_reverse($pagevar['issues']);
-		endif;*/
+		if(empty($pagevar)):
+			show_404();
+		endif;
+		if($keywords = $this->getProductKeyWords($pagevar['page_content']['id'])):
+			$pagevar['keywords'] = explode(',',$keywords);
+		endif;
 		$this->load->helper(array('date','text'));
 		$this->load->view("guests_interface/pages/publication",$pagevar);
 	}

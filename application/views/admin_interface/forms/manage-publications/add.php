@@ -62,6 +62,8 @@
 	<div class="controls">
 		<label>Номер страницы:</label>
 		<input type="text" name="page" class="span1 valid-numeric" value="" placeholder="Номер страницы" />
+		<label>Ключевые слова:</label>
+		<input type="text" name="keywords" class="span9" value="" placeholder="Введите ключевые слова через запятую" />
 	</div>
 	<div class="div-form-operation">
 		<button type="submit" value="" name="submit" class="btn btn-success btn-publication-submit no-clickable btn-loading">Добавить</button>

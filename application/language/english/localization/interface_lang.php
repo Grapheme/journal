@@ -21,4 +21,5 @@ $lang['with_support'] = "With the support";
 $lang['bibliography'] = "Bibliographic list";
 $lang['comments_to_publication'] = "Comments on the publication";
 $lang['signin_for_comment'] = "Sign in to comment on an article.";
+$lang['key_words'] = "Key words";
 ?>

@@ -338,23 +338,40 @@ class Ajax_interface extends MY_Controller{
 	private function ExecuteInsertingPublication($post){
 		
 		$post['issue'] = $this->input->get('issue');
-		unset($post['ru_document'],$post['en_document']);
 		if(!empty($post['ru_title'])):
 			$post['page_url'] = $this->translite($post['ru_title']);
 		elseif(!empty($post['en_title'])):
 			$post['page_url'] = $this->translite($post['en_title']);
 		endif;
-		return $this->insertItem(array('insert'=>$post,'model'=>'publications'));
+		if(!empty($post['keywords'])):
+			$keywords = $post['keywords'];
+		endif;
+		unset($post['ru_document'],$post['en_document'],$post['keywords']);
+		if($publicationID = $this->insertItem(array('insert'=>$post,'model'=>'publications'))):
+			if(!empty($keywords)):
+				$this->setKeyWords($publicationID,$keywords);
+			endif;
+			return $publicationID;
+		else:
+			return FALSE;
+		endif;
 	}
 	
-	private function ExecuteUpdatingPublication($id,$post){
+	private function ExecuteUpdatingPublication($publicationID,$post){
 		
-		$post['id'] = $id;
-		unset($post['ru_document'],$post['en_document']);
+		$post['id'] = $publicationID;
 		if(!empty($post['ru_title'])):
 			$post['page_url'] = $this->translite($post['ru_title']);
 		elseif(!empty($post['en_title'])):
 			$post['page_url'] = $this->translite($post['en_title']);
+		endif;
+		if(!empty($post['keywords'])):
+			$keywords = $post['keywords'];
+		endif;
+		unset($post['ru_document'],$post['en_document'],$post['keywords']);
+		$this->deleteKeyWords($publicationID);
+		if(!empty($keywords)):
+			$this->setKeyWords($publicationID,$keywords);
 		endif;
 		$this->updateItem(array('update'=>$post,'model'=>'publications'));
 		return TRUE;
@@ -383,7 +400,7 @@ class Ajax_interface extends MY_Controller{
 	}
 	
 	/* ------------- keywords ----------------- */
-	private function setKeyWords($productID,$keywords){
+	private function setKeyWords($publicationID,$keywords){
 		
 		if($KeyWordsList = explode(',',$keywords)):
 			$this->load->model(array('keywords','matching'));
@@ -392,11 +409,11 @@ class Ajax_interface extends MY_Controller{
 					$insert_word = array('word'=>trim($KeyWordsList[$i]),'word_hash'=>md5(trim($KeyWordsList[$i])));
 					if(!$wordID = $this->keywords->search('word_hash',$insert_word['word_hash'])):
 						if($wordID = $this->insertItem(array('insert'=>$insert_word,'model'=>'keywords'))):
-							$insert_match = array('word'=>$wordID,'product'=>$productID);
+							$insert_match = array('word'=>$wordID,'publication'=>$publicationID);
 							$matchID = $this->insertItem(array('insert'=>$insert_match,'model'=>'matching'));
 						endif;
-					elseif(!$this->matching->getWhere(NULL,array('word'=>$wordID,'product'=>$productID))):
-						$insert_match = array('word'=>$wordID,'product'=>$productID);
+					elseif(!$this->matching->getWhere(NULL,array('word'=>$wordID,'publication'=>$publicationID))):
+						$insert_match = array('word'=>$wordID,'publication'=>$publicationID);
 						$matchID = $this->insertItem(array('insert'=>$insert_match,'model'=>'matching'));
 					endif;
 				endif;
@@ -404,10 +421,10 @@ class Ajax_interface extends MY_Controller{
 		endif;
 	}
 	
-	private function deleteKeyWords($productID){
+	private function deleteKeyWords($publicationID){
 		
 		$this->load->model('matching');
-		$this->matching->delete(NULL,array('product'=>$productID));
+		$this->matching->delete(NULL,array('publication'=>$publicationID));
 	}
 	
 }

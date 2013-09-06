@@ -38,7 +38,12 @@
 			</div>
 			<?php if(!empty($keywords)):?>
 			<div class="key-words">
-				Ключевые слова: <a href="#">топологические изоляторы</a>, <a href="#">заряженные частицы</a>
+				<?=lang('key_words')?>:
+			<?php for($i=0;$i<count($keywords);$i++):?>
+				<a href="<?=site_url('search/publication?mode=search&word='.md5(trim($keywords[$i])))?>">
+					<?=$keywords[$i];?><?php if(isset($keywords[$i+1])):?>, <?php endif;?>
+				</a>
+			<?php endfor;?>
 			</div>
 			<?php endif;?>
 			<?php if(!empty($publication_resources)):?>

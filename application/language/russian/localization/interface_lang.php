@@ -21,4 +21,5 @@ $lang['with_support'] = "При поддержке";
 $lang['bibliography'] = "Библиографический список";
 $lang['comments_to_publication'] = "Комментарии к статье";
 $lang['signin_for_comment'] = "Авторизуйтесь, чтобы прокомментировать статью.";
+$lang['key_words'] = "Ключевые слова";
 ?>
