@@ -17,14 +17,14 @@
 				<?=$this->load->helper('text');?>
 				<ul class="alphabet-list">
 			<?php for($i=1040;$i<=1071;$i++):?>
-				<?php if(array_search($i,array(1049,1066,1067)) === FALSE):?>
-					<li class="alphabet-item"><a data-code="<?=$i;?>" href="#"><?=unichr($i);?></a>
+				<?php if(array_search($i,array(1049,1066,1067,1068)) === FALSE):?>
+					<li class="alphabet-item"><a class="no-clickable a-get-authors<?=($i==1040 && $this->uri->language_string == RUSLAN)?' active-char':''?>" data-lang="<?=RUSLAN;?>" href="#"><?=unichr($i);?></a></li>
 				<?php endif;?>
 			<?php endfor;?>
 				</ul>
 				<ul class="alphabet-list-eng">
 				<?php for($i=65;$i<91;$i++):?>
-					<li class="alphabet-item"><a data-code="<?=$i;?>" href="#"><?=unichr($i);?></a>
+					<li class="alphabet-item"><a class="no-clickable a-get-authors<?=($i==65 && $this->uri->language_string == ENGLAN)?' active-char':''?>" data-lang="<?=ENGLAN;?>" href="#"><?=unichr($i);?></a></li>
 				<?php endfor;?>
 				</ul>
 			</div>
