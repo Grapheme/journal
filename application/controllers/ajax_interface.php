@@ -280,18 +280,22 @@ class Ajax_interface extends MY_Controller{
 		if($this->postDataValidation('publication')):
 			if($publicationID = $this->ExecuteInsertingPublication($_POST)):
 				if(isset($_FILES['ru_document']['tmp_name'])):
-					$resutl['ru'] = $this->uploadPublicationDocument($publicationID,'ru_document');
+					$result['ru'] = $this->uploadPublicationDocument($publicationID,'ru_document');
 				endif;
 				if(isset($_FILES['en_document']['tmp_name'])):
-					$resutl['en'] = $this->uploadPublicationDocument($publicationID,'en_document');
+					$result['en'] = $this->uploadPublicationDocument($publicationID,'en_document');
 				endif;
-				$json_request['status'] = TRUE;
 				$json_request['responseText'] = 'Публикация добавлена.';
-				if($resutl['ru'] !== TRUE || $resutl['en'] !== TRUE):
-					$json_request['responseText'] .= $resutl['ru']['message'];
-					$json_request['responseText'] .= $resutl['en']['message'];
+				if($result['ru'] !== TRUE):
+					$json_request['responseText'] .= $result['ru'];
 					$json_request['redirect'] = FALSE;
-				else:
+				endif;
+				if($result['en'] !== TRUE):
+					$json_request['responseText'] .= $result['en'];
+					$json_request['redirect'] = FALSE;
+				endif;
+				if($result['en'] === TRUE && $result['ru'] === TRUE):
+					$json_request['status'] = TRUE;
 					$json_request['redirect'] = site_url(ADMIN_START_PAGE.'/publications?issue='.$this->input->get('issue'));
 				endif;
 			endif;
