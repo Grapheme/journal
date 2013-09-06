@@ -15,7 +15,7 @@ class Keywords extends MY_Model{
 		$this->db->select('keywords.word');
 		$this->db->from('matching');
 		$this->db->join('keywords','matching.word = keywords.id');
-		$this->db->where('matching.product',$productID);
+		$this->db->where('matching.publication',$productID);
 		$query = $this->db->get();
 		if($data = $query->result_array()):
 			return $data;

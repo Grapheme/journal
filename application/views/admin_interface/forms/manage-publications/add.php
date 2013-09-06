@@ -25,8 +25,6 @@
 			<div class="control-group">
 				<label>Аннотация:</label>
 				<textarea class="redactor" rows="4" name="ru_annotation"></textarea>
-				<label>Текст статьи:</label>
-				<textarea class="redactor" rows="12" name="ru_content"></textarea>
 				<label>При поддержке:</label>
 				<textarea class="redactor" rows="4" name="ru_support"></textarea>
 				<label>Библиографический список:</label>
@@ -54,14 +52,18 @@
 			<div class="control-group">
 				<label>Annotation:</label>
 				<textarea class="redactor redactor-row4" name="en_annotation"></textarea>
-				<label>Text of the publication:</label>
-				<textarea class="redactor redactor-row12" name="en_content"></textarea>
 				<label>With support:</label>
 				<textarea class="redactor redactor-row4" name="en_support"></textarea>
 				<label>Bibliographic list:</label>
 				<textarea class="redactor redactor-row4" name="en_bibliography"></textarea>
 			</div>
 		</div>
+	</div>
+	<div class="controls">
+		<label>Номер страницы:</label>
+		<input type="text" name="page" class="span1 valid-numeric" value="" placeholder="Номер страницы" />
+		<label>Ключевые слова:</label>
+		<input type="text" name="keywords" class="span9" value="" placeholder="Введите ключевые слова через запятую" />
 	</div>
 	<div class="div-form-operation">
 		<button type="submit" value="" name="submit" class="btn btn-success btn-publication-submit no-clickable btn-loading">Добавить</button>

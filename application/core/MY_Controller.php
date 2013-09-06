@@ -466,10 +466,10 @@ class MY_Controller extends CI_Controller{
 	
 	/* -------------------------------------------------------------------------------------------- */
 	
-	public function getProductKeyWords($product){
+	public function getProductKeyWords($publication){
 		
 		$this->load->model('keywords');
-		if($KeyWords = $this->keywords->getProductKeyWords($product)):
+		if($KeyWords = $this->keywords->getProductKeyWords($publication)):
 			for($i=0;$i<count($KeyWords);$i++):
 				$KeyWordsList[] = $KeyWords[$i]['word'];
 			endfor;

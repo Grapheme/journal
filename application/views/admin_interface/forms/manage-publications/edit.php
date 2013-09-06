@@ -7,39 +7,63 @@
 		<div class="tab-pane fade in active" id="ru">
 			<div class="control-group">
 				<label>Title: </label>
-				<input type="text" name="ru_page_title" class="span6" value="<?=$issue['ru_page_title']?>" placeholder="Title страницы" />
+				<input type="text" name="ru_page_title" class="span6" value="<?=$publication['ru_page_title']?>" placeholder="Title страницы" />
 				<label>Description:</label>
-				<textarea class="span6" name="ru_page_description" placeholder="Description страницы"><?=$issue['ru_page_description']?></textarea>
+				<textarea class="span6" name="ru_page_description" placeholder="Description страницы"><?=$publication['ru_page_description']?></textarea>
 				<label>H1: </label>
-				<input type="text" name="ru_page_h1" class="span6" value="<?=$issue['ru_page_h1']?>" placeholder="H1 страницы" />
+				<input type="text" name="ru_page_h1" class="span6" value="<?=$publication['ru_page_h1']?>" placeholder="H1 страницы" />
 			</div>
 			<div class="control-group">
 				<label>Название:</label>
-				<input type="text" name="ru_title" class="span6" value="<?=$issue['ru_title']?>" placeholder="" />
+				<input type="text" name="ru_title" class="span6" value="<?=$publication['ru_title']?>" placeholder="" />
+			</div>
+			<div class="controls">
+				<label>Документ:</label>
+				<input type="file" autocomplete="off" name="ru_document" size="52">
+				<p class="help-block">Поддерживаются форматы: PDF</p>
+			</div>
+			<div class="control-group">
+				<label>Аннотация:</label>
+				<textarea class="redactor" rows="4" name="ru_annotation"><?=$publication['ru_annotation']?></textarea>
+				<label>При поддержке:</label>
+				<textarea class="redactor" rows="4" name="ru_support"><?=$publication['ru_support']?></textarea>
+				<label>Библиографический список:</label>
+				<textarea class="redactor" rows="4" name="ru_bibliography"><?=$publication['ru_bibliography']?></textarea>
 			</div>
 		</div>
 		<div class="tab-pane fade" id="en">
 			<div class="control-group">
 				<label>Title: </label>
-				<input type="text" name="en_page_title" class="span6" value="<?=$issue['en_page_title']?>" placeholder="Title page" />
+				<input type="text" name="en_page_title" class="span6" value="<?=$publication['en_page_title']?>" placeholder="Title page" />
 				<label>Description:</label>
-				<textarea class="span6" name="en_page_description" placeholder="Description page"><?=$issue['en_page_description']?></textarea>
+				<textarea class="span6" name="en_page_description" placeholder="Description page"><?=$publication['en_page_description']?></textarea>
 				<label>H1: </label>
-				<input type="text" name="en_page_h1" class="span6" value="<?=$issue['en_page_h1']?>" placeholder="H1 page" />
+				<input type="text" name="en_page_h1" class="span6" value="<?=$publication['en_page_h1']?>" placeholder="H1 page" />
 			</div>
 			<div class="control-group">
 				<label>Title:</label>
-				<input type="text" name="en_title" class="span6" value="<?=$issue['en_title']?>" placeholder="" />
+				<input type="text" name="en_title" class="span6" value="<?=$publication['en_title']?>" placeholder="" />
+			</div>
+			<div class="controls">
+				<label>Documenet:</label>
+				<input type="file" autocomplete="off" name="en_document" size="52">
+				<p class="help-block">Supported formats: PDF</p>
+			</div>
+			<div class="control-group">
+				<label>Annotation:</label>
+				<textarea class="redactor redactor-row4" name="en_annotation"><?=$publication['en_annotation']?></textarea>
+				<label>With support:</label>
+				<textarea class="redactor redactor-row4" name="en_support"><?=$publication['en_support']?></textarea>
+				<label>Bibliographic list:</label>
+				<textarea class="redactor redactor-row4" name="en_bibliography"><?=$publication['en_bibliography']?></textarea>
 			</div>
 		</div>
 	</div>
-	<hr/>
-	<div class="control-group">
-		<label>Номер выпуска:</label>
-		<input type="text" name="number" class="span1 valid-required valid-numeric" value="<?=$issue['number']?>" placeholder="" />
-		<?php $this->load->helper('date');?>
-		<?=getMonthList(0,12,$issue['month']);?>
-		<?=getYearsList(2013,2006,TRUE,$issue['year']);?>
+	<div class="controls">
+		<label>Номер страницы:</label>
+		<input type="text" name="page" class="span1 valid-numeric" value="<?=$publication['page']?>" placeholder="Номер страницы" />
+		<label>Ключевые слова:</label>
+		<input type="text" name="keywords" class="span9" value="<?=$publication['keywords'];?>" placeholder="Введите ключевые слова через запятую" />
 	</div>
 	<div class="div-form-operation">
 		<button type="submit" value="" name="submit" class="btn btn-success btn-publication-submit no-clickable btn-loading">Сохранить</button>

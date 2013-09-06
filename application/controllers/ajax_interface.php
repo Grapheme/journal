@@ -263,7 +263,7 @@ class Ajax_interface extends MY_Controller{
 		return $this->insertItem(array('insert'=>$post,'model'=>'issues'));
 		return TRUE;
 	}
-	
+		
 	private function ExecuteUpdatingIssue($id,$post){
 		
 		$post['id'] = $id;
@@ -280,24 +280,14 @@ class Ajax_interface extends MY_Controller{
 		if($this->postDataValidation('publication')):
 			if($publicationID = $this->ExecuteInsertingPublication($_POST)):
 				if(isset($_FILES['ru_document']['tmp_name'])):
-					$result['ru'] = $this->uploadPublicationDocument($publicationID,'ru_document');
+					$this->uploadPublicationDocument($publicationID,'ru_document');
 				endif;
 				if(isset($_FILES['en_document']['tmp_name'])):
-					$result['en'] = $this->uploadPublicationDocument($publicationID,'en_document');
+					$this->uploadPublicationDocument($publicationID,'en_document');
 				endif;
+				$json_request['status'] = TRUE;
 				$json_request['responseText'] = 'Публикация добавлена.';
-				if($result['ru'] !== TRUE):
-					$json_request['responseText'] .= $result['ru'];
-					$json_request['redirect'] = FALSE;
-				endif;
-				if($result['en'] !== TRUE):
-					$json_request['responseText'] .= $result['en'];
-					$json_request['redirect'] = FALSE;
-				endif;
-				if($result['en'] === TRUE && $result['ru'] === TRUE):
-					$json_request['status'] = TRUE;
-					$json_request['redirect'] = site_url(ADMIN_START_PAGE.'/publications?issue='.$this->input->get('issue'));
-				endif;
+				$json_request['redirect'] = site_url(ADMIN_START_PAGE.'/publications?issue='.$this->input->get('issue'));
 			endif;
 		else:
 			$json_request['responseText'] = $this->load->view('html/validation-errors',array('alert_header'=>FALSE),TRUE);
@@ -311,11 +301,17 @@ class Ajax_interface extends MY_Controller{
 			show_error('В доступе отказано');
 		endif;
 		$json_request = array('status'=>FALSE,'responseText'=>'','redirect'=>site_url(ADMIN_START_PAGE));
-		if($this->postDataValidation('issues')):
+		if($this->postDataValidation('publication')):
 			if($this->ExecuteUpdatingPublication($this->input->get('id'),$_POST)):
+				if(isset($_FILES['ru_document']['tmp_name'])):
+					$this->uploadPublicationDocument($this->input->get('id'),'ru_document');
+				endif;
+				if(isset($_FILES['en_document']['tmp_name'])):
+					$this->uploadPublicationDocument($this->input->get('id'),'en_document');
+				endif;
 				$json_request['status'] = TRUE;
 				$json_request['responseText'] = 'Выпуск cохранен';
-				$json_request['redirect'] = site_url(ADMIN_START_PAGE.'/issues?issue='.$this->input->get('issue'));
+				$json_request['redirect'] = site_url(ADMIN_START_PAGE.'/publications?issue='.$this->input->get('issue'));
 			endif;
 		else:
 			$json_request['responseText'] = $this->load->view('html/validation-errors',array('alert_header'=>FALSE),TRUE);
@@ -329,8 +325,12 @@ class Ajax_interface extends MY_Controller{
 			show_error('В доступе отказано');
 		endif;
 		$json_request = array('status'=>FALSE,'responseText'=>'');
-		$this->load->model('issues');
-		$this->issues->delete($this->input->post('id'));
+		$this->load->model('publications');
+		if($publication = $this->publications->getWhere($this->input->post('id'))):
+			$this->filedelete(getcwd().'/download/'.$publication['ru_document']);
+			$this->filedelete(getcwd().'/download/'.$publication['en_document']);
+		endif;
+		$this->publications->delete($this->input->post('id'));
 		$json_request['status'] = TRUE;
 		echo json_encode($json_request);
 	}
@@ -338,29 +338,58 @@ class Ajax_interface extends MY_Controller{
 	private function ExecuteInsertingPublication($post){
 		
 		$post['issue'] = $this->input->get('issue');
-		unset($post['ru_document'],$post['en_document']);
-		return $this->insertItem(array('insert'=>$post,'model'=>'publications'));
+		if(!empty($post['ru_title'])):
+			$post['page_url'] = $this->translite($post['ru_title']);
+		elseif(!empty($post['en_title'])):
+			$post['page_url'] = $this->translite($post['en_title']);
+		endif;
+		if(!empty($post['keywords'])):
+			$keywords = $post['keywords'];
+		endif;
+		unset($post['ru_document'],$post['en_document'],$post['keywords']);
+		if($publicationID = $this->insertItem(array('insert'=>$post,'model'=>'publications'))):
+			if(!empty($keywords)):
+				$this->setKeyWords($publicationID,$keywords);
+			endif;
+			return $publicationID;
+		else:
+			return FALSE;
+		endif;
 	}
 	
-	private function ExecuteUpdatingPublication($id,$post){
+	private function ExecuteUpdatingPublication($publicationID,$post){
 		
-		$post['id'] = $id;
-		$this->updateItem(array('update'=>$post,'model'=>'issues'));
+		$post['id'] = $publicationID;
+		if(!empty($post['ru_title'])):
+			$post['page_url'] = $this->translite($post['ru_title']);
+		elseif(!empty($post['en_title'])):
+			$post['page_url'] = $this->translite($post['en_title']);
+		endif;
+		if(!empty($post['keywords'])):
+			$keywords = $post['keywords'];
+		endif;
+		unset($post['ru_document'],$post['en_document'],$post['keywords']);
+		$this->deleteKeyWords($publicationID);
+		if(!empty($keywords)):
+			$this->setKeyWords($publicationID,$keywords);
+		endif;
+		$this->updateItem(array('update'=>$post,'model'=>'publications'));
 		return TRUE;
 	}
 	
 	private function uploadPublicationDocument($publicationID,$document){
 		
 		$uploadPath = getcwd().'/download';
+		$issueUploadPath = '';
 		$this->load->model(array('issues','publications'));
 		if($this->input->get('issue') !== FALSE):
 			if($issue = $this->issues->getWhere($this->input->get('issue'))):
-				$uploadPath .= '/'.$issue['year'].'/'.$issue['month'];
+				$issueUploadPath = $issue['year'].'/'.$issue['month'];
 			endif;
 		endif;
-		$resultUpload = $this->uploadSingleDocument($uploadPath,$document);
+		$resultUpload = $this->uploadSingleDocument($uploadPath.'/'.$issueUploadPath,$document);
 		if($resultUpload['status'] == TRUE):
-			$responseDocumentSrc = 'download/'.$resultUpload['uploadData']['file_name'];
+			$responseDocumentSrc = $issueUploadPath.'/'.$resultUpload['uploadData']['file_name'];
 			$this->publications->updateField($publicationID,$document,$responseDocumentSrc);
 			return TRUE;
 		else:
@@ -371,7 +400,7 @@ class Ajax_interface extends MY_Controller{
 	}
 	
 	/* ------------- keywords ----------------- */
-	private function setKeyWords($productID,$keywords){
+	private function setKeyWords($publicationID,$keywords){
 		
 		if($KeyWordsList = explode(',',$keywords)):
 			$this->load->model(array('keywords','matching'));
@@ -380,11 +409,11 @@ class Ajax_interface extends MY_Controller{
 					$insert_word = array('word'=>trim($KeyWordsList[$i]),'word_hash'=>md5(trim($KeyWordsList[$i])));
 					if(!$wordID = $this->keywords->search('word_hash',$insert_word['word_hash'])):
 						if($wordID = $this->insertItem(array('insert'=>$insert_word,'model'=>'keywords'))):
-							$insert_match = array('word'=>$wordID,'product'=>$productID);
+							$insert_match = array('word'=>$wordID,'publication'=>$publicationID);
 							$matchID = $this->insertItem(array('insert'=>$insert_match,'model'=>'matching'));
 						endif;
-					elseif(!$this->matching->getWhere(NULL,array('word'=>$wordID,'product'=>$productID))):
-						$insert_match = array('word'=>$wordID,'product'=>$productID);
+					elseif(!$this->matching->getWhere(NULL,array('word'=>$wordID,'publication'=>$publicationID))):
+						$insert_match = array('word'=>$wordID,'publication'=>$publicationID);
 						$matchID = $this->insertItem(array('insert'=>$insert_match,'model'=>'matching'));
 					endif;
 				endif;
@@ -392,10 +421,10 @@ class Ajax_interface extends MY_Controller{
 		endif;
 	}
 	
-	private function deleteKeyWords($productID){
+	private function deleteKeyWords($publicationID){
 		
 		$this->load->model('matching');
-		$this->matching->delete(NULL,array('product'=>$productID));
+		$this->matching->delete(NULL,array('publication'=>$publicationID));
 	}
 	
 }

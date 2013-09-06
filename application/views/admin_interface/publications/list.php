@@ -43,7 +43,7 @@
 							<td><?=$publications[$i]['id'];?></td>
 							<td><?=$publications[$i]['ru_title'].' ('.$publications[$i]['en_title'].')';?></td>
 							<td>
-								<a href="<?=site_url(ADMIN_START_PAGE.'/publications/edit?mode=text&id='.$publications[$i]['id'])?>" class="btn btn-link" ><i class="icon-edit"></i></a>
+								<a href="<?=site_url(ADMIN_START_PAGE.'/publications/edit?issue='.$this->input->get('issue').'&id='.$publications[$i]['id'])?>" class="btn btn-link" ><i class="icon-edit"></i></a>
 								<button data-item="<?=$publications[$i]['id'];?>" class="btn btn-link remove-item"><i class="icon-remove"></i></button>
 							</td>
 						</tr>

@@ -153,6 +153,7 @@ class Admin_interface extends MY_Controller{
 			'publication' => $this->publications->getWhere($this->input->get('id'))
 		
 		);
+		$pagevar['publication']['keywords'] = $this->getProductKeyWords($pagevar['publication']['id']);
 		$this->load->view("admin_interface/publications/edit",$pagevar);
 	}
 	/*************************************************************************************************************/

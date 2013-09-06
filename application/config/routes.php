@@ -51,6 +51,7 @@ $route[ADMIN_START_PAGE.'/publications/edit'] = "admin_interface/editPublication
 /*************************************************** GUEST INTRERFACE ***********************************************/
 $route['issues'] = "guests_interface/issues";
 $route['issue/:num/:num/:num'] = "guests_interface/issue";
+$route['issue/:num/:num/:num/publication/:num'] = "guests_interface/publication";
 
 $route['authors'] = "guests_interface/authors";
 $route['keywords'] = "guests_interface/keywords";
