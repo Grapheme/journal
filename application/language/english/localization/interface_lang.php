@@ -2,6 +2,7 @@
 
 $lang['test'] = "Тестовое сообщение";
 
+$lang['menu_home'] = "Home";
 $lang['menu_issues'] = "Issues";
 $lang['menu_authors'] = "Authors";
 $lang['menu_for_authors'] = "For authors";
