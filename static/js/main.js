@@ -1,4 +1,4 @@
-/*$(document).ready( function(){
+$(document).ready( function(){
 	var timer;
 	
 	$('.month-issues-item .panel').hover(
@@ -11,4 +11,4 @@
 		}
 	);
 	
-});*/
+});
