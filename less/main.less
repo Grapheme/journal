@@ -143,10 +143,10 @@ textarea {
    Author's custom styles
    ========================================================================== */
 html, body { font: 1em @pt-serif; }
-p { line-height: 1.4em/*1.8em*/; }
+p { line-height: 1.7em; }
 .wrapper { width: 933px; margin: 1.5em auto 0; }
-.logo { float: left; width: 234px; height: 132px; margin: 1.5em 0 0; }
-.logo-icon { display: inline-block; width: 51px; height: 87px; border: 2px solid #4b4b4b; background: url(../img/logo.png) no-repeat; 
+.logo { float: left; width: 234px; height: 132px; margin: 1.9em 0 0; }
+.logo-icon { display: inline-block; width: 55px; height: 93px; background: url('../img/logo.png') no-repeat; 
   a { display: block; height: 100%; }
 }
 .r-head-content { height: 184px; margin: 0 0 0 234px; }
@@ -168,7 +168,8 @@ p { line-height: 1.4em/*1.8em*/; }
 .issue { width: 138px; height: 138px; background-color: @active-link; float: right; text-align: center; color: #fff;
          .radius; .transition( all, .4s );
   .issue-text { font: italic 400 .875em @pt-serif; margin: 2.25em 0 0; }
-  .issue-num { font: 700 3.281875em e('/') 1em @proxima; }       
+  .issue-num { font: 700 3.281875em e('/') 1em @proxima; }
+  a { color: #fff !important; text-decoration: none; }       
 }
 .issue:hover { background-color: #c81c2c; }
 
@@ -177,7 +178,7 @@ p { line-height: 1.4em/*1.8em*/; }
 nav { float: left; width: 234px; }
 .nav-list { text-decoration: none; padding: 0;
   .nav-item {
-    a { border-bottom: 1px solid #C8C8C7; color: @nav-color; .uppercase; font: .9em e('/') 2.45em @pt-sans; text-decoration: none;
+    a { border-bottom: 1px solid #C8C8C7; color: @nav-color; .uppercase; font: .9em e('/') 2.675em @pt-sans; text-decoration: none;
       .transition;
     }
     a.active, a:hover { border-color: transparent; color: @active-link; text-decoration: none; }
@@ -212,8 +213,8 @@ article header {
   .article-h2 { width: 567px; font: 700 1.375em e('/') 1.22727272em @proxima;
     .uppercase;
   }
-  .desc { margin: 2.7857em 0 2em 0/*3.2857em 0 2.5em 0*/;     
-    .font-main; line-height: 1.2571em/* 1.9571em */; 
+  .desc { margin: 2em 0 1.6em 0;     
+    .font-main; line-height: 1.7em; 
   }
   .all-pubs-link { position: relative; float: right; font: 16px @myriad; z-index: 5;
     a { display: block; line-height: 1em; color: @font-main-color; border-bottom: 1px solid; line-height: 1.1em; text-decoration: none; .transition; }
@@ -226,11 +227,11 @@ article.to-authors {
 }
 // Unordered list
 
-.themes-list { margin: 0 0 3.2em;
+.themes-list { margin: 0 0 2em;
   .themes-item {  
-    .font-main( 1.1em); line-height: 1.2em/*1.6em*/; margin-bottom: 0.75em;
+    .font-main( 1.1em); line-height: 1.7em; margin-bottom: 0.25em;
     .ord-list { padding: 0 0 0 40px;
-      .ord-item { font-size: 1em; margin: .5em 0 0; }  
+      .ord-item { font-size: 1em; margin: 0.25em 0 0; }  
     }
   }
 }
@@ -261,7 +262,7 @@ footer { padding: 1.125em 0 3.5em; font: .95em @myriad; text-align: right; }
 .pdf-dl-link.single { margin: 3.75em 0 0; }
 
 // Sections styles
-section { width: 698px; margin: 50px 0 0;
+section { width: 698px; margin: 30px 0 0;
   header {
     h2 { margin: 0 0 28px; font: 700 1.375em e('/') 1.22727272em @proxima;
       .uppercase;
@@ -381,14 +382,21 @@ section { width: 698px; margin: 50px 0 0;
        -moz-perspective: 600px;  
         -ms-perspective: 600px; 
             perspective: 600px;     
-    .panel.flipped { transform: rotateY( 180deg ); }        
+
+    .panel.flipped/*.flipped*/ { 
+      transform: rotateY( 180deg ); 
+     -webkit-transform: rotateY( 180deg );
+     -ms-transform: rotateY( 180deg );
+    }        
+    .panel.flipped .front { opacity: 0; }
+
     .panel { position: absolute; width: 100%; height: 100%; 
         -webkit-transform-style: preserve-3d;
         -moz-transform-style: preserve-3d;
         -ms-transform-style: preserve-3d;
         transform-style: preserve-3d;
         
-        .transition( transform, 1s );             
+        .transition( all, 1s );             
       figure {
         display: block;
         position: absolute;
@@ -399,7 +407,7 @@ section { width: 698px; margin: 50px 0 0;
         -moz-backface-visibility:    hidden;
         -ms-backface-visibility:     hidden;
       }
-      .front { text-align: center;
+      .front { text-align: center; .transition( all, 3s );
         background: @active-link;
         div { display: inline-block; position: relative; top: 20%; font: 15px @proxima;
           .uppercase;
