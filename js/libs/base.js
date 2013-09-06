@@ -5,7 +5,7 @@
 var mt = mt || {};
 
 //CONFIGURATION
-mt.baseURL = window.location.protocol+'//'+window.location.hostname+'/journal/';
+mt.baseURL = window.location.protocol+'//'+window.location.hostname+'/ptosnm.ru/';
 mt.currentURL = window.location.href;
 mt.languageSegment = 2;
 mt.currentLanguage = 'ru'; //Установка языка для панели администрирования так как там не используется сегмент указывающий на язык
