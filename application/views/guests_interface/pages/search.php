@@ -17,8 +17,8 @@
 			<?php $this->load->view('guests_interface/forms/search');?>
 		<?php if(!empty($publications)):?>
 			<div class="search-page-form">
-				<div class="form-header">Результаты поиска</div>
-				<div class="publications-num">Найдено <?=count($publications).' '.pluralPublications(count($publications),$this->uri->language_string);?>.</div>
+				<div class="form-header"><?=lang('form_search_results');?></div>
+				<div class="publications-num"><?=lang('form_search_found');?> <?=count($publications).' '.pluralPublications(count($publications),$this->uri->language_string);?>.</div>
 			</div>
 			<ol class="month-list search-page">
 			<?php for($i=0;$i<count($publications);$i++):?>

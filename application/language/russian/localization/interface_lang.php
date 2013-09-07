@@ -25,4 +25,15 @@ $lang['comments_to_publication'] = "Комментарии к статье";
 $lang['signin_for_comment'] = "Авторизуйтесь, чтобы прокомментировать статью.";
 $lang['key_words'] = "Ключевые слова";
 $lang['publication_materials'] = "Дополнительные материалы";
+$lang['all_publication_authors'] = "Перейти к публикациям автора";
+$lang['form_search_publication'] = "Найти статью";
+$lang['form_search_query'] = "Введите запрос";
+$lang['form_search_year'] = "Год";
+$lang['form_search_number'] = "Номер";
+$lang['form_search_button'] = "Искать";
+$lang['form_search_results'] = "Результаты поиска";
+$lang['form_search_found'] = "Найдено";
+
+$lang['author'] = "Автор";
+
 ?>

@@ -13,7 +13,7 @@
 		<?php $this->load->view('guests_interface/includes/navigation');?>
 		<article>
 			<header>
-				<h1 class="article-h1">Автор</h1>
+				<h1 class="article-h1"><?=lang('author')?></h1>
 				<div class="delicate-design-stroke"></div>
 			</header>
 			<section class="author">
@@ -31,7 +31,7 @@
 				</address>
 				<a href="mailto:alexa@irinoch.irk.ru"><?=safe_mailto($page_content['email'],$page_content['email'])?></a>
 				<div class="go-to-author-pubs">
-					<a href="<?=site_url('search?author='.$page_content['id']);?>">Перейти к публикациям автора</a>
+					<a href="<?=site_url('search?author='.$page_content['id']);?>"><?=lang('all_publication_authors');?></a>
 				</div>
 			</section>
 		</article>
