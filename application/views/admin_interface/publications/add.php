@@ -6,6 +6,8 @@
 <head>
 <?php $this->load->view("admin_interface/includes/head");?>
 <link rel="stylesheet" href="<?=site_url('css/admin-panel/redactor.css');?>" />
+<link rel="stylesheet" href="<?=site_url('css/admin-panel/token-input.css');?>" type="text/css" />
+<link rel="stylesheet" href="<?=site_url('css/admin-panel/token-input-facebook.css');?>" type="text/css" />
 </head>
 <body>
 <!--[if lt IE 7]>
@@ -32,5 +34,7 @@
 	<?php $this->load->view("admin_interface/includes/scripts");?>
 	<script type="text/javascript" src="<?=site_url('js/vendor/redactor.min.js');?>"></script>
 	<script type="text/javascript" src="<?=site_url('js/cabinet/redactor-config.js');?>"></script>
+	<script type="text/javascript" src="<?=site_url('js/vendor/jquery.tokeninput.js');?>"></script>
+	<script type="text/javascript" src="<?=site_url('js/cabinet/token-config.js');?>"></script>
 </body>
 </html>

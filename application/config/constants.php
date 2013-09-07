@@ -17,7 +17,7 @@ define('FOPEN_READ_WRITE_CREATE_STRICT',		'x+b');
 define('TEMPORARY',								'temporary');
 define('PER_PAGE_DEFAULT',						10);
 define('ADMIN_START_PAGE',						'admin-panel');
-define('ALLOWED_TYPES_DOCUMENTS',				'pdf');
+define('ALLOWED_TYPES_DOCUMENTS',				'doc|docx|xls|xlsx|txt|pdf|ppt|pptx');
 define('ALLOWED_TYPES_IMAGES',					'jpg|gif|jpeg|png');
 
 define('ENGLAN',								'en');

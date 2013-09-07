@@ -1,3 +1,7 @@
-$(document).ready(function(){
-	$('.styled-select').customSelect();
+/*  Author: Grapheme Group
+ *  http://grapheme.ru/
+ */
+
+$(function(){
+	$(".styled-select").customSelect();
 });

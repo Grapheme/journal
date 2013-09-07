@@ -13,6 +13,7 @@ $lang['menu_usefull_links'] = "Полезные ссылки";
 $lang['menu_institutions'] = "Учреждения";
 
 $lang['not_found_authors'] = "Авторы не найдены!";
+$lang['not_found_keyword'] = "Ключевые слова не найдены!";
 $lang['issue_number'] = "номер";
 $lang['publication_download'] = "Cкачать";
 $lang['bibliography_link'] = "Библиографическая ссылка на эту статью";

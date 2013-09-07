@@ -15,6 +15,22 @@
 progress {width: 100%;}
 .failUpload {background:#c00; padding:2px; color:#fff;}
 
+#dropDocumentZone{
+	border: 10px dashed #ccc;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 25px;
+	text-align: center;
+	padding: 50px 0;
+	font-size: 16px;
+}
+#dropDocumentZone.hover {
+	background: #eaeaea;
+}
+#dropDocumentZone p {margin: 10px; font-size: 14px;}
+progress {width: 100%;}
+.failUpload {background:#c00; padding:2px; color:#fff;}
+
 /* File upload styles */
 .resources-items { margin: 0; padding: 0; list-style: none; }
 .resources-items .img-rounded { border-radius: 0; }

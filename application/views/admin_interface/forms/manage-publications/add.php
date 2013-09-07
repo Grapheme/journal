@@ -64,6 +64,9 @@
 		<input type="text" name="page" class="span1 valid-numeric" value="" placeholder="Номер страницы" />
 		<label>Ключевые слова:</label>
 		<input type="text" name="keywords" class="span9" value="" placeholder="Введите ключевые слова через запятую" />
+		<label>Авторы:</label>
+		<input type="text" value="" class="span6 authors-list" name="authors" />
+		<p>Вводить только на русском языке</p>
 	</div>
 	<div class="div-form-operation">
 		<button type="submit" value="" name="submit" class="btn btn-success btn-publication-submit no-clickable btn-loading">Добавить</button>

@@ -31,7 +31,11 @@ class Ajax_interface extends MY_Controller{
 		$json_request = array('status'=>FALSE,'responseText'=>'');
 		if($this->postDataValidation('char')):
 			$this->load->model('authors');
-			if($authors = $this->authors->getAuthorsByChar($this->input->post('char'),$this->input->post('lang'))):
+			$lang = RUSLAN;
+			if($this->input->post('lang') !== FALSE):
+				$lang = $this->input->post('lang');
+			endif;
+			if($authors = $this->authors->getAuthorsByChar($this->input->post('char'),$lang)):
 				$this->load->helper('text');
 				$this->config->set_item('base_url',baseURL($this->uri->language_string.'/'));
 				$json_request['responseText'] = $this->load->view('html/authors-list',array('authors'=>$authors,'langName'=>$this->input->post('lang')),TRUE);
@@ -43,6 +47,38 @@ class Ajax_interface extends MY_Controller{
 			$json_request['status'] = TRUE;
 		endif;
 		echo json_encode($json_request);
+	}
+	
+	public function getKeyWordsList(){
+		
+		if(!$this->input->is_ajax_request()):
+			show_error('В доступе отказано');
+		endif;
+		$json_request = array('status'=>FALSE,'responseText'=>'');
+		if($this->postDataValidation('char')):
+			$this->load->model('keywords');
+			if($keywords = $this->keywords->getKeywordsByChar($this->input->post('char'))):
+				$this->load->helper('text');
+				$this->config->set_item('base_url',baseURL($this->uri->language_string.'/'));
+				$json_request['responseText'] = $this->load->view('html/keywords-list',array('keywords'=>$keywords),TRUE);
+			else:
+				$this->lang->load('localization/interface',$this->languages[$this->input->post('lang')]);
+				$this->load->helper('language');
+				$json_request['responseText'] = lang('not_found_keyword');
+			endif;
+			$json_request['status'] = TRUE;
+		endif;
+		echo json_encode($json_request);
+	}
+	
+	public function searchAuthor(){
+		
+		$json_request = json_encode(array());
+		$this->load->model('authors');
+		if($authors = $this->authors->searchAuthorsByChar($this->input->get('q'),RUSLAN)):
+			$json_request = json_encode($authors);
+		endif;
+		echo $json_request;
 	}
 	
 	/******************************************** admin interface *******************************************************/
@@ -396,6 +432,30 @@ class Ajax_interface extends MY_Controller{
 		echo json_encode($json_request);
 	}
 	
+	public function uploadResourcePublication(){
+		
+		if(!$this->input->is_ajax_request() && !$this->input->get_request_header('X-file-name',TRUE)):
+			show_error('В доступе отказано');
+		endif;
+		$json_request = array('status'=>FALSE,'responseText'=>'','responsePhotoSrc'=>'');
+		$uploadPath = getcwd().'/download';
+		$issueUploadPath = '';
+		$this->load->model('issues');
+		if($this->input->get('issue') !== FALSE):
+			if($issue = $this->issues->getWhere($this->input->get('issue'))):
+				$issueUploadPath = $issue['year'].'/'.$issue['month'];
+			endif;
+		endif;
+		$resultUpload = $this->uploadSingleDocument($uploadPath.'/'.$issueUploadPath);
+		if($resultUpload['status'] == TRUE):
+			$json_request['responsePhotoSrc'] = $this->saveDocumentPublication($this->input->get('issue'),$this->input->get('publication'),$resultUpload['uploadData']);
+			$json_request['status'] = TRUE;
+		else:
+			$json_request['responseText'] = 'Ошибка при загрузке';
+		endif;
+		echo json_encode($json_request);
+	}
+	
 	private function ExecuteInsertingPublication($post){
 		
 		$post['issue'] = $this->input->get('issue');
@@ -448,7 +508,7 @@ class Ajax_interface extends MY_Controller{
 				$issueUploadPath = $issue['year'].'/'.$issue['month'];
 			endif;
 		endif;
-		$resultUpload = $this->uploadSingleDocument($uploadPath.'/'.$issueUploadPath,$document);
+		$resultUpload = $this->uploadSingleDocument($uploadPath.'/'.$issueUploadPath,$document,'pdf');
 		if($resultUpload['status'] == TRUE):
 			$responseDocumentSrc = $issueUploadPath.'/'.$resultUpload['uploadData']['file_name'];
 			$this->publications->updateField($publicationID,$document,$responseDocumentSrc);
@@ -456,10 +516,21 @@ class Ajax_interface extends MY_Controller{
 		else:
 			return $resultUpload['message'];
 		endif;
-		
-		
 	}
 	
+	private function saveDocumentPublication($issueID,$publicationID,$resource){
+		
+		$resourceData = array("publication"=>$publicationID,"issue"=>$issueID,"resource"=>json_encode($resource));
+		/**************************************************************************************************************/
+		if($resourceID = $this->insertItem(array('insert'=>$resourceData,'model'=>'publications_resources'))):
+			$this->load->helper('string');
+			$html = '<img class="" src="'.site_url(RUSLAN.'/publications/view-document/'.random_string('alnum',16).'?resource_id='.$resourceID).'" alt="" />';
+			$html .= '<a href="#" data-resource-id="'.$resourceID.'" class="delete-resource-item">&times;</a>';
+			return $html;
+		else:
+			return '';
+		endif;
+	}
 	/* ------------- keywords ----------------- */
 	private function setKeyWords($publicationID,$keywords){
 		

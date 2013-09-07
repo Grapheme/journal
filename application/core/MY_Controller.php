@@ -6,6 +6,8 @@ class MY_Controller extends CI_Controller{
 	var $profile = '';
 	var $loginstatus = FALSE;
 	
+	var $acceptedDocTypes = array();
+	
 	var $baseURL = '';
 	var $baseLanguageURL = RUSLAN;
 	var $languages = array(RUSLAN=>'russian',ENGLAN=>'english');
@@ -32,6 +34,17 @@ class MY_Controller extends CI_Controller{
 				endif;
 			endif;
 		endif;
+		$this->acceptedDocTypes = array(
+			'text/plain' => base_url('img/icons/txt.png'),
+			'application/pdf' => base_url('img/icons/pdf.png'),
+			'application/x-zip-compressed' => base_url('img/icons/zip.png'),
+			'application/msword' => base_url('img/icons/word.png'),
+			'application/vnd.openxmlformats-officedocument.wordprocessingml.document' => base_url('img/icons/word.png'),
+			'application/vnd.ms-excel' => base_url('img/icons/excel.png'),
+			'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' => base_url('img/icons/excel.png'),
+			'application/vnd.ms-powerpoint' => base_url('img/icons/default.jpg'),
+			'application/vnd.openxmlformats-officedocument.presentationml.presentation' => base_url('img/icons/default.jpg')
+		);
 	}
 	
 	public function clearSession($redirect = TRUE){
@@ -114,6 +127,25 @@ class MY_Controller extends CI_Controller{
 		endif;
 		header('Content-type: image/jpeg');
 		echo $image;
+	}
+	
+	public function showDocumentIco(){
+		
+		$resource = NULL;
+		$access = FALSE;
+		if($this->input->get('resource_id') != FALSE && is_numeric($this->input->get('resource_id'))):
+			$this->load->model('publications_resources');
+			$record = $this->publications_resources->getWhere($this->input->get('resource_id'));
+			if($FileData = json_decode($record['resource'],TRUE)):
+				if(isset($this->acceptedDocTypes[$FileData['file_type']])):
+					$resource = file_get_contents($this->acceptedDocTypes[$FileData['file_type']]);
+				else:
+					$resource = file_get_contents(base_url('img/icons/no_icon.jpg'));
+				endif;
+			endif;
+		endif;
+		header('Content-type: image/jpeg');
+		echo $resource;
 	}
 	
 	public function imageManupulation($filePath,$dim = NULL,$no_more = TRUE,$user_width = NULL,$user_height = NULL,$create_thumb = FALSE){
@@ -272,7 +304,7 @@ class MY_Controller extends CI_Controller{
 		return $uploadStatus;
 	}
 	
-	public function uploadSingleDocument($uploadPath = NULL,$document){
+	public function uploadSingleDocument($uploadPath = NULL,$document = 'file',$allowed_types = ALLOWED_TYPES_DOCUMENTS){
 		
 		$uploadStatus = array('status'=>FALSE,'message'=>'','uploadData'=>array());
 		if(is_null($uploadPath) || ($this->createDir($uploadPath) === FALSE)):
@@ -283,9 +315,9 @@ class MY_Controller extends CI_Controller{
 				$this->load->library('upload');
 				$config = array();
 				$config['upload_path'] = $uploadPath.'/';
-				$config['allowed_types'] = ALLOWED_TYPES_DOCUMENTS;
+				$config['allowed_types'] = $allowed_types;
 				$config['remove_spaces'] = TRUE;
-				$config['overwrite'] = TRUE;
+				$config['overwrite'] = FALSE;
 				$config['max_size'] = 5120;
 				$config['file_name'] = $this->translite(substr($_FILES[$document]['name'],0,strripos($_FILES[$document]['name'],'.'))).'.'.substr(strrchr($_FILES[$document]['name'],'.'),1);
 				$this->upload->initialize($config);
@@ -476,5 +508,15 @@ class MY_Controller extends CI_Controller{
 			return implode(', ',$KeyWordsList);
 		endif;
 		return '';
+	}
+
+	public function getAuthorsByIDs($authors){
+		
+		$authorsList = array();
+		if($authorsIDs = explode(',',$authors)):
+			$this->load->model('authors');
+			$authorsList = $this->authors->getAuthorsByIDs($authorsIDs);
+		endif;
+		return $authorsList;
 	}
 }

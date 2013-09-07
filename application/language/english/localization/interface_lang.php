@@ -13,6 +13,7 @@ $lang['menu_usefull_links'] = "Usefull links";
 $lang['menu_institutions'] = "Institutions";
 
 $lang['not_found_authors'] = "Authors Not Found!";
+$lang['not_found_keyword'] = "Keywords Not Found!";
 $lang['issue_number'] = "number";
 $lang['publication_download'] = "Download";
 $lang['bibliography_link'] = "Bibliography link to this article";

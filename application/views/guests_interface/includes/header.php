@@ -6,7 +6,7 @@
 		<?php $this->load->view('guests_interface/includes/languages');?>
 	<?php if(uri_string()== '' && $issue_number !== FALSE):?>
 		<div class="issue">
-			<a href="#">
+			<a href="<?=$issue_link;?>">
 				<div class="issue-text">Выпуск №</div>
 				<div class="issue-num"><?=$issue_number;?></div>
 			</a>

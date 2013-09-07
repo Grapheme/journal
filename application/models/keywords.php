@@ -24,4 +24,15 @@ class Keywords extends MY_Model{
 		
 	}
 	
+	function getKeywordsByChar($char){
+		
+		$this->db->select($this->_fields());
+		$this->db->order_by('word');
+		$this->db->like('word',$char,'after');
+		$query = $this->db->get($this->table);
+		if($data = $query->result_array()):
+			return $data;
+		endif;
+		return NULL;
+	}
 }

@@ -5,9 +5,7 @@
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
 <head>
 <?php $this->load->view("admin_interface/includes/head");?>
-<link rel="stylesheet" href="<?=site_url('css/admin-panel/redactor.css');?>" />
-<link rel="stylesheet" href="<?=site_url('css/admin-panel/token-input.css');?>" type="text/css" />
-<link rel="stylesheet" href="<?=site_url('css/admin-panel/token-input-facebook.css');?>" type="text/css" />
+<link rel="stylesheet" href="<?=site_url('css/admin-panel/uploadzone.css');?>" type="text/css" />
 </head>
 <body>
 <!--[if lt IE 7]>
@@ -23,32 +21,15 @@
 				<ul class="breadcrumb">
 					<li><a href="<?=site_url(ADMIN_START_PAGE);?>">Панель управления</a> <span class="divider">/</span></li>
 					<li><a href="<?=site_url(ADMIN_START_PAGE.'/publications?issue='.$this->input->get('issue'));?>">Публикации</a> <span class="divider">/</span></li>
-					<li class="active">Редактирование публикации</li>
+					<li class="active">Дополнительные материалы</li>
 				</ul>
 				<div class="clear"></div>
-				<?php $this->load->view('admin_interface/forms/manage-publications/edit');?>
+				<?php $this->load->view('admin_interface/forms/manage-publications/resources');?>
 			</div>
 		</div>
 	</div>
 	<?php $this->load->view("admin_interface/includes/footer");?>
 	<?php $this->load->view("admin_interface/includes/scripts");?>
-	<script type="text/javascript" src="<?=site_url('js/vendor/redactor.min.js');?>"></script>
-	<script type="text/javascript" src="<?=site_url('js/cabinet/redactor-config.js');?>"></script>
-	<script type="text/javascript" src="<?=site_url('js/vendor/jquery.tokeninput.js');?>"></script>
-	<script type="text/javascript">
-		$(document).ready(function(){
-			$("input.authors-list").tokenInput(mt.getBaseURL('search-authors-list'),{
-				prePopulate:[
-				<?php for($i=0;$i<count($authors);$i++):?>
-					{id:<?=$authors[$i]['id'];?>, name: "<?=$authors[$i]['name'];?>"}<?php if(isset($authors[$i+1])):?>,<?php endif;?>
-				<?php endfor;?>
-				],
-				theme: "facebook",
-				hintText: "Введите слово для поиска",
-				noResultsText: "Ничего не найдено",
-				searchingText: "Поиск...",
-			});
-		});
-	</script>
+	<script type="text/javascript" src="<?=site_url('js/libs/drop-upload-documents.js');?>"></script>
 </body>
 </html>

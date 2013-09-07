@@ -29,11 +29,14 @@
 			</header>
 			<?php if(!empty($authors)):?>
 			<div class="authors">
-				Чежина Н. В., Королев Д. А., Холмичева Н. Н.
+			<?php for($j=0;$j<count($authors);$j++):?>
+				<a href="<?=site_url('author/'.getTranslit($authors[$j][$this->uri->language_string.'_name']).'/'.$authors[$j]['id']);?>"><?=$authors[$j][$this->uri->language_string.'_name'];?></a><?php if(isset($authors[$j+1])):?>, <?php endif;?>
+			<?php endfor;?>
 			</div>
 			<?php endif;?>
 			<div class="biblio-link">
-				<?=lang('bibliography_link')?>: Анчаров А.И., Болдырев В.В., Солдатов А . //<?=$page_content[$this->uri->language_string.'_title']?> – <?=$issue['year'];?>. - № <?=$issue['number'];?>. – <?=$page_content['page']?> <?=lang('page_char')?>.
+				<?=lang('bibliography_link')?>: <?php for($j=0;$j<count($authors);$j++):?><?=$authors[$j][$this->uri->language_string.'_name'];?><?php if(isset($authors[$j+1])):?>, <?php endif;?><?php endfor;?>
+				 //<?=$page_content[$this->uri->language_string.'_title']?> – <?=$issue['year'];?>. - № <?=$issue['number'];?>. – <?=$page_content['page']?> <?=lang('page_char')?>.
 				– <?=lang('ejournal');?>. – <?=site_url(uri_string())?><a class="no-clickable" href="">[BibT<span class="lower">E</span>X]</a>
 			</div>
 			<?php if(!empty($keywords)):?>
@@ -54,12 +57,13 @@
 				<ul class="unord-list">
 				<?php for($i=0;$i<count($publication_resources);$i++):?>
 					<li class="unord-item clearfix">
-						<div class="list-item-icon video audio text">
-							<a href="<?=site_url($publication_resources[$i]['file_path'])?>"></a>
+						<div class="list-item-icon"> <!--video audio text-->
+							<img class="" src="<?=site_url($this->uri->language_string.'/publications/view-document/'.random_string('alnum',16).'?resource_id='.$publication_resources[$i]['id']);?>" alt="" />
+							<a href="<?=site_url('publication/get-resource?resourse='.$publication_resources[$i]['id'])?>"></a>
 						</div>
 						<div class="list-item-desc">
-							<div class="list-item-name"><?=$publication_resources[$i]['file_name'];?></div>
-							<a href="<?=site_url($publication_resources[$i]['file_path'])?>" class="list-dl-link">скачать</a>
+							<div class="list-item-name"><?=$publication_resources[$i]['resource']['file_name'];?></div>
+							<a href="<?=site_url('publication/get-resource?resourse='.$publication_resources[$i]['id']);?>" class="list-dl-link">скачать</a>
 						</div>
 					</li>
 				<?php endfor;?>

@@ -29,7 +29,9 @@
 							<a href="<?=site_url('issue/'.$page_content['year'].'/'.$page_content['month'].'/'.$page_content['id'].'/publication/'.$publications[$i]['id'])?>"><?=$publications[$i][$this->uri->language_string.'_title']?></a>
 						</h2>
 						<div class="authors">
-							Чежина Н. В., Королев Д. А., Холмичева Н. Н.
+						<?php for($j=0;$j<count($publications[$i]['authors']);$j++):?>
+							<a href="<?=site_url('author/'.getTranslit($publications[$i]['authors'][$j][$this->uri->language_string.'_name']).'/'.$publications[$i]['authors'][$j]['id']);?>"><?=$publications[$i]['authors'][$j][$this->uri->language_string.'_name'];?></a><?php if(isset($publications[$i]['authors'][$j+1])):?>, <?php endif;?>
+						<?php endfor;?>
 						</div>
 					</li>
 				<?php endfor;?>
