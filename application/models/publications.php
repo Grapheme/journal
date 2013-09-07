@@ -34,6 +34,19 @@ class Publications extends MY_Model{
 		return NULL;
 	}
 	
+	function getPublicationByAuthor($author){
+		
+		$this->db->select('issues.id AS issue,issues.year,issues.month,issues.number,issues.ru_title AS issue_ru_title,issues.en_title AS issue_en_title,publications.*');
+		$this->db->from('publications');
+		$this->db->join('issues','issues.id = publications.issue');
+		$this->db->where('(publications.authors = \''.$author.'\' OR publications.authors LIKE \'%'.','.$author.'\' OR publications.authors LIKE \'%,'.$author.',%\' OR publications.authors LIKE \''.$author.',%\')',NULL);
+		$query = $this->db->get();
+		if($data = $query->result_array()):
+			return $data;
+		endif;
+		return NULL;
+	}
+	
 	function getPublicationByString($string){
 		
 		$this->db->select('issues.id AS issue,issues.year,issues.month,issues.number,issues.ru_title AS issue_ru_title,issues.en_title AS issue_en_title,publications.*');

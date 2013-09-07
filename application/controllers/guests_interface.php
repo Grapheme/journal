@@ -229,6 +229,7 @@ class Guests_interface extends MY_Controller{
 			'year' => $this->input->get('year'),
 			'number' => $this->input->get('number'),
 			'word' => $this->input->get('word'),
+			'author' => $this->input->get('author')
 		);
 		$pagevar['publications'] = $this->searchIssues($searchParameters);
 		for($i=0;$i<count($pagevar['publications']);$i++):
@@ -245,6 +246,8 @@ class Guests_interface extends MY_Controller{
 			if($word = $this->keywords->search('word_hash',$parameters['word'])):
 				return $this->publications->getPublicationByKeyWord($word);
 			endif;
+		elseif(!empty($parameters['author']) && is_numeric($parameters['author'])):
+			return $this->publications->getPublicationByAuthor($parameters['author']);
 		elseif(empty($parameters['year']) && empty($parameters['number']) && !empty($parameters['text'])):
 			return $this->publications->getPublicationByString($parameters['text']);
 		elseif((!empty($parameters['year']) || !empty($parameters['number'])) && !empty($parameters['text'])):

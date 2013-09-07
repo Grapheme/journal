@@ -31,7 +31,7 @@
 				</address>
 				<a href="mailto:alexa@irinoch.irk.ru"><?=safe_mailto($page_content['email'],$page_content['email'])?></a>
 				<div class="go-to-author-pubs">
-					<a href="#">Перейти к публикациям автора</a>
+					<a href="<?=site_url('search?author='.$page_content['id']);?>">Перейти к публикациям автора</a>
 				</div>
 			</section>
 		</article>
