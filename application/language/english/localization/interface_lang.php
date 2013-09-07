@@ -24,4 +24,5 @@ $lang['bibliography'] = "Bibliographic list";
 $lang['comments_to_publication'] = "Comments on the publication";
 $lang['signin_for_comment'] = "Sign in to comment on an article.";
 $lang['key_words'] = "Key words";
+$lang['publication_materials'] = "Additional materials";
 ?>

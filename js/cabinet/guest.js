@@ -39,4 +39,9 @@ $(function(){
 			error: function(xhr,textStatus,errorThrown){}
 		});
 	})
+	$("form.form-search-publications").submit(function(){
+		if($("input.input-search-text").emptyValue()){
+			return false;
+		}
+	})
 });

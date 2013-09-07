@@ -135,6 +135,32 @@ class Guests_interface extends MY_Controller{
 		show_404();
 	}
 	
+	public function getFilePublication(){
+		
+		$this->load->model('publications');
+		if($publication = $this->publications->getWhere($this->input->get('resourse'))):
+			if(!is_null($publication[$this->uri->language_string.'_document']) && !empty($publication[$this->uri->language_string.'_document'])):
+				if($filePath = getcwd().'/download/'.$publication[$this->uri->language_string.'_document']):
+					if(file_exists($filePath)):
+						header('Pragma: public');
+						header('Expires: 0');
+						header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+						header('Last-Modified: '.gmdate('D, d M Y H:i:s', filemtime($filePath)).' GMT');
+						header('Cache-Control: private',false);
+						header('Content-Type: '.$filePath);
+						header('Content-Disposition: attachment; filename="'.basename($filePath).'"');
+						header('Content-Transfer-Encoding: binary');
+						header('Content-Length: '.filesize($filePath));
+						header('Connection: close');
+						readfile($filePath);
+						exit();
+					endif;
+				endif;
+			endif;
+		endif;
+		show_404();
+	}
+	
 	public function authors(){
 		
 		$this->load->model(array('pages','page_resources','authors'));
@@ -196,9 +222,35 @@ class Guests_interface extends MY_Controller{
 		$pagevar = array(
 			'page_content' => $this->pages->getWhere(NULL,array('page_url'=>uri_string())),
 			'images' => $this->page_resources->getWhere(NULL,array('page_url'=>uri_string()),TRUE),
-			'issues' => array()
+			'publications' => array()
 		);
+		$searchParameters = array(
+			'text' => $this->input->get('text'),
+			'year' => $this->input->get('year'),
+			'number' => $this->input->get('number'),
+			'word' => $this->input->get('word'),
+		);
+		$pagevar['publications'] = $this->searchIssues($searchParameters);
+		for($i=0;$i<count($pagevar['publications']);$i++):
+			$pagevar['publications'][$i]['authors'] = $this->getAuthorsByIDs($pagevar['publications'][$i]['authors']);
+		endfor;
+		$this->load->helper(array('text','date'));
 		$this->load->view("guests_interface/pages/search",$pagevar);
+	}
+
+	private function searchIssues($parameters){
+		
+		$this->load->model(array('keywords','publications'));
+		if(!empty($parameters['word'])):
+			if($word = $this->keywords->search('word_hash',$parameters['word'])):
+				return $this->publications->getPublicationByKeyWord($word);
+			endif;
+		elseif(empty($parameters['year']) && empty($parameters['number']) && !empty($parameters['text'])):
+			return $this->publications->getPublicationByString($parameters['text']);
+		elseif((!empty($parameters['year']) || !empty($parameters['number'])) && !empty($parameters['text'])):
+			return $this->publications->getPublicationByIssue($parameters);
+		endif;
+		return NULL;
 	}
 
 	/********************************************************************************************************************/

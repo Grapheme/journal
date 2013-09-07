@@ -20,7 +20,7 @@
 					<li>
 					<?php if(empty($publications[$i][$this->uri->language_string.'_document']) === FALSE):?>
 						<div class="pdf-dl-link">
-							<a href="<?=BaseURL('download/'.$publications[$i][$this->uri->language_string.'_document']);?>">
+							<a href="<?=site_url('publication/get-publication?resourse='.$publications[$i]['id']);?>">
 								<img src="<?=BaseURL('img/pdf.png');?>"><?=lang('publication_download');?>
 							</a>
 						</div>

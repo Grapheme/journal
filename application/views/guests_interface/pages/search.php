@@ -15,26 +15,30 @@
 		<article>
 			<?=(isset($page_content[$this->uri->language_string.'_content']))?$page_content[$this->uri->language_string.'_content']:'';?>
 			<?php $this->load->view('guests_interface/forms/search');?>
-		<?php if(!empty($issues)):?>
+		<?php if(!empty($publications)):?>
 			<div class="search-page-form">
 				<div class="form-header">Результаты поиска</div>
-				<div class="publications-num">Найдено публикаций: <?=count($issues);?></div>
+				<div class="publications-num">Найдено <?=count($publications).' '.pluralPublications(count($publications),$this->uri->language_string);?>.</div>
 			</div>
 			<ol class="month-list search-page">
-			<?php for($i=0;$i<count($issues);$i++):?>
+			<?php for($i=0;$i<count($publications);$i++):?>
 				<li>
+				<?php if(empty($publications[$i][$this->uri->language_string.'_document']) === FALSE):?>
 					<div class="pdf-dl-link">
-						<a href=""><img src="<?=base_url('img/pdf.png')?>">Скачать</a>
+						<a href="<?=site_url('publication/get-publication?resourse='.$publications[$i]['id']);?>">
+							<img src="<?=BaseURL('img/pdf.png');?>"><?=lang('publication_download');?>
+						</a>
 					</div>
+				<?php endif;?>
 					<h2 class="article-h2">
-						<a href="<?=site_url('issue/'.$issues[$i]['id']);?>"><?=$issues[$i]['title']?></a>
+						<a href="<?=site_url('issue/'.$publications[$i]['year'].'/'.$publications[$i]['month'].'/'.$publications[$i]['issue'].'/publication/'.$publications[$i]['id'])?>"><?=$publications[$i][$this->uri->language_string.'_title']?></a>
 					</h2>
 					<div class="publications-date">
-						<?=$issues[$i]['date'];?> (стр. 3)
+						<?=mb_strtolower(getMonthName($publications[$i]['month'],$this->uri->language_string));?>. <?=$publications[$i]['year'];?> (<?=lang('page_char').' '.$publications[$i]['page'];?>)
 					</div>
 					<div class="authors">
-					<?php for($j=0;$j<count($issues[$i]['authors']);$j++):?>
-						<?=$issues[$i]['authors'][$j]['name'];?><?=(isset($issues[$i]['authors'][$j+1]))?',':'';?>
+					<?php for($j=0;$j<count($publications[$i]['authors']);$j++):?>
+						<a href="<?=site_url('author/'.getTranslit($publications[$i]['authors'][$j][$this->uri->language_string.'_name']).'/'.$publications[$i]['authors'][$j]['id']);?>"><?=$publications[$i]['authors'][$j][$this->uri->language_string.'_name'];?></a><?php if(isset($publications[$i]['authors'][$j+1])):?>, <?php endif;?>
 					<?php endfor;?>
 					</div>
 				</li>

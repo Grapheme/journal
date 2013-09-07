@@ -456,6 +456,23 @@ class Ajax_interface extends MY_Controller{
 		echo json_encode($json_request);
 	}
 	
+	public function resourceDeletePublications(){
+		
+		if(!$this->input->is_ajax_request() || !$this->loginstatus):
+			show_error('В доступе отказано');
+		endif;
+		$json_request = array('status'=>FALSE,'responseText'=>'');
+		if($this->input->post('resourceID') != FALSE):
+			$this->load->model('publications_resources');
+			$resource = $this->publications_resources->getWhere($this->input->post('resourceID'));
+			$file = json_decode($resource['resource'],TRUE);
+			$this->publications_resources->delete($this->input->post('resourceID'));
+			$this->filedelete($file['full_path']);
+			$json_request['status'] = TRUE;
+		endif;
+		echo json_encode($json_request);
+	}
+	
 	private function ExecuteInsertingPublication($post){
 		
 		$post['issue'] = $this->input->get('issue');

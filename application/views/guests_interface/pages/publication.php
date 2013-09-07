@@ -17,7 +17,7 @@
 				<div class="delicate-design-stroke"> </div>
 			<?php if(empty($page_content[$this->uri->language_string.'_document']) === FALSE):?>
 				<div class="pdf-dl-link single">
-					<a href="<?=BaseURL('download/'.$page_content[$this->uri->language_string.'_document']);?>">
+					<a href="<?=site_url('publication/get-publication?resourse='.$page_content['id']);?>">
 						<img src="<?=BaseURL('img/pdf.png');?>"><?=lang('publication_download');?>
 					</a>
 				</div>
@@ -34,11 +34,15 @@
 			<?php endfor;?>
 			</div>
 			<?php endif;?>
-			<div class="biblio-link">
-				<?=lang('bibliography_link')?>: <?php for($j=0;$j<count($authors);$j++):?><?=$authors[$j][$this->uri->language_string.'_name'];?><?php if(isset($authors[$j+1])):?>, <?php endif;?><?php endfor;?>
-				 //<?=$page_content[$this->uri->language_string.'_title']?> – <?=$issue['year'];?>. - № <?=$issue['number'];?>. – <?=$page_content['page']?> <?=lang('page_char')?>.
-				– <?=lang('ejournal');?>. – <?=site_url(uri_string())?><a class="no-clickable" href="">[BibT<span class="lower">E</span>X]</a>
-			</div>
+			<section>
+				<header>
+					<h3><?=lang('bibliography_link')?></h3>
+				</header>
+				<div class="biblio-link">
+					<?php for($j=0;$j<count($authors);$j++):?><?=$authors[$j][$this->uri->language_string.'_name'];?><?php if(isset($authors[$j+1])):?>, <?php endif;?><?php endfor;?> //<?=$page_content[$this->uri->language_string.'_title']?> – <?=$issue['year'];?>. - № <?=$issue['number'];?>. – <?=$page_content['page']?> <?=lang('page_char')?>.
+					– <?=lang('ejournal');?>. – <?=site_url(uri_string())?><a class="no-clickable" href=""> [B<span class="capital">ib</span>T<span class="lower">E</span>X]</a>
+				</div>
+			</section>
 			<?php if(!empty($keywords)):?>
 			<div class="key-words">
 				<?=lang('key_words')?>:
@@ -52,7 +56,7 @@
 			<?php if(!empty($publication_resources)):?>
 			<section>
 				<header>
-					<h3>Дополнительные материалы</h3>
+					<h3><?=lang('publication_materials')?></h3>
 				</header>
 				<ul class="unord-list">
 				<?php for($i=0;$i<count($publication_resources);$i++):?>

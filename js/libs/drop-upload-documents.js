@@ -160,7 +160,7 @@ $(function(){
 		$(this).addClass('hidden');
 		$("div.div-zone-upload-document").removeClass('hidden');
 	})
-	$("a.delete-documents-item").click(function(){
+	$("a.delete-resource-item").click(function(){
 		mt.deleteResource(this);
 	});
 });

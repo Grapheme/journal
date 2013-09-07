@@ -35,6 +35,7 @@ $route[ADMIN_START_PAGE.'/publications/insert'] = "ajax_interface/insertPublicat
 $route[ADMIN_START_PAGE.'/publications/update'] = "ajax_interface/updatePublication";
 $route[ADMIN_START_PAGE.'/publications/remove'] = "ajax_interface/removePublication";
 $route[ADMIN_START_PAGE.'/publications/upload/resources'] = "ajax_interface/uploadResourcePublication";
+$route[ADMIN_START_PAGE.'/publications/remove/resources'] = "ajax_interface/resourceDeletePublications";
 /*************************************************** ADMIN INTRERFACE ***********************************************/
 $route[ADMIN_START_PAGE] = "admin_interface/controlPanel";
 /* ----------------------------------------------- Pages ---------------------------------------------------------- */
@@ -65,6 +66,7 @@ $route['issue/:num/:num/:num'] = "guests_interface/issue";
 $route['issue/:num/:num/:num/publication/:num'] = "guests_interface/publication";
 
 $route['publication/get-resource'] = "guests_interface/getFileResource";
+$route['publication/get-publication'] = "guests_interface/getFilePublication";
 
 $route['authors'] = "guests_interface/authors";
 $route['keywords'] = "guests_interface/keywords";
