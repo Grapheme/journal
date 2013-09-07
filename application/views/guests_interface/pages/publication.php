@@ -32,10 +32,15 @@
 				Чежина Н. В., Королев Д. А., Холмичева Н. Н.
 			</div>
 			<?php endif;?>
-			<div class="biblio-link">
-				<?=lang('bibliography_link')?>: Анчаров А.И., Болдырев В.В., Солдатов А . //<?=$page_content[$this->uri->language_string.'_title']?> – <?=$issue['year'];?>. - № <?=$issue['number'];?>. – <?=$page_content['page']?> <?=lang('page_char')?>.
-				– <?=lang('ejournal');?>. – <?=site_url(uri_string())?><a class="no-clickable" href="">[BibT<span class="lower">E</span>X]</a>
-			</div>
+			<section>
+				<header>
+					<h3><?=lang('bibliography_link')?></h3>
+				</header>
+				<div class="biblio-link">
+					Анчаров А.И., Болдырев В.В., Солдатов А . //<?=$page_content[$this->uri->language_string.'_title']?> – <?=$issue['year'];?>. - № <?=$issue['number'];?>. – <?=$page_content['page']?> <?=lang('page_char')?>.
+					– <?=lang('ejournal');?>. – <?=site_url(uri_string())?><a class="no-clickable" href=""> [B<span class="capital">ib</span>T<span class="lower">E</span>X]</a>
+				</div>
+			</section>
 			<?php if(!empty($keywords)):?>
 			<div class="key-words">
 				<?=lang('key_words')?>:
