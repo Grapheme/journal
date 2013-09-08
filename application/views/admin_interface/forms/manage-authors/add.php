@@ -49,7 +49,7 @@
 	<div class="control-group">
 		<label>Учреждение:</label>
 		<select name="institution" class="span4">
-			<option value="0">Укажите учреждение автора</option>
+			<option value="0">Укажите место работы автора</option>
 		<?php for($i=0;$i<count($institutions);$i++):?>
 			<option value="<?=$institutions[$i]['id']?>"><?=$institutions[$i]['ru_small_title'];?></option>
 		<?php endfor;?>

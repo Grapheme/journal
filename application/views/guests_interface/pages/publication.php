@@ -34,18 +34,13 @@
 			<?php endfor;?>
 			</div>
 			<?php endif;?>
-			<section>
-				<header>
-					<h3><?=lang('bibliography_link')?></h3>
-				</header>
-				<div class="biblio-link">
-					<?php for($j=0;$j<count($authors);$j++):?><?=$authors[$j][$this->uri->language_string.'_name'];?><?php if(isset($authors[$j+1])):?>, <?php endif;?><?php endfor;?> //<?=$page_content[$this->uri->language_string.'_title']?> – <?=$issue['year'];?>. - № <?=$issue['number'];?>. – <?=$page_content['page']?> <?=lang('page_char')?>.
-					– <?=lang('ejournal');?>. – <?=site_url(uri_string())?><a class="no-clickable" href=""> [B<span class="capital">ib</span>T<span class="lower">E</span>X]</a>
-				</div>
-			</section>
+			<div class="biblio-link">
+				<strong><?=lang('bibliography_link')?></strong>: <?php for($j=0;$j<count($authors);$j++):?><?=$authors[$j][$this->uri->language_string.'_name'];?><?php if(isset($authors[$j+1])):?>, <?php endif;?><?php endfor;?> //<?=$page_content[$this->uri->language_string.'_title']?> – <?=$issue['year'];?>. - № <?=$issue['number'];?>. – <?=$page_content['page']?> <?=lang('page_char')?>.
+				– <?=lang('ejournal');?>. – <?=site_url(uri_string())?><a class="no-clickable" href=""> [B<span class="capital">ib</span>T<span class="lower">E</span>X]</a>
+			</div>
 			<?php if(!empty($keywords)):?>
 			<div class="key-words">
-				<?=lang('key_words')?>:
+				<strong><?=lang('key_words')?></strong>: 
 			<?php for($i=0;$i<count($keywords);$i++):?>
 				<a href="<?=site_url('search/publication?mode=search&word='.md5(trim($keywords[$i])))?>">
 					<?=$keywords[$i];?><?php if(isset($keywords[$i+1])):?>, <?php endif;?>
