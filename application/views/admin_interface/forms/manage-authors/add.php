@@ -18,6 +18,8 @@
 				<input type="text" name="ru_name" class="span3" value="" placeholder="Имя" />
 				<label>Должность:</label>
 				<input type="text" name="ru_position" class="span3" value="" placeholder="Должность" />
+				<label>Адрес:</label>
+				<textarea rows="2" class="span6" name="ru_address" placeholder="Адрес"></textarea>
 			</div>
 		</div>
 		<div class="tab-pane fade" id="en">
