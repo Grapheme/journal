@@ -178,11 +178,32 @@ class Admin_interface extends MY_Controller{
 		
 		$this->load->model('publications');
 		$pagevar = array(
-			'publication' => $this->publications->getWhere($this->input->get('id'))
+			'publication' => $this->publications->getWhere($this->input->get('id')),
+			'authors' => array()
 		
 		);
+		$pagevar['authors'] = $this->getAuthorsByIDs($pagevar['publication']['authors']);
 		$pagevar['publication']['keywords'] = $this->getProductKeyWords($pagevar['publication']['id']);
 		$this->load->view("admin_interface/publications/edit",$pagevar);
+	}
+	
+	public function resourcesPublications(){
+		
+		$this->load->model(array('publications','publications_resources'));
+		$pagevar = array(
+			'publication' => $this->publications->getWhere($this->input->get('id')),
+			'resources' => array()
+		);
+		if($resources = $this->publications_resources->getWhere(NULL,array('issue'=>$this->input->get('issue'),'publication'=>$this->input->get('publication')),TRUE)):
+			for($i=0;$i<count($resources);$i++):
+				$pagevar['resources'][$i]['id'] = $resources[$i]['id'];
+				$pagevar['resources'][$i]['publication'] = $resources[$i]['publication'];
+				$pagevar['resources'][$i]['issue'] = $resources[$i]['issue'];
+				$pagevar['resources'][$i]['resource'] = json_decode($resources[$i]['resource'],TRUE);
+			endfor;
+		endif;
+		$this->load->helper('string');
+		$this->load->view("admin_interface/publications/resources",$pagevar);
 	}
 	/*************************************************************************************************************/
 	

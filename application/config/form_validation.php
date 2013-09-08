@@ -11,7 +11,7 @@
 		),
 		'char' =>array(
 			array('field'=>'char','label'=>'char','rules'=>'required|trim'),
-			array('field'=>'lang','label'=>'lang','rules'=>'required|trim')
+			array('field'=>'lang','label'=>'lang','rules'=>'trim')
 		),
 		'author' =>array(
 			array('field'=>'ru_page_title','label'=>'Title страницы','rules'=>'trim|xss_clean'),

@@ -13,8 +13,11 @@
 			if(!isset($issue_number) || is_null($issue_number)):
 				$issue_number = FALSE;
 			endif;
+			if(!isset($issue_link) || is_null($issue_link)):
+				$issue_link = FALSE;
+			endif;
 		?>
-		<?php $this->load->view('guests_interface/includes/header',array('issue_number'=>$issue_number));?>
+		<?php $this->load->view('guests_interface/includes/header',array('issue_number'=>$issue_number,'issue_link'=>$issue_link));?>
 		<?php $this->load->view('guests_interface/includes/navigation');?>
 		<article>
 			<?=(isset($page_content[$this->uri->language_string.'_content']))?$page_content[$this->uri->language_string.'_content']:'';?>

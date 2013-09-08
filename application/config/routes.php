@@ -8,10 +8,11 @@ $route['login-in'] = "general_interface/loginIn";
 $route['log-off'] = "general_interface/logoff";
 $route['redactor/upload'] = "general_interface/redactorUploadImage";
 $route['redactor/get-uploaded-images'] = "general_interface/redactorUploadedImages";
+$route['publications/view-document/:any'] = "general_interface/showDocumentIco";
 /*************************************************** AJAX INTRERFACE ***********************************************/
-
 $route['get-authors-list'] = "ajax_interface/getAuthorsList";
-
+$route['get-keywords-list'] = "ajax_interface/getKeyWordsList";
+$route['search-authors-list'] = "ajax_interface/searchAuthor";
 /****************** pages ********************/
 $route[ADMIN_START_PAGE.'/page/:any/update'] = "ajax_interface/updatePage";
 $route[ADMIN_START_PAGE.'/pages/:any/upload/resource'] = "ajax_interface/pageUploadResources";
@@ -33,6 +34,8 @@ $route[ADMIN_START_PAGE.'/issues/remove'] = "ajax_interface/removeIssue";
 $route[ADMIN_START_PAGE.'/publications/insert'] = "ajax_interface/insertPublication";
 $route[ADMIN_START_PAGE.'/publications/update'] = "ajax_interface/updatePublication";
 $route[ADMIN_START_PAGE.'/publications/remove'] = "ajax_interface/removePublication";
+$route[ADMIN_START_PAGE.'/publications/upload/resources'] = "ajax_interface/uploadResourcePublication";
+$route[ADMIN_START_PAGE.'/publications/remove/resources'] = "ajax_interface/resourceDeletePublications";
 /*************************************************** ADMIN INTRERFACE ***********************************************/
 $route[ADMIN_START_PAGE] = "admin_interface/controlPanel";
 /* ----------------------------------------------- Pages ---------------------------------------------------------- */
@@ -54,12 +57,16 @@ $route[ADMIN_START_PAGE.'/issues/edit'] = "admin_interface/editIssue";
 $route[ADMIN_START_PAGE.'/publications'] = "admin_interface/publicationsList";
 $route[ADMIN_START_PAGE.'/publications/add'] = "admin_interface/insertPublications";
 $route[ADMIN_START_PAGE.'/publications/edit'] = "admin_interface/editPublications";
+$route[ADMIN_START_PAGE.'/publications/resources'] = "admin_interface/resourcesPublications";
 /*************************************************** GUEST INTRERFACE ***********************************************/
 
 /*************************************************** GUEST INTRERFACE ***********************************************/
 $route['issues'] = "guests_interface/issues";
 $route['issue/:num/:num/:num'] = "guests_interface/issue";
 $route['issue/:num/:num/:num/publication/:num'] = "guests_interface/publication";
+
+$route['publication/get-resource'] = "guests_interface/getFileResource";
+$route['publication/get-publication'] = "guests_interface/getFilePublication";
 
 $route['authors'] = "guests_interface/authors";
 $route['keywords'] = "guests_interface/keywords";
