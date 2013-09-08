@@ -45,7 +45,7 @@
 				<input type="text" name="en_title" class="span6" value="<?=$publication['en_title']?>" placeholder="" />
 			</div>
 			<div class="controls">
-				<label>Documenet:</label>
+				<label>Document:</label>
 				<input type="file" autocomplete="off" name="en_document" size="52">
 				<p class="help-block">Supported formats: PDF</p>
 			</div>

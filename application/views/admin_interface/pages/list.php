@@ -23,12 +23,12 @@
 				</ul>
 				<div class="clear"></div>
 				<h2>Страницы</h2>
-				<table class="table table-bordered" data-action="<?=site_url(ADMIN_START_PAGE.'/pages/remove');?>">
+				<table class="table table-bordered table-striped table-hover table-condensed" data-action="<?=site_url(ADMIN_START_PAGE.'/pages/remove');?>">
 					<thead>
 						<tr>
-							<th class="span1">№ ID</th>
+							<th width="20px">ID</th>
 							<th class="span7">Название</th>
-							<th class="span1"></th>
+							<th width="10px"></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -37,7 +37,7 @@
 							<td><?=$pages[$i]['id'];?></td>
 							<td><?=$pages[$i]['title'];?></td>
 							<td>
-								<a href="<?=site_url(ADMIN_START_PAGE.'/pages/'.$pages[$i]['page_url'].'/edit?mode=text&id='.$pages[$i]['id'])?>" class="btn btn-link" ><i class="icon-edit"></i></a>
+								<a href="<?=site_url(ADMIN_START_PAGE.'/pages/'.$pages[$i]['page_url'].'/edit?mode=text&id='.$pages[$i]['id'])?>" class="btn btn-link" ><i class="icon-pencil"></i></a>
 							</td>
 						</tr>
 					<?php endfor;?>

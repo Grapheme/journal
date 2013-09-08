@@ -23,10 +23,10 @@
 				</ul>
 				<div class="clear"></div>
 				<div class="inline">
-					<a href="<?=site_url(ADMIN_START_PAGE.'/authors/add')?>" class="btn">Добавить автора</a>
+					<a href="<?=site_url(ADMIN_START_PAGE.'/authors/add')?>" class="btn btn-info">Добавить автора</a>
 				</div>
 				<h2>Авторы</h2>
-				<table class="table table-bordered" data-action="<?=site_url(ADMIN_START_PAGE.'/authors/remove');?>">
+				<table class="table table-bordered table-striped table-hover table-condensed" data-action="<?=site_url(ADMIN_START_PAGE.'/authors/remove');?>">
 					<thead>
 						<tr>
 							<th class="span1">№ ID</th>
@@ -40,7 +40,7 @@
 							<td><?=$authors[$i]['id'];?></td>
 							<td><?=$authors[$i]['ru_name'].' ('.$authors[$i]['en_name'].')';?></td>
 							<td>
-								<a href="<?=site_url(ADMIN_START_PAGE.'/authors/edit?mode=text&id='.$authors[$i]['id'])?>" class="btn btn-link" ><i class="icon-edit"></i></a>
+								<a href="<?=site_url(ADMIN_START_PAGE.'/authors/edit?mode=text&id='.$authors[$i]['id'])?>" class="btn btn-link" ><i class="icon-pencil"></i></a>
 								<button data-item="<?=$authors[$i]['id'];?>" class="btn btn-link remove-item"><i class="icon-remove"></i></button>
 							</td>
 						</tr>

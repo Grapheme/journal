@@ -23,11 +23,11 @@
 				</ul>
 				<div class="clear"></div>
 				<div class="inline">
-					<a href="<?=site_url(ADMIN_START_PAGE.'/issues/add')?>" class="btn">Добавить выпуск</a>
+					<a href="<?=site_url(ADMIN_START_PAGE.'/issues/add')?>" class="btn btn-info">Добавить выпуск</a>
 				</div>
 				<h2>Выпуски</h2>
 				<?php $this->load->view('html/select-years');?>
-				<table class="table table-bordered" data-action="<?=site_url(ADMIN_START_PAGE.'/issues/remove');?>">
+				<table class="table table-bordered table-striped table-hover table-condensed" data-action="<?=site_url(ADMIN_START_PAGE.'/issues/remove');?>">
 					<thead>
 						<tr>
 							<th class="span1">№</th>
@@ -41,7 +41,7 @@
 							<td><?=$issues[$i]['id'];?></td>
 							<td><?=$issues[$i]['ru_title'].' ('.$issues[$i]['en_title'].')';?></td>
 							<td>
-								<a href="<?=site_url(ADMIN_START_PAGE.'/issues/edit?mode=text&id='.$issues[$i]['id'])?>" class="btn btn-link" ><i class="icon-edit"></i></a>
+								<a href="<?=site_url(ADMIN_START_PAGE.'/issues/edit?mode=text&id='.$issues[$i]['id'])?>" class="btn btn-link" ><i class="icon-pencil"></i></a>
 								<button data-item="<?=$issues[$i]['id'];?>" class="btn btn-link remove-item"><i class="icon-remove"></i></button>
 							</td>
 						</tr>

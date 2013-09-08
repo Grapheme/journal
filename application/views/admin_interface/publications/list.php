@@ -25,11 +25,11 @@
 				<div class="inline">
 					<?php $this->load->view('html/select-issues');?>
 					<?php if($this->input->get('issue') !== FALSE):?>
-					<a href="<?=site_url(ADMIN_START_PAGE.'/publications/add?issue='.$this->input->get('issue'))?>" class="btn">Добавить публикацию</a>
+					<a href="<?=site_url(ADMIN_START_PAGE.'/publications/add?issue='.$this->input->get('issue'))?>" class="btn add-btn btn-info">Добавить публикацию</a>
 					<?php endif;?>
 				</div>
 				<h2>Публикации</h2>
-				<table class="table table-bordered" data-action="<?=site_url(ADMIN_START_PAGE.'/publications/remove');?>">
+				<table class="table table-bordered table-striped table-hover table-condensed" data-action="<?=site_url(ADMIN_START_PAGE.'/publications/remove');?>">
 					<thead>
 						<tr>
 							<th class="span1">№</th>
@@ -43,8 +43,8 @@
 							<td><?=$publications[$i]['id'];?></td>
 							<td><?=$publications[$i]['ru_title'].' ('.$publications[$i]['en_title'].')';?></td>
 							<td>
-								<a href="<?=site_url(ADMIN_START_PAGE.'/publications/edit?issue='.$this->input->get('issue').'&id='.$publications[$i]['id'])?>" class="btn btn-link" ><i class="icon-edit"></i></a>
-								<a href="<?=site_url(ADMIN_START_PAGE.'/publications/resources?issue='.$this->input->get('issue').'&publication='.$publications[$i]['id'])?>" title="Дополнительные материалы" class="btn btn-link" ><i class="icon-inbox"></i></a>
+								<a href="<?=site_url(ADMIN_START_PAGE.'/publications/edit?issue='.$this->input->get('issue').'&id='.$publications[$i]['id'])?>" class="btn btn-link" ><i class="icon-pencil"></i></a>
+								<a href="<?=site_url(ADMIN_START_PAGE.'/publications/resources?issue='.$this->input->get('issue').'&publication='.$publications[$i]['id'])?>" title="Дополнительные материалы" class="btn btn-link" ><i class="icon-list"></i></a>
 								<button data-item="<?=$publications[$i]['id'];?>" class="btn btn-link remove-item"><i class="icon-remove"></i></button>
 							</td>
 						</tr>

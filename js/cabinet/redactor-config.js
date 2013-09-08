@@ -162,7 +162,7 @@ $(function(){
 	var mainConfig = {
 		buttons: buttons,
 		autoresize: false,
-		minHeight: true,
+		minHeight: 300,
 		//buttonsAdd: ['button_undo','button_redo','|'],
 		//buttonsCustom: buttonsCustom,
 		lang: 'ru',

@@ -23,10 +23,10 @@
 				</ul>
 				<div class="clear"></div>
 				<div class="inline">
-					<a href="<?=site_url(ADMIN_START_PAGE.'/institutions/add')?>" class="btn">Добавить учреждение</a>
+					<a href="<?=site_url(ADMIN_START_PAGE.'/institutions/add')?>" class="btn btn-info">Добавить учреждение</a>
 				</div>
 				<h2>Учреждения</h2>
-				<table class="table table-bordered" data-action="<?=site_url(ADMIN_START_PAGE.'/institutions/remove');?>">
+				<table class="table table-bordered table-striped table-hover table-condensed" data-action="<?=site_url(ADMIN_START_PAGE.'/institutions/remove');?>">
 					<thead>
 						<tr>
 							<th class="span1">№</th>
@@ -40,7 +40,7 @@
 							<td><?=$institutions[$i]['id'];?></td>
 							<td><?=$institutions[$i]['ru_small_title'].' ('.$institutions[$i]['en_small_title'].')';?></td>
 							<td>
-								<a href="<?=site_url(ADMIN_START_PAGE.'/institutions/edit?id='.$institutions[$i]['id'])?>" class="btn btn-link" ><i class="icon-edit"></i></a>
+								<a href="<?=site_url(ADMIN_START_PAGE.'/institutions/edit?id='.$institutions[$i]['id'])?>" class="btn btn-link" ><i class="icon-pencil"></i></a>
 								<button data-item="<?=$institutions[$i]['id'];?>" class="btn btn-link remove-item"><i class="icon-remove"></i></button>
 							</td>
 						</tr>
