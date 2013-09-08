@@ -191,7 +191,7 @@ nav { float: left; width: 234px; }
 article { margin: 0 0 0 234px; min-height: 20em;
   .authors { width: 567px; margin: 0 0 50px;  
     .font-main; color: @gray; font-style: italic;
-    a { color: #999; text-decoration: none; border-bottom: 1px solid transparent; }
+    a { color: #999; text-decoration: none; border-bottom: 1px solid transparent; transition: all 0.5s; }
     a:hover { border-bottom: 1px solid #666; color: #666; }
   }
   .biblio-link { 
@@ -205,7 +205,8 @@ article { margin: 0 0 0 234px; min-height: 20em;
   }
   .key-words { margin: 1em 0 0; 
     .font-main;
-    a { text-decoration: none; color: @gray; }
+    a { text-decoration: none; color: @gray; border: 1px solid transparent; transition: all 0.5s; }
+    a:hover { color: #666; border-bottom: 1px solid #666; }
   }
 }
 
@@ -271,7 +272,7 @@ section { width: 698px; margin: 30px 0 0;
     h2 { margin: 0 0 28px; font: 700 1.375em e('/') 1.22727272em @proxima;
       .uppercase;
     }
-    h3 { margin: 0 0 28px; font: 700 1.125em e('/') 1.1666em @proxima;
+    h3 { margin: 2.5em 0 1em 0; font: 700 1.125em e('/') 1.1666em @proxima;
       .uppercase;
     }
   }
