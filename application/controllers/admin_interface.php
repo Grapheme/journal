@@ -158,13 +158,16 @@ class Admin_interface extends MY_Controller{
 		if($this->input->get('issue') !== FALSE && is_numeric($this->input->get('issue'))):
 			$issue = $this->input->get('issue');
 		endif;
+		if($this->input->get('issue') === FALSE || !is_numeric($this->input->get('issue'))):
+			redirect(uri_string().'?issue='.$issue);
+		endif;
 		$pagevar = array(
 			'publications' => $this->publications->getWhere(NULL,array('issue'=>$issue),TRUE),
 			'issues' => $issues
 		);
-		if(!empty($pagevar['issues'])):
+		/*if(!empty($pagevar['issues'])):
 			$pagevar['issues'] = array_reverse($pagevar['issues']);
-		endif;
+		endif;*/
 		
 		$this->load->view("admin_interface/publications/list",$pagevar);
 	}

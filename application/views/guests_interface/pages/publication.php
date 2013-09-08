@@ -62,7 +62,7 @@
 				<?php for($i=0;$i<count($publication_resources);$i++):?>
 					<li class="unord-item clearfix">
 						<div class="list-item-icon"> <!--video audio text-->
-							<img class="" src="<?=site_url($this->uri->language_string.'/publications/view-document/'.random_string('alnum',16).'?resource_id='.$publication_resources[$i]['id']);?>" alt="" />
+							<img class="" src="<?=site_url('publications/view-document/'.random_string('alnum',16).'?resource_id='.$publication_resources[$i]['id']);?>" alt="" />
 							<a href="<?=site_url('publication/get-resource?resourse='.$publication_resources[$i]['id'])?>"></a>
 						</div>
 						<div class="list-item-desc">
@@ -98,17 +98,7 @@
 					<div class="auth-to-comment">
 					<?=lang('signin_for_comment')?>
 					</div>
-					<div class="auth-icons">
-						<div class="facebook">
-							<a href="#"> </a>
-						</div>
-						<div class="twitter">
-							<a href="#"> </a>
-						</div>
-						<div class="vk">
-							<a href="#"> </a>
-						</div>
-					</div>
+					<?php $this->load->view('html/social-networks');?>
 					<?php $this->load->view('guests_interface/forms/comments');?>
 					<ul class="comments-list">
 						<li>

@@ -9,6 +9,10 @@ $route['log-off'] = "general_interface/logoff";
 $route['redactor/upload'] = "general_interface/redactorUploadImage";
 $route['redactor/get-uploaded-images'] = "general_interface/redactorUploadedImages";
 $route['publications/view-document/:any'] = "general_interface/showDocumentIco";
+/********** sing in by social network *************/
+$route['sign-in/vk'] = "general_interface/signInVK";
+$route['sign-in/facebook'] = "general_interface/signInUpFacebook";
+/*************************************************/
 /*************************************************** AJAX INTRERFACE ***********************************************/
 $route['get-authors-list'] = "ajax_interface/getAuthorsList";
 $route['get-keywords-list'] = "ajax_interface/getKeyWordsList";
@@ -58,8 +62,6 @@ $route[ADMIN_START_PAGE.'/publications'] = "admin_interface/publicationsList";
 $route[ADMIN_START_PAGE.'/publications/add'] = "admin_interface/insertPublications";
 $route[ADMIN_START_PAGE.'/publications/edit'] = "admin_interface/editPublications";
 $route[ADMIN_START_PAGE.'/publications/resources'] = "admin_interface/resourcesPublications";
-/*************************************************** GUEST INTRERFACE ***********************************************/
-
 /*************************************************** GUEST INTRERFACE ***********************************************/
 $route['issues'] = "guests_interface/issues";
 $route['issue/:num/:num/:num'] = "guests_interface/issue";
