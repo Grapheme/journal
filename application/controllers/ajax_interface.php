@@ -91,6 +91,7 @@ class Ajax_interface extends MY_Controller{
 		endif;
 		$json_request = array('status'=>FALSE,'responseText'=>'');
 		/* -------------------------------*/
+		include_once(getcwd().'/scripts/script1.php');
 		$json_request['status'] = TRUE;
 		$json_request['responseText'] = 'Скрипт №1 выполнен успешно';
 		/* -------------------------------*/
@@ -104,6 +105,7 @@ class Ajax_interface extends MY_Controller{
 		endif;
 		$json_request = array('status'=>FALSE,'responseText'=>'');
 		/* -------------------------------*/
+		include_once(getcwd().'/scripts/script2.php');
 		$json_request['status'] = TRUE;
 		$json_request['responseText'] = 'Скрипт №2 выполнен успешно';
 		/* -------------------------------*/
