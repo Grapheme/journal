@@ -38,12 +38,25 @@ class MY_Controller extends CI_Controller{
 			'text/plain' => base_url('img/icons/txt.png'),
 			'application/pdf' => base_url('img/icons/pdf.png'),
 			'application/x-zip-compressed' => base_url('img/icons/zip.png'),
-			'application/msword' => base_url('img/icons/word.png'),
-			'application/vnd.openxmlformats-officedocument.wordprocessingml.document' => base_url('img/icons/word.png'),
-			'application/vnd.ms-excel' => base_url('img/icons/excel.png'),
-			'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' => base_url('img/icons/excel.png'),
-			'application/vnd.ms-powerpoint' => base_url('img/icons/default.jpg'),
-			'application/vnd.openxmlformats-officedocument.presentationml.presentation' => base_url('img/icons/default.jpg')
+			'application/msword' => base_url('img/icons/doc.png'),
+			'application/vnd.openxmlformats-officedocument.wordprocessingml.document' => base_url('img/icons/doc.png'),
+			'application/vnd.ms-excel' => base_url('img/icons/doc.png'),
+			'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' => base_url('img/icons/doc.png'),
+			'application/vnd.ms-powerpoint' => base_url('img/icons/doc.png'),
+			'application/vnd.openxmlformats-officedocument.presentationml.presentation' => base_url('img/icons/doc.png'),
+			
+			'image/png' => base_url('img/icons/pic.png'),
+			'image/jpeg'=> base_url('img/icons/pic.png'),
+			'image/gif'=> base_url('img/icons/pic.png'),
+			
+			'audio/mpeg' => base_url('img/icons/sound.png'),
+			'audio/ogg'=> base_url('img/icons/sound.png'),
+			'audio/webm'=> base_url('img/icons/sound.png'),
+			
+			'video/avi' => base_url('img/icons/video.png'),
+			'video/mpeg' => base_url('img/icons/video.png'),
+			'video/mp4'=> base_url('img/icons/video.png'),
+			'video/webm'=> base_url('img/icons/video.png'),
 		);
 	}
 	
@@ -334,7 +347,7 @@ class MY_Controller extends CI_Controller{
 				$config['allowed_types'] = $allowed_types;
 				$config['remove_spaces'] = TRUE;
 				$config['overwrite'] = FALSE;
-				$config['max_size'] = 5120;
+				$config['max_size'] = 50000;
 				$config['file_name'] = $this->translite(substr($_FILES[$document]['name'],0,strripos($_FILES[$document]['name'],'.'))).'.'.substr(strrchr($_FILES[$document]['name'],'.'),1);
 				$this->upload->initialize($config);
 				if(!$this->upload->do_upload($document)):

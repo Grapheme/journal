@@ -24,7 +24,12 @@
 					<?=$page_content[$this->uri->language_string.'_position'];?>
 				</div>
 				<div>
-					<span class="gray"><?=$page_content['institution'][$this->uri->language_string.'_title'];?></span> 
+					<span class="gray"><?=$page_content['institution'][$this->uri->language_string.'_title'];?></span>
+				<?php if(!empty($page_content['institution'][$this->uri->language_string.'_site_link'])):?>
+					<div>
+						<?=lang('link_institution_site');?>: <a href="<?=$page_content['institution'][$this->uri->language_string.'_site_link'];?>" target="_blank"><?=$page_content['institution'][$this->uri->language_string.'_site_link'];?></a>
+					</div>
+				<?php endif;?>
 				</div>
 				<address>
 					<?=$page_content[$this->uri->language_string.'_address'];?>
@@ -38,9 +43,6 @@
 		<?php $this->load->view('guests_interface/includes/footer');?>
 	</div>
 	<?php $this->load->view('guests_interface/includes/scripts');?>
-	<script type="text/javascript" src="<?=baseURL('js/libs/localize.js');?>"></script>
-	<script type="text/javascript" src="<?=baseURL('js/libs/base.js');?>"></script>
-	<script type="text/javascript" src="<?=baseURL('js/cabinet/guest.js');?>"></script>
 	<?php $this->load->view('guests_interface/includes/typekit');?>
 	<?php $this->load->view('guests_interface/includes/google-analytics');?>
 </body>

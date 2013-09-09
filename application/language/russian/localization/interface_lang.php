@@ -35,5 +35,5 @@ $lang['form_search_results'] = "Результаты поиска";
 $lang['form_search_found'] = "Найдено";
 
 $lang['author'] = "Автор";
-
+$lang['link_institution_site'] = "Ссылка на сайт";
 ?>

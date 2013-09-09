@@ -235,6 +235,11 @@ class Ajax_interface extends MY_Controller{
 	
 	private function ExecuteInsertingInstitution($post){
 		
+		if(empty($post['ru_site_link']) && !empty($post['en_site_link'])):
+			$post['ru_site_link'] = $post['en_site_link'];
+		elseif(!empty($post['ru_site_link']) && empty($post['en_site_link'])):
+			$post['en_site_link'] = $post['en_site_link'];
+		endif;
 		return $this->insertItem(array('insert'=>$post,'model'=>'institutions'));
 		return TRUE;
 	}
@@ -446,7 +451,7 @@ class Ajax_interface extends MY_Controller{
 				$issueUploadPath = $issue['year'].'/'.$issue['month'];
 			endif;
 		endif;
-		$resultUpload = $this->uploadSingleDocument($uploadPath.'/'.$issueUploadPath);
+		$resultUpload = $this->uploadSingleDocument($uploadPath.'/'.$issueUploadPath,'file',ALLOWED_TYPES_DOCUMENTS.'|'.ALLOWED_TYPES_IMAGES.'|'.ALLOWED_TYPES_MEDIA);
 		if($resultUpload['status'] == TRUE):
 			$json_request['responsePhotoSrc'] = $this->saveDocumentPublication($this->input->get('issue'),$this->input->get('publication'),$resultUpload['uploadData']);
 			$json_request['status'] = TRUE;

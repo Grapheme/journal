@@ -37,7 +37,8 @@
 			array('field'=>'ru_description','label'=>'Описание','rules'=>'trim|xss_clean'),
 			array('field'=>'en_title','label'=>'Title','rules'=>'trim|xss_clean'),
 			array('field'=>'en_description','label'=>'Description','rules'=>'trim|xss_clean'),
-			array('field'=>'site_link','label'=>'Ссылка на сайт','rules'=>'prep_url|trim|xss_clean')
+			array('field'=>'ru_site_link','label'=>'Ссылка на сайт','rules'=>'prep_url|trim|xss_clean'),
+			array('field'=>'en_site_link','label'=>'Ссылка на сайт','rules'=>'prep_url|trim|xss_clean')
 		),
 		'issues' =>array(
 			array('field'=>'ru_page_title','label'=>'Title страницы','rules'=>'trim|xss_clean'),

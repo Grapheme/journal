@@ -8,7 +8,7 @@ uploadDataDocument.interval = {};
 uploadDataDocument.TotalSize = 0;
 uploadDataDocument.CurrentSize = {};
 uploadDataDocument.FilesSize = {};
-uploadDataDocument.maxFileSize = 5000000;
+uploadDataDocument.maxFileSize = 50000000;
 uploadDataDocument.DropZoneDefaultState = function(){
 	$("div.div-zone-upload-document").addClass('hidden');
 	$("a.a-zone-upload-documents").removeClass('hidden');
@@ -27,6 +27,16 @@ var acceptedDocTypes = {
 	'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': true,
 	'application/vnd.ms-powerpoint': true,
 	'application/vnd.openxmlformats-officedocument.presentationml.presentation': true,
+	'image/png': true,
+	'image/jpeg': true,
+	'image/gif': true,
+	'audio/mpeg': true,
+	'audio/ogg': true,
+	'audio/webm': true,
+	'video/avi': true,
+	'video/mpeg': true,
+	'video/mp4': true,
+	'video/webm': true,
 };
 var doc_progress = document.getElementById('uploadDocProgress');
 var fileupload = document.getElementById('uploadDocument');
@@ -50,7 +60,6 @@ function ReadDocument(files){
 		for(var i=0;i<files.length;i++){
 			if(files[i].size <= uploadDataDocument.maxFileSize){
 				console.log(files[i].type);
-				console.log(acceptedDocTypes[files[i].type]);
 				if(acceptedDocTypes[files[i].type] === true){
 					if(doc_tests.formdata) formData.append('file',files[i]);
 					UploadDocument(formData,files[i]);

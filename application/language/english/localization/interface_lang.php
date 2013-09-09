@@ -35,4 +35,5 @@ $lang['form_search_results'] = "Search results";
 $lang['form_search_found'] = "Found";
 
 $lang['author'] = "Author";
+$lang['link_institution_site'] = "Link to website";
 ?>

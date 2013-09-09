@@ -83,7 +83,7 @@ class Admin_interface extends MY_Controller{
 		$pagevar = array(
 			'institutions' => $this->institutions->getAll()
 		);
-		$this->load->view("admin_interface/authors/add");
+		$this->load->view("admin_interface/authors/add",$pagevar);
 	}
 	
 	public function editAuthor(){
