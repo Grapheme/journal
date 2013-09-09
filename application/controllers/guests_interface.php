@@ -26,6 +26,7 @@ class Guests_interface extends MY_Controller{
 		$pagevar = array(
 			'page_content' => $this->pages->getWhere(NULL,array('page_url'=>$page_url)),
 			'images' => $this->page_resources->getWhere(NULL,array('page_url'=>$page_url),TRUE),
+			'footer' => $this->pages->getWhere(NULL,array('page_url'=>'footer'))
 		);
 		if(!is_null($params)):
 			foreach($params as $key => $value):

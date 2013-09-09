@@ -19,6 +19,9 @@ $route['get-authors-list'] = "ajax_interface/getAuthorsList";
 $route['get-keywords-list'] = "ajax_interface/getKeyWordsList";
 $route['search-authors-list'] = "ajax_interface/searchAuthor";
 $route['send-publication-comment'] = "ajax_interface/sendPublicationComment";
+/*********************************************/
+$route['edit/issue/exec-script-1'] = "ajax_interface/execScript1";
+$route['edit/issue/exec-script-2'] = "ajax_interface/execScript2";
 /****************** pages ********************/
 $route[ADMIN_START_PAGE.'/page/:any/update'] = "ajax_interface/updatePage";
 $route[ADMIN_START_PAGE.'/pages/:any/upload/resource'] = "ajax_interface/pageUploadResources";
