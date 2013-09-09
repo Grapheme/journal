@@ -49,8 +49,11 @@
 		<?php $this->load->view('guests_interface/includes/footer');?>
 	</div>
 	<?php $this->load->view('guests_interface/includes/scripts');?>
-	<script src="<?=baseURL('js/vendor/jquery.customSelect.min.js');?>"></script>
-	<script src="<?=baseURL('js/cabinet/styled-select-init.js');?>"></script>	
+	<script type="text/javascript" src="<?=baseURL('js/libs/localize.js');?>"></script>
+	<script type="text/javascript" src="<?=baseURL('js/libs/base.js');?>"></script>
+	<script type="text/javascript" src="<?=baseURL('js/cabinet/guest.js');?>"></script>
+	<script type="text/javascript" src="<?=baseURL('js/vendor/jquery.customSelect.min.js');?>"></script>
+	<script type="text/javascript" src="<?=baseURL('js/cabinet/styled-select-init.js');?>"></script>	
 	<?php $this->load->view('guests_interface/includes/typekit');?>
 	<?php $this->load->view('guests_interface/includes/google-analytics');?>
 </body>

@@ -38,6 +38,9 @@
 		<?php $this->load->view('guests_interface/includes/footer');?>
 	</div>
 	<?php $this->load->view('guests_interface/includes/scripts');?>
+	<script type="text/javascript" src="<?=baseURL('js/libs/localize.js');?>"></script>
+	<script type="text/javascript" src="<?=baseURL('js/libs/base.js');?>"></script>
+	<script type="text/javascript" src="<?=baseURL('js/cabinet/guest.js');?>"></script>
 	<?php $this->load->view('guests_interface/includes/typekit');?>
 	<?php $this->load->view('guests_interface/includes/google-analytics');?>
 </body>

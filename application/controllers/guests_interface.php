@@ -84,7 +84,7 @@ class Guests_interface extends MY_Controller{
 	
 	public function publication(){
 		
-		$this->load->model(array('issues','publications','publications_resources'));
+		$this->load->model(array('issues','publications','publications_resources','publications_comments'));
 		$pagevar = array(
 			'page_content' => $this->publications->getWhere($this->uri->segment(6)),
 			'issue' => $this->issues->getWhere($this->uri->segment(4)),
@@ -108,6 +108,7 @@ class Guests_interface extends MY_Controller{
 			endfor;
 		endif;
 		$pagevar['authors'] = $this->getAuthorsByIDs($pagevar['page_content']['authors']);
+		$pagevar['comments'] = $this->publications_comments->getPublicationComments($this->uri->segment(6));
 		$this->load->helper(array('date','text'));
 		$this->session->set_userdata('current_page',site_url(uri_string()));
 		$this->load->view("guests_interface/pages/publication",$pagevar);

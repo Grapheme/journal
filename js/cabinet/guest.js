@@ -44,4 +44,19 @@ $(function(){
 			return false;
 		}
 	})
+	$("form.form-sent-publication-comments .btn-submit").click(function(){
+		var options = {target: null,beforeSubmit: mt.ajaxBeforeSubmit,dataType:'json',type:'post'};
+		var _form = $(this).parents('form');
+		options.success = function(response,status,xhr,jqForm){
+			mt.ajaxSuccessSubmit(response,status,xhr,jqForm);
+			if(response.status){
+				$(_form).find('textarea').val('');
+				$("ul.ul-publication-comments-list").prepend(response.responseText);
+			}else{
+				$(_form).after(response.responseText);
+			}
+		};
+		$(_form).ajaxSubmit(options);
+		return false;
+	})
 });

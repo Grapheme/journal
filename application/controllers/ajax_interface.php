@@ -473,6 +473,35 @@ class Ajax_interface extends MY_Controller{
 		echo json_encode($json_request);
 	}
 	
+	public function sendPublicationComment(){
+		
+		if(!$this->input->is_ajax_request() && $this->loginstatus && $this->account['group'] == USER_GROUP_VALUE):
+			show_error('В доступе отказано');
+		endif;
+		$json_request = array('status'=>FALSE,'responseText'=>'');
+		if($this->postDataValidation('publication_comment')):
+			if($publicationInfo = $this->ExecuteInsertingComment($_POST)):
+				$json_request['status'] = TRUE;
+				$comment = array(
+					'id' => $this->account['id'],
+					'link' => $this->profile['link'],
+					'name' => $this->profile['name'],
+					'comment' => $this->input->post('comment',TRUE)
+				);
+				$json_request['responseText'] = $this->load->view('html/comments-list',array('comment'=>$comment),TRUE);
+			endif;
+		else:
+			$json_request['responseText'] = $this->load->view('html/validation-errors',array('alert_header'=>FALSE),TRUE);
+		endif;
+		echo json_encode($json_request);
+	}
+	
+	private function ExecuteInsertingComment($post){
+		
+		$post['account'] = $this->account['id'];
+		return $this->insertItem(array('insert'=>$post,'model'=>'publications_comments'));
+	}
+	
 	private function ExecuteInsertingPublication($post){
 		
 		$post['issue'] = $this->input->get('issue');

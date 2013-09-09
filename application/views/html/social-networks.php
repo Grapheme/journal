@@ -1,3 +1,7 @@
+<?php if($this->loginstatus === FALSE):?>
+<div class="auth-to-comment">
+	<?=lang('signin_for_comment')?>
+</div>
 <div class="auth-icons">
 	<div class="facebook">
 		<a href="<?=OAUTH_FACEBOOK.site_url('sign-in/facebook');?>"></a>
@@ -6,3 +10,4 @@
 		<a href="<?=OAUTH_VK.site_url('sign-in/vk');?>"></a>
 	</div>
 </div>
+<?php endif;?>

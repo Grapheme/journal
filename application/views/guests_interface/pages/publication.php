@@ -5,6 +5,7 @@
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
 <head>
 	<?php $this->load->view('guests_interface/includes/head');?>
+	<link href="<?=BaseURL('css/bootstrap.css');?>" rel="stylesheet" />
 </head>
 <body>
 	<?php $this->load->view('guests_interface/includes/ie7');?>
@@ -88,14 +89,11 @@
 					<h3><?=lang('comments_to_publication')?></h3>
 				</header>
 				<div class="comments">
-					<div class="auth-to-comment">
-					<?=lang('signin_for_comment')?>
-					</div>
 					<?php $this->load->view('html/social-networks');?>
 					<?php $this->load->view('guests_interface/forms/comments');?>
-					<ul class="comments-list">
-					<?php for($i=0;$i<2;$i++):?>
-						<?php $this->load->view('html/comments-list')?>
+					<ul class="comments-list ul-publication-comments-list">
+					<?php for($i=0;$i<count($comments);$i++):?>
+						<?php $this->load->view('html/comments-list',array('comment'=>$comments[$i]));?>
 					<?php endfor;?>
 					</ul>
 				</div>
@@ -104,6 +102,12 @@
 		<?php $this->load->view('guests_interface/includes/footer');?>
 	</div>
 	<?php $this->load->view('guests_interface/includes/scripts');?>
+	<script type="text/javascript" src="<?=baseURL('js/vendor/jquery.form.js');?>"></script>
+	<script type="text/javascript" src="<?=baseURL('js/libs/bootstrap.min.js');?>"></script>
+	<script type="text/javascript" src="<?=baseURL('js/libs/upload-document.js');?>"></script>
+	<script type="text/javascript" src="<?=baseURL('js/libs/localize.js');?>"></script>
+	<script type="text/javascript" src="<?=baseURL('js/libs/base.js');?>"></script>
+	<script type="text/javascript" src="<?=baseURL('js/cabinet/guest.js');?>"></script>
 	<?php $this->load->view('guests_interface/includes/typekit');?>
 	<?php $this->load->view('guests_interface/includes/google-analytics');?>
 </body>

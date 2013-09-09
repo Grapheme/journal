@@ -69,6 +69,11 @@
 			array('field'=>'en_content','label'=>'Text of the publication','rules'=>'trim|xss_clean'),
 			array('field'=>'en_support','label'=>'With support','rules'=>'trim|xss_clean'),
 			array('field'=>'en_bibliography','label'=>'Bibliographic list','rules'=>'trim|xss_clean')
+		),
+		'publication_comment' =>array(
+			array('field'=>'issue','label'=>' ','rules'=>'required|trim|integer'),
+			array('field'=>'publication','label'=>' ','rules'=>'required|trim|integer'),
+			array('field'=>'comment','label'=>' ','rules'=>'required|trim|xss_clean')
 		)
 		
 	);

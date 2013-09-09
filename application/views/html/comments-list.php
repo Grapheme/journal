@@ -1,20 +1,18 @@
 <li>
 	<div class="comment-from">
 		<figure>
-			<a href="#"><img src="<?=BaseURL('img/face.png');?>" alt=""></a>
+			<a href="<?=$comment['link'];?>"><img src="<?=site_url('load-image/avatar/'.$comment['id']);?>" alt="<?=$comment['name'];?>"></a>
 		</figure>
 		<div class="comment-from-info">
-			<div class="name"><a href="#">Лариса Карповская</a></div>
+			<div class="name"><a href="<?=$comment['link'];?>"><?=$comment['name'];?></a></div>
 			<div class="comment-text">
-				Спасибо, Лариса Германовна! Великолепные стихотворения. Как много красивых слов сказано о физике!
+				<?=$comment['comment'];?>
 			</div>
-			<div class="answer">
-				ответить
-			</div>
+			<!--<div class="answer">ответить</div>-->
 		</div>
 	</div>
 </li>
-<li class="answer-elem">
+<!--<li class="answer-elem">
 	<div class="comment-from">
 		<figure>
 			<a href="#"><img src="<?=BaseURL('img/face.png');?>" alt=""></a>
@@ -26,4 +24,4 @@
 			</div>
 		</div>
 	</div>
-</li>
+</li>-->
