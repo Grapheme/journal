@@ -4,7 +4,7 @@ class Accounts extends MY_Model{
 
 	protected $table = "accounts";
 	protected $primary_key = "id";
-	protected $fields = array("*");
+	protected $fields = array("id,group,name,link,login,active,signdate");
 
 	function __construct(){
 		

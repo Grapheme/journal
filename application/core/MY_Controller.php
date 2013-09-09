@@ -164,7 +164,7 @@ class MY_Controller extends CI_Controller{
 	public function getImageContent($content = NULL,$manupulation = NULL){
 		
 		if(!is_null($content)):
-			$filepath = TEMPORARY.'file-content.tmp';
+			$filepath = TEMPORARY.'/file-content.tmp';
 			file_put_contents($filepath,$content);
 			if(!is_null($manupulation) && is_array($manupulation)):
 				$this->imageManupulation($filepath,$manupulation['dim'],$manupulation['ratio'],$manupulation['width'],$manupulation['height']);
