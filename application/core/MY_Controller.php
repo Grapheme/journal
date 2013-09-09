@@ -2,7 +2,7 @@
 
 class MY_Controller extends CI_Controller{
 	
-	var $account = array('id'=>0);
+	var $account = array('id'=>0,'group'=>0);
 	var $profile = '';
 	var $loginstatus = FALSE;
 	
@@ -120,7 +120,7 @@ class MY_Controller extends CI_Controller{
 		switch($this->uri->segment(2)):
 			case 'news': $this->load->model('news'); $image = $this->news->getImage($this->uri->segment(3),'photo'); break;
 			case 'events': $this->load->model('events'); $image = $this->events->getImage($this->uri->segment(3),'photo'); break;
-			case 'menu': $this->load->model('menu'); $image = $this->menu->getImage($this->uri->segment(3),'photo'); break;
+			case 'avatar': $this->load->model('accounts'); $image = $this->accounts->getImage($this->uri->segment(3),'photo'); break;
 		endswitch;
 		if(is_null($image) || empty($image)):
 			$image = file_get_contents(NO_IMAGE);
@@ -146,6 +146,22 @@ class MY_Controller extends CI_Controller{
 		endif;
 		header('Content-type: image/jpeg');
 		echo $resource;
+	}
+	
+	public function getImageContent($content = NULL,$manupulation = NULL){
+		
+		if(!is_null($content)):
+			$filepath = TEMPORARY.'file-content.tmp';
+			file_put_contents($filepath,$content);
+			if(!is_null($manupulation) && is_array($manupulation)):
+				$this->imageManupulation($filepath,$manupulation['dim'],$manupulation['ratio'],$manupulation['width'],$manupulation['height']);
+			endif;
+			$fileContent = file_get_contents($filepath);
+			$this->filedelete($filepath);
+			return $fileContent;
+		else:
+			return '';
+		endif;
 	}
 	
 	public function imageManupulation($filePath,$dim = NULL,$no_more = TRUE,$user_width = NULL,$user_height = NULL,$create_thumb = FALSE){
@@ -425,7 +441,7 @@ class MY_Controller extends CI_Controller{
 		curl_setopt($ch,CURLOPT_HEADER,0);
 		$result = curl_exec($ch);
 		curl_close($ch);
-		if($result == FALSE):
+		if($result === FALSE):
 			return file_get_contents($url);
 		else:
 			return $result;

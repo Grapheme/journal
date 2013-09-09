@@ -1,13 +1,18 @@
-<form>
-	<textarea></textarea>
+<?php if($this->loginstatus && $this->account['group'] == USER_GROUP_VALUE):?>
+<a name="comments-form"></a>
+<form method="POST" action="<?=site_url('send-publication-comment');?>">
+	<input type="hidden" name="issue" value="<?=$this->uri->segment(4);?>"/>
+	<input type="hidden" name="publication" value="<?=$this->uri->segment(6);?>"/>
+	<textarea name="comment"></textarea>
 	<div class="comment-from-form clearfix">
 		<figure>
-			<a href="#"><img src="<?=BaseURL('img/face.png')?>" alt=""></a>
+			<a href="<?=$this->profile['link']?>" target="_blank"><img src="<?=site_url('load-image/avatar/'.$this->account['id']);?>" alt="<?=$this->profile['name'];?>"></a>
 		</figure>
 		<input type="submit" value="Отправить">
 		<div class="comment-from-info">
-			<div class="name"><a href="#">Jamie Reynolds</a></div>
-			<div class="social-addr">https://www.facebook.com</div>
+			<div class="name"><a href="<?=$this->profile['link']?>" target="_blank"><?=$this->profile['name'];?></a></div>
+			<div class="social-addr"><?=$this->profile['link'];?></div>
 		</div>
 	</div>
 </form>
+<?php endif;?>

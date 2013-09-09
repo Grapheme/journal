@@ -21,9 +21,12 @@ class General_interface extends MY_Controller{
 		if($this->postDataValidation('signin') == TRUE):
 			if($user = $this->accounts->authentication($this->input->post('login'),$this->input->post('password'))):
 				if($user['active']):
-					$account = json_encode(array('id'=>$user['id']));
-					$this->session->set_userdata(array('logon'=>md5($this->input->post('login')),'account'=>$account));
-					$json_request['redirect'] = site_url(ADMIN_START_PAGE.'/pages');
+					$this->setLoginSession($user['id']);
+					if($user['group'] == ADMIN_GROUP_VALUE):
+						$json_request['redirect'] = site_url(ADMIN_START_PAGE.'/pages');
+					elseif($user['group'] == USER_GROUP_VALUE && isset($_SERVER['HTTP_REFERER'])):
+						$json_request['redirect'] = $_SERVER['HTTP_REFERER'];
+					endif;
 					$json_request['status'] = TRUE;
 				else:
 					$json_request['responseText'] = 'Аккаунт не активирован';
@@ -97,61 +100,48 @@ class General_interface extends MY_Controller{
 	/********** sing in by social network *************/
 	
 	public function signInVK(){
-		
-		if($vkontakte = $this->getVKontakteAccessToken($this->input->get('code'),site_url('sign-in/vk'))):
+		if($vkontakte = $this->getVKontakteAccessToken($this->input->get('code'),site_url($this->uri->language_string.'/sign-in/vk'))):
 			if($VKontakteAccountInformation = $this->getVKontakteAccountInformation($vkontakte)):
 				$VKontakteAccountInformation['access_token'] = $vkontakte['access_token'];
 				if($userID = $this->accounts->search('vkid',$VKontakteAccountInformation['uid'])):
 					$this->signInAccount($userID);
 					$this->accounts->updateField($userID,'vk_access_token',$vkontakte['access_token']);
 				else:
-					$this->signUp();
-					$this->session->set_userdata(array('signinvk'=>json_encode($VKontakteAccountInformation),'link-account'=>TRUE));
-					if($this->session->userdata('current_url') === FALSE || $this->session->userdata('current_url') == ''):
-						redirect('?mode=link-account&status=1');
-					elseif(strripos($this->session->userdata('current_url'),'?') === FALSE):
-						redirect($this->session->userdata('current_url').'?mode=link-account&status=1');
-					else:
-						redirect($this->session->userdata('current_url').'&mode=link-account&status=1');
+					if($userID = $this->registerUserByVK($VKontakteAccountInformation)):
+						$this->signInAccount($userID);
 					endif;
 				endif;
 			else:
 				show_error('Ошибка при авторизации. Попробуйте позже');
 			endif;
 		endif;
-		redirect($this->session->userdata('current_url'));
+		redirect($this->session->userdata('current_page').'#comments-form');
 	}
 	
 	public function signInUpFacebook(){
 		
-		if($accessToken = $this->getFaceBookAccessToken($this->input->get('code'),site_url('sign-in/facebook'))):
+		if($accessToken = $this->getFaceBookAccessToken($this->input->get('code'),site_url($this->uri->language_string.'/sign-in/facebook'))):
 			if($faceBookAccountInformation = $this->getFaceBookAccountInformation($accessToken)):
 				$faceBookAccountInformation['access_token'] = $accessToken;
 				if($userID = $this->accounts->search('facebookid',$faceBookAccountInformation['id'])):
 					$this->signInAccount($userID);
 					$this->accounts->updateField($userID,'facebook_access_token',$accessToken);
 				else:
-					$this->session->set_userdata(array('signinfb'=>json_encode($faceBookAccountInformation),'link-account'=>TRUE));
-					if($this->session->userdata('current_url') === FALSE || $this->session->userdata('current_url') == ''):
-						redirect('?mode=link-account&status=1');
-					elseif(strripos($this->session->userdata('current_url'),'?') === FALSE):
-						redirect($this->session->userdata('current_url').'?mode=link-account&status=1');
-					else:
-						redirect($this->session->userdata('current_url').'&mode=link-account&status=1');
+					if($userID = $this->registerUserByFaceBook($faceBookAccountInformation)):
+						$this->signInAccount($userID);
 					endif;
 				endif;
 			else:
 				show_error('Ошибка при авторизации. Попробуйте позже');
 			endif;
 		endif;
-		redirect($this->session->userdata('current_url'));
+		redirect($this->session->userdata('current_page').'#comments-form');
 	}
 	
 	private function signInAccount($userID){
 		
 		if($user = $this->accounts->getWhere($userID,array('active'=>1))):
 			$this->setLoginSession($user['id']);
-			$this->clearTemporaryCode($user['id']);
 			return TRUE;
 		endif;
 		return FALSE;
@@ -160,7 +150,7 @@ class General_interface extends MY_Controller{
 	private function setLoginSession($accountID){
 		
 		if($accountInfo = $this->accounts->getWhere($accountID)):
-			$account = json_encode(array('id'=>$accountInfo['id']));
+			$account = json_encode(array('id'=>$accountInfo['id'],'group'=>$accountInfo['group']));
 			$this->session->set_userdata(array('logon'=>md5($accountInfo['login']),'account'=>$account));
 			return TRUE;
 		endif;
@@ -168,36 +158,9 @@ class General_interface extends MY_Controller{
 	}
 	/*************************************************************************************************************/
 	
-	private function signUp(){
-		
-		if($accountInfo = $this->getRegisterAccount($_POST)):
-			if($this->registerUserByVK($accountInfo['accountID'],$accountInfo['userID']) == TRUE):
-				$this->session->unset_userdata('signinvk');
-			elseif($this->registerUserByFaceBook($accountInfo['accountID'],$accountInfo['userID']) == TRUE):
-				$this->session->unset_userdata('signinfb');
-			endif;
-			$this->createDir(getcwd().'/diskspace/user'.$accountInfo['userID']);
-			$json_request['status'] = TRUE;
-			$json_request['responseText'] = 'Круто! Вы зарегистрированы.<br/>Мы отправили на email cсылку для активации аккаунта.';
-			$mailtext = $this->load->view('mails/signup',array('data'=>$_POST,'activate_code'=>$accountInfo['activate_code']),TRUE);
-			$this->sendMail($_POST['email'],'robot@universiality.com','Universiality Learning','Регистрация на UNIVERSIALITY LEARNING',$mailtext);
-		endif;
-	}
-	
-	private function getRegisterAccount($post = NULL){
-		
-		if(!is_null($post)):
-			$this->load->helper(array('string','date'));
-			$account = array();
-			$account['accountID'] = $this->accounts->insertRecord(array('group'=>2,'account'=>$account['userID'],'email'=>$post['email'],'password'=>md5($post['password']),'signdate'=>date("Y-m-d H:i:s"),'language'=>$this->language,'temporary_code'=>$account['activate_code'],'code_life'=>future_days()));
-			return $account;
-		endif;
-		return FALSE;
-	}
-	
 	private function getVKontakteAccessToken($code,$redirect){
 		
-		$url = "https://oauth.vk.com/access_token?client_id=3539213&client_secret=6juI1xBlfDgTpen0EdyS&code=".$code."&redirect_uri=".$redirect;
+		$url = "https://oauth.vk.com/access_token?client_id=3867305&client_secret=qFZITMpsU8aHlO2OlJbP&code=".$code."&redirect_uri=".$redirect;
 		$VKontakteResponse = json_decode($this->getCurlLink($url),TRUE);
 		if(isset($VKontakteResponse['access_token'])):
 			return $VKontakteResponse;
@@ -219,7 +182,7 @@ class General_interface extends MY_Controller{
 	
 	private function getFaceBookAccessToken($code,$redirect){
 		
-		$url = "https://graph.facebook.com/oauth/access_token?client_id=341255199337226&client_secret=81dffd355fc48f7e41a487a9f3841e3e&code=".$code."&redirect_uri=".$redirect;
+		$url = "https://graph.facebook.com/oauth/access_token?client_id=229311657225307&client_secret=bf7516bd1fa176fe76c86899d1d092cc&code=".$code."&redirect_uri=".$redirect;
 		$FaceBookResultString = $this->getCurlLink($url);
 		$FaceBookResultArray = explode('&',$FaceBookResultString);
 		$accessToken = explode('=',$FaceBookResultArray[0]);
@@ -241,11 +204,39 @@ class General_interface extends MY_Controller{
 		return FALSE;
 	}
 	
-	private function resetSNAccountID($SN,$value){
+	private function registerUserByVK($signUpVK){
 		
-		if($SNAccountID = $this->accounts->search($SN.'id',$value)):
-			$this->accounts->updateField($SNAccountID,$SN.'id','');
-			$this->accounts->updateField($SNAccountID,$SN.'_access_token','');
+		if(isset($signUpVK['uid']) && $signUpVK['uid']):
+			$photo = '';
+			if(!empty($signUpVK['photo'])):
+				$photo = file_get_contents($signUpVK['photo']);
+			endif;
+			$signUpData = array(
+				"group"=>1,"vkid"=>$signUpVK['uid'],"vk_access_token"=>$signUpVK['access_token'],"facebookid"=>0,"facebook_access_token"=>'',
+				"photo"=>$photo,"name"=>$signUpVK['first_name'].' '.$signUpVK['last_name'],
+				"link"=>'http://vk.com/'.$signUpVK['screen_name'],'login'=>'','password'=>'','active'=>1
+			);
+			return $this->insertItem(array('insert'=>$signUpData,'model'=>'accounts'));
+		else:
+			return FALSE;
+		endif;
+	}
+	
+	private function registerUserByFaceBook($signUpFB){
+		
+		if(isset($signUpFB['id']) && $signUpFB['id']):
+			$photo = '';
+			if(!empty($signUpFB['picture']['data']['url'])):
+				$photo = $this->getImageContent(file_get_contents($signUpFB['picture']['data']['url']),array('dim'=>'width','ratio'=>TRUE,'width'=>60,'height'=>60));
+			endif;
+			$signUpData = array(
+				"group"=>1,"vkid"=>0,"vk_access_token"=>'',"facebookid"=>$signUpFB['id'],"facebook_access_token"=>$signUpFB['access_token'],
+				"photo"=>$photo,"name"=>$signUpFB['first_name'].' '.$signUpFB['last_name'],
+				"link"=>$signUpFB['link'],'login'=>'','password'=>'','active'=>1
+			);
+			return $this->insertItem(array('insert'=>$signUpData,'model'=>'accounts'));
+		else:
+			return FALSE;
 		endif;
 	}
 	

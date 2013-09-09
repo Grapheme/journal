@@ -91,6 +91,7 @@ class Guests_interface extends MY_Controller{
 			'publication_resources' => array(),
 			'keywords' => array(),
 			'authors' => array(),
+			'comments' => array()
 		);
 		if(empty($pagevar)):
 			show_404();
@@ -108,6 +109,7 @@ class Guests_interface extends MY_Controller{
 		endif;
 		$pagevar['authors'] = $this->getAuthorsByIDs($pagevar['page_content']['authors']);
 		$this->load->helper(array('date','text'));
+		$this->session->set_userdata('current_page',site_url(uri_string()));
 		$this->load->view("guests_interface/pages/publication",$pagevar);
 	}
 	

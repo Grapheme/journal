@@ -28,5 +28,8 @@ define('BASE_THUMBNAIL_WIDTH',					120);
 define('BASE_THUMBNAIL_HEIGHT',					120);
 define('THUMBNAIL_PERCENT',						25);
 
-define('OAUTH_VK',								'https://oauth.vk.com/authorize?client_id=3867015&response_type=code&redirect_uri=');
-define('OAUTH_FACEBOOK',						'https://www.facebook.com/dialog/oauth?client_id=721458814538342&response_type=code&redirect_uri=');
+define('ADMIN_GROUP_VALUE',						0);
+define('USER_GROUP_VALUE',						1);
+
+define('OAUTH_VK',								'https://oauth.vk.com/authorize?client_id=3867305&response_type=code&redirect_uri=');
+define('OAUTH_FACEBOOK',						'https://www.facebook.com/dialog/oauth?client_id=229311657225307&response_type=code&redirect_uri=');
