@@ -178,18 +178,21 @@ p { line-height: 1.7em; font-size: 1.1em; }
 nav { float: left; width: 234px; }
 .nav-list { text-decoration: none; padding: 0;
   .nav-item {
-    a { border-bottom: 1px solid #C8C8C7; color: @nav-color; .uppercase; font: .9em e('/') 2.675em @pt-sans; text-decoration: none;
+    a { border-bottom: 1px solid #C8C8C7; color: @nav-color; .uppercase; font: .9em e('/') 2.5em @pt-sans; text-decoration: none;
       .transition;
     }
     a.active, a:hover { border-color: transparent; color: @active-link; text-decoration: none; }
   }
 }
+.nav-item.separator { line-height: 0.75em; }
 
 //Article
 
 article { margin: 0 0 0 234px; min-height: 20em;
   .authors { width: 567px; margin: 0 0 50px;  
     .font-main; color: @gray; font-style: italic;
+    a { color: #999; text-decoration: none; border-bottom: 1px solid transparent; transition: all 0.5s; }
+    a:hover { border-bottom: 1px solid #666; color: #666; }
   }
   .biblio-link { 
     .font-main( 1.1em ); line-height: 1.8em;
@@ -202,7 +205,8 @@ article { margin: 0 0 0 234px; min-height: 20em;
   }
   .key-words { margin: 1em 0 0; 
     .font-main;
-    a { text-decoration: none; color: @gray; }
+    a { text-decoration: none; color: @gray; border: 1px solid transparent; transition: all 0.5s; }
+    a:hover { color: #666; border-bottom: 1px solid #666; }
   }
 }
 
@@ -268,7 +272,7 @@ section { width: 698px; margin: 30px 0 0;
     h2 { margin: 0 0 28px; font: 700 1.375em e('/') 1.22727272em @proxima;
       .uppercase;
     }
-    h3 { margin: 0 0 28px; font: 700 1.125em e('/') 1.1666em @proxima;
+    h3 { margin: 2.5em 0 1em 0; font: 700 1.125em e('/') 1.1666em @proxima;
       .uppercase;
     }
   }
@@ -299,7 +303,7 @@ section { width: 698px; margin: 30px 0 0;
       span { color: @font-main-color; font-family: @pt-serif;
         .gray { color: @gray - #161616; }
       }
-      .font-main(1.1em); font-family: @proxima; line-height: 1.6em; color: #c2c2c2;
+      .font-main(1.1em); /*font-family: @proxima;*/ line-height: 1.6em; /*color: #c2c2c2;*/
     }
   }
   .theme-header { margin: 0 0 1.5em; font-size: 1.1em; line-height: 1.6em; }
