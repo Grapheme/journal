@@ -40,7 +40,17 @@ $(function(){
 		});
 	})
 	$("form.form-search-publications").submit(function(){
-		if($("input.input-search-text").emptyValue()){
+		var error = true;
+		$("div.msg-alert").remove();
+		if($("input.input-search-text").emptyValue() === false){
+			error = false;
+		}else if($("select.hasCustomSelect[name='year']").emptyValue() === false){
+			error = false;
+		}else if($("select.hasCustomSelect[name='number']").emptyValue() === false){
+			error = false;
+		}
+		if(error){
+			$(this).after('<div class="msg-alert error">'+Localize[mt.getLanguageURL()]['search_string_empty']+'</div>')
 			return false;
 		}
 	})
@@ -67,7 +77,6 @@ $(function(){
 		$(_form).ajaxSubmit(options);
 		return false;
 	})
-
 	$("div.show-answer-form").click(function(){
 		$("form.insert-form-comment").remove();$("div.show-answer-form").removeClass('hidden');
 		$("div.div-answer-form form").clone(true).insertAfter(this).addClass('insert-form-comment').find('button.btn-cancel-comment').removeClass('hidden');

@@ -70,13 +70,13 @@ class Publications extends MY_Model{
 		$this->db->select('issues.id AS issue,issues.year,issues.month,issues.number,issues.ru_title AS issue_ru_title,issues.en_title AS issue_en_title,publications.*');
 		$this->db->from('publications');
 		$this->db->join('issues','issues.id = publications.issue');
-		if($parameters['year'] !== FALSE):
+		if(!empty($parameters['year'])):
 			$this->db->where('issues.year',$parameters['year']);
 		endif;
-		if($parameters['number'] !== FALSE):
+		if(!empty($parameters['number'])):
 			$this->db->where('issues.number',$parameters['number']);
 		endif;
-		if($parameters['text'] !== FALSE):
+		if(!empty($parameters['text'])):
 			$this->db->where('(publications.ru_title LIKE \'%'.$parameters['text'].'%\' OR publications.en_title LIKE \'%'.$parameters['text'].'%\' OR publications.ru_annotation LIKE \'%'.$parameters['text'].'%\' OR publications.en_annotation LIKE \'%'.$parameters['text'].'%\')',NULL);
 		endif;
 		$query = $this->db->get();

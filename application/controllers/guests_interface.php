@@ -252,9 +252,8 @@ class Guests_interface extends MY_Controller{
 			endif;
 		elseif(!empty($parameters['author']) && is_numeric($parameters['author'])):
 			return $this->publications->getPublicationByAuthor($parameters['author']);
-		elseif(empty($parameters['year']) && empty($parameters['number']) && !empty($parameters['text'])):
-			return $this->publications->getPublicationByString($parameters['text']);
-		elseif((!empty($parameters['year']) || !empty($parameters['number'])) && !empty($parameters['text'])):
+		else:
+//			print_r($parameters);exit;
 			return $this->publications->getPublicationByIssue($parameters);
 		endif;
 		return NULL;
@@ -278,8 +277,6 @@ class Guests_interface extends MY_Controller{
 					endif;
 				endfor;
 			endfor;
-//			print_r($commentsList);exit;
-			
 		endif;
 		return $commentsList;
 	}
