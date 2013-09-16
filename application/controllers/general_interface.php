@@ -100,6 +100,7 @@ class General_interface extends MY_Controller{
 	/********** sing in by social network *************/
 	
 	public function signInVK(){
+				
 		if($vkontakte = $this->getVKontakteAccessToken($this->input->get('code'),site_url($this->uri->language_string.'/sign-in/vk'))):
 			if($VKontakteAccountInformation = $this->getVKontakteAccountInformation($vkontakte)):
 				$VKontakteAccountInformation['access_token'] = $vkontakte['access_token'];

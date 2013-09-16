@@ -291,8 +291,8 @@ section { width: 698px; margin: 30px 0 0;
       .list-item-icon.text { background: url(../img/sprites/files_types.png) no-repeat -113px 0; }
       .list-item-icon.text:hover { background-position: -113px -54px; }
       
-      .list-item-desc { 
-        .list-dl-link { color: @gray; border-bottom: 1px solid transparent; text-decoration: none;
+      .list-item-desc { margin: 0 0 0 47px;
+        .list-dl-link { display: block; color: @gray; border-bottom: 1px solid transparent; text-decoration: none;
           .transition;
         }
         .list-dl-link:hover { border-bottom: 1px solid @gray; }
@@ -333,6 +333,11 @@ section { width: 698px; margin: 30px 0 0;
       textarea { width: 500px; height: 104px; border: 1px solid @font-main-color; }
       input[type="submit"] { float: right; width: 99px; height: 35px; background: @active-link; color: #fff; border: none; .radius(2px); .transition( all, .4s ); }
       input[type="submit"]:hover { background-color: @active-link-hover; }
+      input[type="submit"].loading { 
+        text-indent: -9999px; background: url(../img/dots-white.gif) no-repeat center center;
+      }
+      button.btn-cancel-comment { width: 99px; height: 35px; margin: 0 0 11px 10px; background: @active-link; color: #fff; border: none; .radius(2px); .transition( all, .4s ); }
+      button.btn-cancel-comment:hover { background-color: @active-link-hover; }
       .comment-from-form { margin: 1em 0 65px;
         figure { float: left; width: 61px; height: 61px;          
           img { max-width: 100%; .radius; }
