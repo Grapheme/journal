@@ -105,6 +105,7 @@ class Guests_interface extends MY_Controller{
 				$pagevar['publication_resources'][$i]['id'] = $resources[$i]['id'];
 				$pagevar['publication_resources'][$i]['publication'] = $resources[$i]['publication'];
 				$pagevar['publication_resources'][$i]['issue'] = $resources[$i]['issue'];
+				$pagevar['publication_resources'][$i]['caption'] = $resources[$i]['caption'];
 				$pagevar['publication_resources'][$i]['resource'] = json_decode($resources[$i]['resource'],TRUE);
 			endfor;
 		endif;
@@ -253,7 +254,6 @@ class Guests_interface extends MY_Controller{
 		elseif(!empty($parameters['author']) && is_numeric($parameters['author'])):
 			return $this->publications->getPublicationByAuthor($parameters['author']);
 		else:
-//			print_r($parameters);exit;
 			return $this->publications->getPublicationByIssue($parameters);
 		endif;
 		return NULL;

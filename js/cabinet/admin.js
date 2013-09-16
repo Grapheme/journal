@@ -23,6 +23,32 @@ $(function(){
 			error: function(xhr,textStatus,errorThrown){}
 		});
 	});
+
+	$("button.btn-resources-caption").click(function(){
+		var _this = this;
+		var itemID = $(this).attr('data-item');
+		var caption = $(this).siblings('input.resource-caption').val().trim();
+		var number = $(this).siblings('input.resource-number').val().trim();
+		var action = $(this).parents('ul.resources-items').attr('data-action');
+		$.ajax({
+			url: action,type: 'POST',dataType: 'json',
+			data:{'id':itemID,'caption':caption,'number':number},
+			beforeSend: function(){$(_this).addClass('loading');},
+			success: function(response,textStatus,xhr){
+				$(_this).removeClass('loading');
+				if(response.status){
+					$(_this).html('OK').removeClass('btn-info').addClass('btn-success');
+				}else{
+					$(_this).html('NOT').removeClass('btn-info').addClass('btn-danger');
+				}
+			},
+			error: function(xhr,textStatus,errorThrown){
+				$(_this).removeClass('loading');
+				$(_this).html('ERR').removeClass('btn-info').addClass('btn-danger');
+			}
+		});
+	});
+
 	$("button.btn-publication-submit").click(function(){
 		$(this).addClass('loading');
 		var _form = $(this).parents('form');

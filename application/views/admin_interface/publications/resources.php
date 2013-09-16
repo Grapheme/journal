@@ -24,12 +24,19 @@
 					<li class="active">Дополнительные материалы</li>
 				</ul>
 				<div class="clear"></div>
+				<?php $this->load->view('admin_interface/includes/nav-tab-publication-resources');?>
+				<?php if($this->input->get('mode')=='files'):?>
 				<?php $this->load->view('admin_interface/forms/manage-publications/resources');?>
+				<?php elseif($this->input->get('mode')=='captions'):?>
+				<?php $this->load->view('admin_interface/forms/manage-publications/resources-captions');?>
+				<?php endif;?>
 			</div>
 		</div>
 	</div>
 	<?php $this->load->view("admin_interface/includes/footer");?>
 	<?php $this->load->view("admin_interface/includes/scripts");?>
+<?php if($this->input->get('mode')=='files'):?>
 	<script type="text/javascript" src="<?=site_url('js/libs/drop-upload-documents.js');?>"></script>
+<?php endif;?>
 </body>
 </html>

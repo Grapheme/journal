@@ -202,6 +202,8 @@ class Admin_interface extends MY_Controller{
 				$pagevar['resources'][$i]['id'] = $resources[$i]['id'];
 				$pagevar['resources'][$i]['publication'] = $resources[$i]['publication'];
 				$pagevar['resources'][$i]['issue'] = $resources[$i]['issue'];
+				$pagevar['resources'][$i]['number'] = $resources[$i]['number'];
+				$pagevar['resources'][$i]['caption'] = $resources[$i]['caption'];
 				$pagevar['resources'][$i]['resource'] = json_decode($resources[$i]['resource'],TRUE);
 			endfor;
 		endif;

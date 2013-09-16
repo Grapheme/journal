@@ -45,6 +45,7 @@ $route[ADMIN_START_PAGE.'/publications/update'] = "ajax_interface/updatePublicat
 $route[ADMIN_START_PAGE.'/publications/remove'] = "ajax_interface/removePublication";
 $route[ADMIN_START_PAGE.'/publications/upload/resources'] = "ajax_interface/uploadResourcePublication";
 $route[ADMIN_START_PAGE.'/publications/remove/resources'] = "ajax_interface/resourceDeletePublications";
+$route[ADMIN_START_PAGE.'/publications/resources/caption'] = "ajax_interface/resourceCaptionSavePublications";
 /*************************************************** ADMIN INTRERFACE ***********************************************/
 $route[ADMIN_START_PAGE] = "admin_interface/controlPanel";
 /* ----------------------------------------------- Pages ---------------------------------------------------------- */
