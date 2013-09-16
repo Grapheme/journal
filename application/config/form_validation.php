@@ -74,7 +74,8 @@
 		'publication_comment' =>array(
 			array('field'=>'issue','label'=>' ','rules'=>'required|trim|integer'),
 			array('field'=>'publication','label'=>' ','rules'=>'required|trim|integer'),
-			array('field'=>'comment','label'=>' ','rules'=>'required|trim|xss_clean')
+			array('field'=>'comment','label'=>' ','rules'=>'required|trim|xss_clean'),
+			array('field'=>'parent','label'=>' ','rules'=>'required|trim|numeric')
 		)
 		
 	);

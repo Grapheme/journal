@@ -109,7 +109,7 @@ class Guests_interface extends MY_Controller{
 			endfor;
 		endif;
 		$pagevar['authors'] = $this->getAuthorsByIDs($pagevar['page_content']['authors']);
-		$pagevar['comments'] = $this->publications_comments->getPublicationComments($this->uri->segment(6));
+		$pagevar['comments'] = $this->getPublicationComments($this->uri->segment(6));
 		$this->load->helper(array('date','text'));
 		$this->session->set_userdata('current_page',site_url(uri_string()));
 		$this->load->view("guests_interface/pages/publication",$pagevar);
@@ -259,7 +259,33 @@ class Guests_interface extends MY_Controller{
 		endif;
 		return NULL;
 	}
-
+	
+	private function getPublicationComments($publicationID){
+		
+		$commentsList = array();
+		if($comments = $this->publications_comments->getPublicationComments($publicationID)):
+			
+			for($i=0;$i<count($comments);$i++):
+				if($comments[$i]['parent'] == 0):
+					$commentsList[] = $comments[$i];
+				endif;
+			endfor;
+			
+			for($i=0;$i<count($commentsList);$i++):
+				for($j=0;$j<count($comments);$j++):
+					if($commentsList[$i]['comment_id'] == $comments[$j]['parent']):
+						$commentsList[$i]['sub_comments'][] = $comments[$j];
+					endif;
+				endfor;
+			endfor;
+//			print_r($commentsList);exit;
+			
+		endif;
+		return $commentsList;
+	}
+	
+		
+	
 	/********************************************************************************************************************/
 	
 	private function getCountPublication($issues){

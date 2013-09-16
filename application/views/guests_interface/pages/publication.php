@@ -94,6 +94,11 @@
 					<ul class="comments-list ul-publication-comments-list">
 					<?php for($i=0;$i<count($comments);$i++):?>
 						<?php $this->load->view('html/comments-list',array('comment'=>$comments[$i]));?>
+						<?php if(isset($comments[$i]['sub_comments']) && !empty($comments[$i]['sub_comments'])):?>
+							<?php for($j=0;$j<count($comments[$i]['sub_comments']);$j++):?>
+								<?php $this->load->view('html/comments-answer-list',array('comment'=>$comments[$i]['sub_comments'][$j]));?>
+							<?php endfor;?>
+						<?php endif;?>
 					<?php endfor;?>
 					</ul>
 				</div>

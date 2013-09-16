@@ -168,7 +168,7 @@ mt.ajaxBeforeSubmit = function(formData,jqForm,options){
 		$("button.btn-temporary-loading").remove();
 	}
 	if(mt.validation(jqForm) == false){
-		$("button.btn-loading").removeClass('loading');
+		$(".btn-loading").removeClass('loading');
 		return false;
 	}else{
 		return true;

@@ -1,4 +1,4 @@
-<li>
+<li class="answer-elem">
 	<div class="comment-from">
 		<figure>
 			<a href="<?=$comment['link'];?>"><img src="<?=site_url('load-image/avatar/'.$comment['id']);?>" alt="<?=$comment['name'];?>"></a>
@@ -8,9 +8,6 @@
 			<div class="comment-text">
 				<?=$comment['comment'];?>
 			</div>
-		<?php if($this->loginstatus === TRUE && $comment['id'] != $this->account['id']):?>
-			<div data-comment="<?=$comment['comment_id'];?>" class="answer show-answer-form">ответить</div>
-		<?php endif;?>
 		</div>
 	</div>
 </li>

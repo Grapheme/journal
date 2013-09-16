@@ -513,7 +513,10 @@ class Ajax_interface extends MY_Controller{
 		if(!$this->input->is_ajax_request() && $this->loginstatus && $this->account['group'] == USER_GROUP_VALUE):
 			show_error('В доступе отказано');
 		endif;
-		$json_request = array('status'=>FALSE,'responseText'=>'');
+		
+//		print_r($this->input->post());exit;
+		
+		$json_request = array('status'=>FALSE,'responseText'=>'','parent_comment'=>0);
 		if($this->postDataValidation('publication_comment')):
 			if($publicationInfo = $this->ExecuteInsertingComment($_POST)):
 				$json_request['status'] = TRUE;
@@ -523,7 +526,12 @@ class Ajax_interface extends MY_Controller{
 					'name' => $this->profile['name'],
 					'comment' => $this->input->post('comment',TRUE)
 				);
-				$json_request['responseText'] = $this->load->view('html/comments-list',array('comment'=>$comment),TRUE);
+				if($this->input->post('parent') == 0):
+					$json_request['responseText'] = $this->load->view('html/comments-list',array('comment'=>$comment),TRUE);
+				else:
+					$json_request['responseText'] = $this->load->view('html/comments-answer-list',array('comment'=>$comment),TRUE);
+				endif;
+				$json_request['parent_comment'] = $this->input->post('parent');
 			endif;
 		else:
 			$json_request['responseText'] = $this->load->view('html/validation-errors',array('alert_header'=>FALSE),TRUE);
