@@ -36,4 +36,4 @@ progress {width: 100%;}
 .resources-items .img-rounded { border-radius: 0; }
 	.resources-items li { float: left; margin: 0 1.5em 1.5em 0;overflow: hidden; }
 	.resources-items li img { max-height: 14em; width: auto; }
-.delete-resource-item { font-size: 2em; border: 0 none !important; display: block; text-decoration: none !important; background: #fff; padding: 0.25em; border-radius: 2px; }
+.delete-resource-item { font-size: 2em; border: 0 none !important; display: block; text-decoration: none !important; padding: 0.25em; border-radius: 2px; }

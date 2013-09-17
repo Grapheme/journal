@@ -10,3 +10,5 @@
 <!--[if lt IE 9]>
 <script src="<?=base_url('js/libs/html5shiv.js');?>"></script>
 <![endif]-->
+<script type="text/javascript" src="//use.typekit.net/tuk3ffo.js"></script>
+<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
