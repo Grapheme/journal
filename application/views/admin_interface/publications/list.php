@@ -44,7 +44,7 @@
 							<td><?=$publications[$i]['ru_title'].' ('.$publications[$i]['en_title'].')';?></td>
 							<td>
 								<a href="<?=site_url(ADMIN_START_PAGE.'/publications/edit?issue='.$this->input->get('issue').'&id='.$publications[$i]['id'])?>" class="btn btn-link" ><i class="icon-pencil"></i></a>
-								<a href="<?=site_url(ADMIN_START_PAGE.'/publications/resources?issue='.$this->input->get('issue').'&publication='.$publications[$i]['id'])?>" title="Дополнительные материалы" class="btn btn-link" ><i class="icon-list"></i></a>
+								<a href="<?=site_url(ADMIN_START_PAGE.'/publications/resources?mode=files&issue='.$this->input->get('issue').'&publication='.$publications[$i]['id'])?>" title="Дополнительные материалы" class="btn btn-link" ><i class="icon-list"></i></a>
 								<button data-item="<?=$publications[$i]['id'];?>" class="btn btn-link remove-item"><i class="icon-remove"></i></button>
 							</td>
 						</tr>
@@ -58,6 +58,5 @@
 	<?php $this->load->view("admin_interface/includes/footer");?>
 	<?php $this->load->view("admin_interface/includes/scripts");?>
 	<script type="text/javascript" src="<?=site_url('js/cabinet/selects.js');?>"></script>
-	<script type="text/javascript" src="<?=site_url('js/libs/upload-document.js');?>"></script>
 </body>
 </html>

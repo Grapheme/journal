@@ -513,7 +513,7 @@ class Ajax_interface extends MY_Controller{
 		if(!$this->input->is_ajax_request() && $this->loginstatus && $this->account['group'] == USER_GROUP_VALUE):
 			show_error('В доступе отказано');
 		endif;
-		$json_request = array('status'=>FALSE,'responseText'=>'');
+		$json_request = array('status'=>FALSE,'responseText'=>'','parent_comment'=>0);
 		if($this->postDataValidation('publication_comment')):
 			if($publicationInfo = $this->ExecuteInsertingComment($_POST)):
 				$json_request['status'] = TRUE;
@@ -523,11 +523,34 @@ class Ajax_interface extends MY_Controller{
 					'name' => $this->profile['name'],
 					'comment' => $this->input->post('comment',TRUE)
 				);
-				$json_request['responseText'] = $this->load->view('html/comments-list',array('comment'=>$comment),TRUE);
+				if($this->input->post('parent') == 0):
+					$json_request['responseText'] = $this->load->view('html/comments-list',array('comment'=>$comment),TRUE);
+				else:
+					$json_request['responseText'] = $this->load->view('html/comments-answer-list',array('comment'=>$comment),TRUE);
+				endif;
+				$json_request['parent_comment'] = $this->input->post('parent');
 			endif;
 		else:
 			$json_request['responseText'] = $this->load->view('html/validation-errors',array('alert_header'=>FALSE),TRUE);
 		endif;
+		echo json_encode($json_request);
+	}
+	
+	public function resourceCaptionSavePublications(){
+		
+		if(!$this->input->is_ajax_request()):
+			show_error('В доступе отказано');
+		endif;
+		$json_request = array('status'=>FALSE);
+		if($this->postDataValidation('resources_caption')):
+			$this->load->model('publications_resources');
+			$this->publications_resources->updateField($this->input->post('id'),'caption',$this->input->post('caption'));
+			$this->publications_resources->updateField($this->input->post('id'),'number',$this->input->post('number'));
+			$json_request['status'] = TRUE;
+		else:
+			$json_request['responseText'] = $this->load->view('html/validation-errors',array('alert_header'=>FALSE),TRUE);
+		endif;
+		
 		echo json_encode($json_request);
 	}
 	
@@ -601,7 +624,9 @@ class Ajax_interface extends MY_Controller{
 	
 	private function saveDocumentPublication($issueID,$publicationID,$resource){
 		
-		$resourceData = array("publication"=>$publicationID,"issue"=>$issueID,"resource"=>json_encode($resource));
+		$this->load->model('publications_resources');
+		$number = $this->publications_resources->getNextNumber(array('publication'=>$publicationID));
+		$resourceData = array("publication"=>$publicationID,"number"=>$number+1,"issue"=>$issueID,"resource"=>json_encode($resource));
 		/**************************************************************************************************************/
 		if($resourceID = $this->insertItem(array('insert'=>$resourceData,'model'=>'publications_resources'))):
 			$this->load->helper('string');

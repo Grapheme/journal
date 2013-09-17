@@ -74,7 +74,13 @@
 		'publication_comment' =>array(
 			array('field'=>'issue','label'=>' ','rules'=>'required|trim|integer'),
 			array('field'=>'publication','label'=>' ','rules'=>'required|trim|integer'),
-			array('field'=>'comment','label'=>' ','rules'=>'required|trim|xss_clean')
+			array('field'=>'comment','label'=>' ','rules'=>'required|trim|xss_clean'),
+			array('field'=>'parent','label'=>' ','rules'=>'required|trim|numeric')
+		),
+		'resources_caption' =>array(
+			array('field'=>'id','label'=>'ID','rules'=>'required|trim|numeric'),
+			array('field'=>'caption','label'=>'Caption','rules'=>'trim|xss_clean'),
+			array('field'=>'number','label'=>'Number','rules'=>'trim|numeric'),
 		)
 		
 	);

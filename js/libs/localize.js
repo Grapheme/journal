@@ -16,7 +16,8 @@ Localize['ru'] = {
 	locked: "Заблокировано",
 	confirm: 'Вы уверены, что хотите удалить?',
 	sending_mail: 'Письмо отправлено',
-	error_load_template: 'Ошибка при загрузке шаблона'
+	error_load_template: 'Ошибка при загрузке шаблона',
+	search_string_empty: 'Не указаны параметры поиска'
 };
 Localize['en'] = {
 	empty_field: 'Field cannot be empty',
@@ -31,5 +32,6 @@ Localize['en'] = {
 	locked: "NOT ACTIVE",
 	confirm: 'Are you sure you want to delete?',
 	sending_mail: 'The letter was sent',
-	error_load_template: 'Error loading template'
+	error_load_template: 'Error loading template',
+	search_string_empty: 'Do not specify search'
 };

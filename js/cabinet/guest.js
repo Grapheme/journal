@@ -40,23 +40,52 @@ $(function(){
 		});
 	})
 	$("form.form-search-publications").submit(function(){
-		if($("input.input-search-text").emptyValue()){
+		var error = true;
+		$("div.msg-alert").remove();
+		if($("input.input-search-text").emptyValue() === false){
+			error = false;
+		}else if($("select.hasCustomSelect[name='year']").emptyValue() === false){
+			error = false;
+		}else if($("select.hasCustomSelect[name='number']").emptyValue() === false){
+			error = false;
+		}
+		if(error){
+			$(this).after('<div class="msg-alert error">'+Localize[mt.getLanguageURL()]['search_string_empty']+'</div>')
 			return false;
 		}
 	})
 	$("form.form-sent-publication-comments .btn-submit").click(function(){
 		var options = {target: null,beforeSubmit: mt.ajaxBeforeSubmit,dataType:'json',type:'post'};
 		var _form = $(this).parents('form');
+		var _this = this;
+		$(this).addClass('loading');
 		options.success = function(response,status,xhr,jqForm){
 			mt.ajaxSuccessSubmit(response,status,xhr,jqForm);
 			if(response.status){
-				$(_form).find('textarea').val('');
-				$("ul.ul-publication-comments-list").prepend(response.responseText);
+				if(response.parent_comment == 0){
+					$(_form).find('textarea').val('');
+					$("ul.ul-publication-comments-list").prepend(response.responseText);
+				}else{
+					$("form.insert-form-comment").parents('li').after(response.responseText);
+					$("form.insert-form-comment").remove();
+					$("div.show-answer-form").removeClass('hidden');
+				}
 			}else{
 				$(_form).after(response.responseText);
 			}
 		};
 		$(_form).ajaxSubmit(options);
 		return false;
+	})
+	$("div.show-answer-form").click(function(){
+		$("form.insert-form-comment").remove();$("div.show-answer-form").removeClass('hidden');
+		$("div.div-answer-form form").clone(true).insertAfter(this).addClass('insert-form-comment').find('button.btn-cancel-comment').removeClass('hidden');
+		$("form.insert-form-comment").find('.input-parent-comment').val($(this).attr('data-comment'));
+		$(this).addClass('hidden');
+		$("div.div-answer-form").addClass('hidden');
+	})
+	$("button.btn-cancel-comment").click(function(){
+		$("form.insert-form-comment").remove();$("div.show-answer-form").removeClass('hidden');
+		$("div.div-answer-form").removeClass('hidden');
 	})
 });

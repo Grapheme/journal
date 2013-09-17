@@ -13,7 +13,7 @@ class Publications_comments extends MY_Model{
 	
 	function getPublicationComments($publicationID){
 		
-		$this->db->select('accounts.id,accounts.name,accounts.link,publications_comments.comment,publications_comments.parent,publications_comments.date');
+		$this->db->select('accounts.id,accounts.name,accounts.link,publications_comments.id AS comment_id,publications_comments.comment,publications_comments.parent,publications_comments.date');
 		$this->db->from('accounts');
 		$this->db->join('publications_comments','accounts.id = publications_comments.account');
 		$this->db->where('publications_comments.publication',$publicationID);
