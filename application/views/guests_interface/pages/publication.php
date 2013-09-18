@@ -61,7 +61,7 @@
 						</div>
 						<div class="list-item-desc">
 							<div class="list-item-name"><?=$publication_resources[$i]['resource']['file_name'];?></div>
-							<div class="list-item-name"><?=$publication_resources[$i]['caption'];?></div>
+							<div class="list-item-name-caption"><?=$publication_resources[$i]['caption'];?></div>
 							<a href="<?=site_url('publication/get-resource?resourse='.$publication_resources[$i]['id']);?>" class="list-dl-link">скачать</a>
 						</div>
 					</li>

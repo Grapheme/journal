@@ -142,8 +142,11 @@ textarea {
 /* ==========================================================================
    Author's custom styles
    ========================================================================== */
+
+  
 html, body { font: 1em @pt-serif; }
 p { line-height: 1.7em; font-size: 1.1em; }
+a { color: #999; }
 .wrapper { width: 933px; margin: 1.5em auto 0; }
 .logo { float: left; width: 234px; height: 132px; margin: 1.9em 0 0; }
 .logo-icon { display: inline-block; width: 55px; height: 93px; background: url('../img/logo.png') no-repeat; 
@@ -246,9 +249,11 @@ article.to-authors {
 }
 
 footer { padding: 1.125em 0 3.5em; font: .95em @myriad; text-align: right; }
-.footer-content { display: inline-block; width: 240px;
+.footer-content { display: inline-block; width: 300px;
   .delicate-design-stroke { display: inline-block; width: 58px; margin: 0 0 2em; border-bottom: 3px solid @active-link; }
-  .issn { margin: 0 0 0.5em; letter-spacing: 1px; .uppercase; }
+  .issn { margin: 0 0 0.15em; letter-spacing: 1px; .uppercase; 
+    a { color: #999; text-transform: none; }
+  }
   .massm-sert { margin: 0;
     a { color: #000; border-bottom: 1px solid #a3a3a3; text-decoration: none;  .transition; }
     a:hover { border-color: transparent; }
@@ -289,8 +294,8 @@ section { width: 698px; margin: 30px 0 0;
       .list-item-icon.text { background: url(../img/sprites/files_types.png) no-repeat -113px 0; }
       .list-item-icon.text:hover { background-position: -113px -54px; }
       
-      .list-item-desc { 
-        .list-dl-link { color: @gray; border-bottom: 1px solid transparent; text-decoration: none;
+      .list-item-desc { margin: 0 0 0 47px;
+        .list-dl-link { display: block; color: @gray; border-bottom: 1px solid transparent; text-decoration: none;
           .transition;
         }
         .list-dl-link:hover { border-bottom: 1px solid @gray; }
@@ -329,18 +334,23 @@ section { width: 698px; margin: 30px 0 0;
     }
     form { width: 500px;
       textarea { width: 500px; height: 104px; border: 1px solid @font-main-color; }
-      input[type="submit"] { float: right; width: 99px; height: 35px; background: @active-link; color: #fff; border: none; .radius(2px); .transition( all, .4s ); }
+      input[type="submit"] { font-size: 0.9em; float: right; width: 99px; height: 35px; background: @active-link; color: #fff; border: none; .radius(2px); .transition( all, .4s ); }
       input[type="submit"]:hover { background-color: @active-link-hover; }
+      input[type="submit"].loading { 
+        text-indent: -9999px; background: url(../img/dots-white.gif) no-repeat center center;
+      }
+      button.btn-cancel-comment { width: 99px; height: 35px; margin: 0 0 11px 10px; background: @active-link; color: #fff; border: none; .radius(2px); .transition( all, .4s ); }
+      button.btn-cancel-comment:hover { background-color: @active-link-hover; }
       .comment-from-form { margin: 1em 0 65px;
         figure { float: left; width: 61px; height: 61px;          
           img { max-width: 100%; .radius; }
         }
         .comment-from-info { margin: 0 105px 0 72px; 
-          .name { 
+          .name { margin: 0.4em 0 0; 
             a { font: italic 18px e('/') 21px @pt-serif; color: @font-main-color; text-decoration: none; }
             a:hover { color: #000; }
           }
-          .social-addr { margin: .5em 0 0; color: @gray; }
+          .social-addr { margin: 0; color: @gray; }
         }
       }
     }
@@ -495,6 +505,7 @@ section.author { margin-top: 0;
       .transition;
       }
       a:hover { color: @active-link-hover/*font-main-color*/; /*border-color: transparent;*/ }
+      .active-char { color: @active-link-hover; cursor: default; }
     }
   }
 }
