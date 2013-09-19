@@ -43,7 +43,7 @@ class Guests_interface extends MY_Controller{
 		
 		$this->load->model('issues');
 		$issue_number = FALSE; $issue_link = FALSE;
-		if($issue = $this->issues->getWhere()):
+		if($issue = $this->issues->getLast()):
 			$issue_link = site_url('issue/'.$issue['year'].'/'.$issue['number'].'/'.$issue['id']);
 			$issue_number = $issue['number'].'/'.substr($issue['year'],2,2);
 		endif;
