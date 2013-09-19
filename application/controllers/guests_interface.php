@@ -229,17 +229,19 @@ class Guests_interface extends MY_Controller{
 			'images' => $this->page_resources->getWhere(NULL,array('page_url'=>uri_string()),TRUE),
 			'publications' => array()
 		);
-		$searchParameters = array(
-			'text' => $this->input->get('text'),
-			'year' => $this->input->get('year'),
-			'number' => $this->input->get('number'),
-			'word' => $this->input->get('word'),
-			'author' => $this->input->get('author')
-		);
-		$pagevar['publications'] = $this->searchIssues($searchParameters);
-		for($i=0;$i<count($pagevar['publications']);$i++):
-			$pagevar['publications'][$i]['authors'] = $this->getAuthorsByIDs($pagevar['publications'][$i]['authors']);
-		endfor;
+		if($this->input->get() !== FALSE):
+			$searchParameters = array(
+				'text' => $this->input->get('text'),
+				'year' => $this->input->get('year'),
+				'number' => $this->input->get('number'),
+				'word' => $this->input->get('word'),
+				'author' => $this->input->get('author')
+			);
+			$pagevar['publications'] = $this->searchIssues($searchParameters);
+			for($i=0;$i<count($pagevar['publications']);$i++):
+				$pagevar['publications'][$i]['authors'] = $this->getAuthorsByIDs($pagevar['publications'][$i]['authors']);
+			endfor;
+		endif;
 		$this->load->helper(array('text','date'));
 		$this->load->view("guests_interface/pages/search",$pagevar);
 	}
@@ -280,9 +282,7 @@ class Guests_interface extends MY_Controller{
 		endif;
 		return $commentsList;
 	}
-	
-		
-	
+
 	/********************************************************************************************************************/
 	
 	private function getCountPublication($issues){

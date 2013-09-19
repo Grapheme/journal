@@ -5,9 +5,9 @@
 var mt = mt || {};
 
 //CONFIGURATION
-mt.baseURL = window.location.protocol+'//'+window.location.hostname+'/ptosnm/';
+mt.baseURL = window.location.protocol+'//'+window.location.hostname+'/';
 mt.currentURL = window.location.href;
-mt.languageSegment = 2;
+mt.languageSegment = 1;
 mt.currentLanguage = 'ru'; //Установка языка для панели администрирования так как там не используется сегмент указывающий на язык
 mt.toltipPlacement = 'right'; // Возможные значения top | bottom | left | right | auto
 mt.toltipTrigger = 'manual'; // Возможные значения click | hover | focus | manual

@@ -43,7 +43,7 @@
 			<div class="key-words">
 				<strong><?=lang('key_words')?></strong>: 
 			<?php for($i=0;$i<count($keywords);$i++):?>
-				<a href="<?=site_url('search/publication?mode=search&word='.md5(trim($keywords[$i])))?>"><?=$keywords[$i];?></a><?php if(isset($keywords[$i+1])):?>,<?php endif;?> 
+				<a href="<?=site_url('search?word='.md5(trim($keywords[$i])))?>"><?=$keywords[$i];?></a><?php if(isset($keywords[$i+1])):?>,<?php endif;?> 
 			<?php endfor;?>
 			</div>
 			<?php endif;?>

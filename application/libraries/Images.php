@@ -16,10 +16,10 @@ class Images{
 		endif;
 		list($width,$height,$type) = getimagesize($source);
 		$config['x_axis'] = 0; $config['y_axis'] = 0;
-		if($width > $base_width):
-			$this->resizeImage($source,$base_width,$base_height);
-		elseif($height > $base_height):
+		if($width > $height && $width > $base_width):
 			$this->resizeImage($source,$base_width,$base_height,'height');
+		elseif($height > $width && $height > $base_height):
+			$this->resizeImage($source,$base_width,$base_height);
 		endif;
 		list($width,$height,$type) = getimagesize($source);
 		if($width > $height):
@@ -39,7 +39,7 @@ class Images{
 		endif;
 	}
 	
-	function crop_to_ratio($source, $width, $height, $x = 4, $y = 3, $dest = FALSE){
+	public function cropToRatio($source, $width, $height, $x = 4, $y = 3, $dest = FALSE){
 	// $config['image_library'] = 'gd2'; 
 	$config['source_image'] = $source;
 	$config['maintain_ratio'] = FALSE;
