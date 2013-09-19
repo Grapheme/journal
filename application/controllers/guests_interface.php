@@ -146,6 +146,9 @@ class Guests_interface extends MY_Controller{
 		if($publication = $this->publications->getWhere($this->input->get('resourse'))):
 			if(!is_null($publication[$this->uri->language_string.'_document']) && !empty($publication[$this->uri->language_string.'_document'])):
 				if($filePath = getcwd().'/download/'.$publication[$this->uri->language_string.'_document']):
+					if(!file_exists($filePath)):
+						$filePath = getcwd().$publication[$this->uri->language_string.'_document'];
+					endif;
 					if(file_exists($filePath)):
 						header('Pragma: public');
 						header('Expires: 0');
