@@ -21,6 +21,8 @@ define('ALLOWED_TYPES_DOCUMENTS',				'doc|docx|xls|xlsx|txt|pdf|ppt|pptx|txt|tex
 define('ALLOWED_TYPES_MEDIA',					'avi|mpg|mpe|mpeg|mp3');
 define('ALLOWED_TYPES_IMAGES',					'jpg|gif|jpeg|png');
 
+define('NO_AVATAR',								getcwd().'/img/icons/no-avatar.png');
+
 define('ENGLAN',								'en');
 define('RUSLAN',								'ru');
 define('BASE_WIDTH',							960);

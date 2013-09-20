@@ -175,7 +175,7 @@ mt.ajaxBeforeSubmit = function(formData,jqForm,options){
 	}
 }
 mt.ajaxSuccessSubmit = function(responseText,statusText,xhr,jqForm){
-	$("button.btn-loading").removeClass('loading');
+	$(jqForm).find(".btn-loading").removeClass('loading');
 }
 $.fn.exists = function(){
 	if($(this).length > 0){

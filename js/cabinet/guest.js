@@ -67,9 +67,10 @@ $(function(){
 					$("ul.ul-publication-comments-list").prepend(response.responseText);
 				}else{
 					$("form.insert-form-comment").parents('li').after(response.responseText);
-					$("form.insert-form-comment").remove();
-					$("div.show-answer-form").removeClass('hidden');
 				}
+				$("form.insert-form-comment").remove();
+				$("div.show-answer-form").removeClass('hidden');
+				$("div.div-answer-form").removeClass('hidden');
 			}else{
 				$(_form).after(response.responseText);
 			}

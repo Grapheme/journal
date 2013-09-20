@@ -36,7 +36,7 @@
 			</div>
 			<?php endif;?>
 			<div class="biblio-link">
-				<strong><?=lang('bibliography_link')?></strong>: <?php for($j=0;$j<count($authors);$j++):?><?=$authors[$j][$this->uri->language_string.'_name'];?><?php if(isset($authors[$j+1])):?>, <?php endif;?><?php endfor;?> //<?=$page_content[$this->uri->language_string.'_title']?> – <?=$issue['year'];?>. - № <?=$issue['number'];?>. – <?=$page_content['page']?> <?=lang('page_char')?>.
+				<strong><?=lang('bibliography_link')?></strong>: <?php for($j=0;$j<count($authors);$j++):?><?=$authors[$j][$this->uri->language_string.'_name'];?><?php if(isset($authors[$j+1])):?>, <?php endif;?><?php endfor;?> //<?=$page_content[$this->uri->language_string.'_title']?> – <?=$issue['year'];?>. - № <?=$issue['number'];?>. <?=(!empty($page_content['page']))?'– '.$page_content['page'].' '.lang('page_char').'.':'';?>
 				– <?=lang('ejournal');?>. – <?=site_url(uri_string())?><a class="no-clickable" href=""> [B<span class="capital">ib</span>T<span class="lower">E</span>X]</a>
 			</div>
 			<?php if(!empty($keywords)):?>

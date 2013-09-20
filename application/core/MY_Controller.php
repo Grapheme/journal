@@ -136,7 +136,7 @@ class MY_Controller extends CI_Controller{
 			case 'avatar': $this->load->model('accounts'); $image = $this->accounts->getImage($this->uri->segment(3),'photo'); break;
 		endswitch;
 		if(is_null($image) || empty($image)):
-			$image = file_get_contents(NO_IMAGE);
+			$image = file_get_contents(NO_AVATAR);
 		endif;
 		header('Content-type: image/jpeg');
 		echo $image;
