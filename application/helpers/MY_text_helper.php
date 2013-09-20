@@ -22,4 +22,13 @@
 		if ($n1 == 1) return $language[$langURL][0];
 		return $language[$langURL][2];
 	}
+
+	function getInitials($FIO){
+		
+		if(!empty($FIO)):
+			list($lastname,$name,$middlename) = explode(' ',$FIO,3);
+			return $lastname.' '.mb_substr($name,0,1,'UTF-8').'. '.mb_substr($middlename,0,1,'UTF-8').'.';
+		endif;
+		return '';
+	}
 ?>

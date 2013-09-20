@@ -31,7 +31,7 @@
 			<?php if(!empty($authors)):?>
 			<div class="authors">
 			<?php for($j=0;$j<count($authors);$j++):?>
-				<a href="<?=site_url('author/'.getTranslit($authors[$j][$this->uri->language_string.'_name']).'/'.$authors[$j]['id']);?>"><?=$authors[$j][$this->uri->language_string.'_name'];?></a><?php if(isset($authors[$j+1])):?>, <?php endif;?>
+				<a href="<?=site_url('author/'.getTranslit($authors[$j][$this->uri->language_string.'_name']).'/'.$authors[$j]['id']);?>"><?=getInitials($authors[$j][$this->uri->language_string.'_name']);?></a><?php if(isset($authors[$j+1])):?>, <?php endif;?>
 			<?php endfor;?>
 			</div>
 			<?php endif;?>

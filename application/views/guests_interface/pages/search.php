@@ -38,7 +38,7 @@
 					</div>
 					<div class="authors">
 					<?php for($j=0;$j<count($publications[$i]['authors']);$j++):?>
-						<a href="<?=site_url('author/'.getTranslit($publications[$i]['authors'][$j][$this->uri->language_string.'_name']).'/'.$publications[$i]['authors'][$j]['id']);?>"><?=$publications[$i]['authors'][$j][$this->uri->language_string.'_name'];?></a><?php if(isset($publications[$i]['authors'][$j+1])):?>, <?php endif;?>
+						<a href="<?=site_url('author/'.getTranslit($publications[$i]['authors'][$j][$this->uri->language_string.'_name']).'/'.$publications[$i]['authors'][$j]['id']);?>"><?=getInitials($publications[$i]['authors'][$j][$this->uri->language_string.'_name']);?></a><?php if(isset($publications[$i]['authors'][$j+1])):?>, <?php endif;?>
 					<?php endfor;?>
 					</div>
 				</li>

@@ -183,7 +183,7 @@ class Guests_interface extends MY_Controller{
 		endif;
 		if($authors = $this->authors->getAuthorsByChar($char,$this->uri->language_string)):
 			$this->load->helper('text');
-			$pagevar['authors'] = $this->load->view('html/authors-list',array('authors'=>$authors,'langName'=>$this->uri->language_string),TRUE);
+			$pagevar['authors'] = $this->load->view('html/authors-list',array('authors'=>$authors,'langName'=>$this->uri->language_string,'abbr'=>TRUE),TRUE);
 		else:
 			$pagevar['authors'] =lang('not_found_authors');
 		endif;
@@ -227,6 +227,7 @@ class Guests_interface extends MY_Controller{
 	public function search(){
 		
 		$this->load->model(array('pages','page_resources'));
+		$this->load->helper(array('text','date'));
 		$pagevar = array(
 			'page_content' => $this->pages->getWhere(NULL,array('page_url'=>uri_string())),
 			'images' => $this->page_resources->getWhere(NULL,array('page_url'=>uri_string()),TRUE),
@@ -245,7 +246,6 @@ class Guests_interface extends MY_Controller{
 				$pagevar['publications'][$i]['authors'] = $this->getAuthorsByIDs($pagevar['publications'][$i]['authors']);
 			endfor;
 		endif;
-		$this->load->helper(array('text','date'));
 		$this->load->view("guests_interface/pages/search",$pagevar);
 	}
 
