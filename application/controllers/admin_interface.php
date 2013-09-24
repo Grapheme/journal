@@ -2,9 +2,6 @@
 
 class Admin_interface extends MY_Controller{
 	
-	var $per_page = PER_PAGE_DEFAULT;
-	var $offset = 0;
-	
 	function __construct(){
 		
 		parent::__construct();
@@ -72,8 +69,18 @@ class Admin_interface extends MY_Controller{
 		
 		$this->load->model('authors');
 		$pagevar = array(
-			'authors' => $this->authors->getAll(),
+			'authors' => array(),
+			'pages' => NULL
 		);
+		if($this->input->get('search') === FALSE):
+			$pagevar['authors'] = $this->authors->limit(PER_PAGE_DEFAULT,$this->uri->segment(4),'ru_name,en_name');
+			$pagevar['pages'] = $this->pagination('admin-panel/authors',4,$this->authors->countAllResults(),PER_PAGE_DEFAULT);
+		else:
+			if($authors = $this->getAuthorsByIDs($this->input->get('search'))):
+				$authorsIDs = $this->getDBRecordsIDs($authors);
+				$pagevar['authors'] = $this->authors->getWhereIN(array('field'=>'id','where_in'=>$authorsIDs,'many_records'=>TRUE,'order_by'=>'ru_name,en_name'));
+			endif;
+		endif;
 		$this->load->view("admin_interface/authors/list",$pagevar);
 	}
 	

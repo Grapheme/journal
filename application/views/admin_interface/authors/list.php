@@ -5,6 +5,9 @@
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
 <head>
 <?php $this->load->view("admin_interface/includes/head");?>
+
+<link rel="stylesheet" href="<?=site_url('css/admin-panel/token-input.css');?>" type="text/css" />
+<link rel="stylesheet" href="<?=site_url('css/admin-panel/token-input-facebook.css');?>" type="text/css" />
 </head>
 <body>
 <!--[if lt IE 7]>
@@ -26,10 +29,11 @@
 					<a href="<?=site_url(ADMIN_START_PAGE.'/authors/add')?>" class="btn btn-info">Добавить автора</a>
 				</div>
 				<h2>Авторы</h2>
+				<?=$pages;?>
+				<?php $this->load->view('html/multy-search-form',array('form_action'=>uri_string(),'search_action'=>'search-authors-list')); ?>
 				<table class="table table-bordered table-striped table-hover table-condensed" data-action="<?=site_url(ADMIN_START_PAGE.'/authors/remove');?>">
 					<thead>
 						<tr>
-							<th class="span1">№ ID</th>
 							<th class="span6">Имя автора</th>
 							<th class="span2"></th>
 						</tr>
@@ -37,7 +41,6 @@
 					<tbody>
 					<?php for($i=0;$i<count($authors);$i++):?>
 						<tr>
-							<td><?=$authors[$i]['id'];?></td>
 							<td><?=$authors[$i]['ru_name'].' ('.$authors[$i]['en_name'].')';?></td>
 							<td>
 								<a href="<?=site_url(ADMIN_START_PAGE.'/authors/edit?mode=text&id='.$authors[$i]['id'])?>" class="btn btn-link" ><i class="icon-pencil"></i></a>
@@ -47,11 +50,15 @@
 					<?php endfor;?>
 					</tbody>
 				</table>
+				<?=$pages;?>
 				<div class="clear"></div>
 			</div>
 		</div>
 	</div>
 	<?php $this->load->view("admin_interface/includes/footer");?>
 	<?php $this->load->view("admin_interface/includes/scripts");?>
+	
+	<script type="text/javascript" src="<?=site_url('js/vendor/jquery.tokeninput.js');?>"></script>
+	<script type="text/javascript" src="<?=site_url('js/cabinet/token-config.js');?>"></script>
 </body>
 </html>

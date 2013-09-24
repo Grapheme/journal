@@ -73,7 +73,6 @@ class MY_Model extends CI_Model{
 		$where = (isset($arguments[0]['where']))?$arguments[0]['where']:NULL;
 		$manyRecords = (isset($arguments[0]['many_records']))?$arguments[0]['many_records']:FALSE;
 		$orderBy = (isset($arguments[0]['order_by']))?$arguments[0]['order_by']:$this->order_by;
-		
 		$this->db->select($this->_fields());
 		$this->db->order_by($orderBy);
 		if(!is_null($primary_key)):

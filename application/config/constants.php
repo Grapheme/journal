@@ -15,7 +15,7 @@ define('FOPEN_WRITE_CREATE_STRICT',				'xb');
 define('FOPEN_READ_WRITE_CREATE_STRICT',		'x+b');
 
 define('TEMPORARY',								'temporary');
-define('PER_PAGE_DEFAULT',						10);
+define('PER_PAGE_DEFAULT',						30);
 define('ADMIN_START_PAGE',						'admin-panel');
 define('ALLOWED_TYPES_DOCUMENTS',				'doc|docx|xls|xlsx|txt|pdf|ppt|pptx|txt|text');
 define('ALLOWED_TYPES_MEDIA',					'avi|mpg|mpe|mpeg|mp3');

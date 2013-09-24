@@ -10,6 +10,12 @@ $route['redactor/upload'] = "general_interface/redactorUploadImage";
 $route['redactor/get-uploaded-images'] = "general_interface/redactorUploadedImages";
 $route['publications/view-document/:any'] = "general_interface/showDocumentIco";
 $route['load-image/avatar/:num'] = "general_interface/loadimage";
+
+/********** search *************/
+$route['search-authors-list'] = "general_interface/searchAuthor";
+/*******************************/
+
+
 /********** sing in by social network *************/
 $route['sign-in/vk'] = "general_interface/signInVK";
 $route['sign-in/facebook'] = "general_interface/signInUpFacebook";
@@ -17,7 +23,6 @@ $route['sign-in/facebook'] = "general_interface/signInUpFacebook";
 /*************************************************** AJAX INTRERFACE ***********************************************/
 $route['get-authors-list'] = "ajax_interface/getAuthorsList";
 $route['get-keywords-list'] = "ajax_interface/getKeyWordsList";
-$route['search-authors-list'] = "ajax_interface/searchAuthor";
 $route['send-publication-comment'] = "ajax_interface/sendPublicationComment";
 /*********************************************/
 $route['edit/issue/exec-script-1'] = "ajax_interface/execScript1";
@@ -56,7 +61,7 @@ $route[ADMIN_START_PAGE.'/institutions'] = "admin_interface/institutionsList";
 $route[ADMIN_START_PAGE.'/institutions/add'] = "admin_interface/insertInstitution";
 $route[ADMIN_START_PAGE.'/institutions/edit'] = "admin_interface/editInstitution";
 /* ----------------------------------------------- Authors ---------------------------------------------------------- */
-$route[ADMIN_START_PAGE.'/authors'] = "admin_interface/authorsList";
+$route[ADMIN_START_PAGE.'/authors(\/:any)*?'] = "admin_interface/authorsList";
 $route[ADMIN_START_PAGE.'/authors/add'] = "admin_interface/insertAuthor";
 $route[ADMIN_START_PAGE.'/authors/edit'] = "admin_interface/editAuthor";
 /* ----------------------------------------------- Issues ---------------------------------------------------------- */

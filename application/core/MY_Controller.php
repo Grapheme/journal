@@ -516,11 +516,11 @@ class MY_Controller extends CI_Controller{
 		return '';
 	}
 	
-	public function getDBRecordsIDs($courses,$field = 'id'){
+	public function getDBRecordsIDs($array,$field = 'id'){
 		
 		$ids = array();
-		for($i=0;$i<count($courses);$i++):
-			$ids[] = $courses[$i][$field];
+		for($i=0;$i<count($array);$i++):
+			$ids[] = (int)$array[$i][$field];
 		endfor;
 		return $ids;
 	}

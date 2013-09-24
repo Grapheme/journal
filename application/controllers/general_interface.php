@@ -96,9 +96,7 @@ class General_interface extends MY_Controller{
 			echo json_encode($fullList);
 		endif;
 	}
-	
 	/********** sing in by social network *************/
-	
 	public function signInVK(){
 				
 		if($vkontakte = $this->getVKontakteAccessToken($this->input->get('code'),site_url($this->uri->language_string.'/sign-in/vk'))):
@@ -243,4 +241,13 @@ class General_interface extends MY_Controller{
 	
 	/*************************************************************************************************************/
 	
+	public function searchAuthor(){
+		
+		$json_request = json_encode(array());
+		$this->load->model('authors');
+		if($authors = $this->authors->searchAuthorsByChar($this->input->get('q'),RUSLAN)):
+			$json_request = json_encode($authors);
+		endif;
+		echo $json_request;
+	}
 }

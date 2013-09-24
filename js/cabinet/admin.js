@@ -23,7 +23,6 @@ $(function(){
 			error: function(xhr,textStatus,errorThrown){}
 		});
 	});
-
 	$("button.btn-resources-caption").click(function(){
 		var _this = this;
 		var itemID = $(this).attr('data-item');
@@ -48,7 +47,6 @@ $(function(){
 			}
 		});
 	});
-
 	$("button.btn-publication-submit").click(function(){
 		$(this).addClass('loading');
 		var _form = $(this).parents('form');

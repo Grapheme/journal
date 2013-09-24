@@ -12,15 +12,14 @@ $(function(){
 	
 	$("input.suggest-searching").tokenInput(
 		getFormAction($("input.suggest-searching")),{
-		theme: "facebook",
-		hintText: "Введите слово для поиска",
-		noResultsText: "Ничего не найдено",
-		searchingText: "Поиск...",
-		tokenDelimiter: ','
-	});
+			theme: "facebook",
+			hintText: "Введите слово для поиска",
+			noResultsText: "Ничего не найдено",
+			searchingText: "Поиск...",
+		}	);
 	
 	function getFormAction(_input){
-		return mt.getBaseURL($(_input).attr('data-search-action').trim());
+		return $(_input).attr('data-search-action').trim();
 	}
 	
 });
