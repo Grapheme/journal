@@ -35,7 +35,6 @@ class Authors extends MY_Model{
 	function getAuthorsByIDs($IDs){
 
 		$this->db->select('id,ru_name AS name,ru_name,en_name');
-		$this->db->order_by('ru_name,en_name');
 		$this->db->where_in('id',$IDs);
 		$query = $this->db->get($this->table);
 		if($data = $query->result_array()):

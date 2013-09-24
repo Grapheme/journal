@@ -152,7 +152,7 @@ class Admin_interface extends MY_Controller{
 		
 		$this->load->model(array('publications','issues'));
 		$issue = 0;
-		if($issues = $this->issues->getAll()):
+		if($issues = $this->issues->getAll('year DESC,month DESC,number DESC')):
 			$issue = $issues[0]['id'];
 		endif;
 		if($this->input->get('issue') !== FALSE && is_numeric($this->input->get('issue'))):
@@ -165,10 +165,6 @@ class Admin_interface extends MY_Controller{
 			'publications' => $this->publications->getWhere(NULL,array('issue'=>$issue),TRUE),
 			'issues' => $issues
 		);
-		/*if(!empty($pagevar['issues'])):
-			$pagevar['issues'] = array_reverse($pagevar['issues']);
-		endif;*/
-		
 		$this->load->view("admin_interface/publications/list",$pagevar);
 	}
 	
@@ -183,7 +179,6 @@ class Admin_interface extends MY_Controller{
 		$pagevar = array(
 			'publication' => $this->publications->getWhere($this->input->get('id')),
 			'authors' => array()
-		
 		);
 		$pagevar['authors'] = $this->getAuthorsByIDs($pagevar['publication']['authors']);
 		$pagevar['publication']['keywords'] = $this->getProductKeyWords($pagevar['publication']['id']);

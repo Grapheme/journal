@@ -28,16 +28,23 @@
 					<?=$page_content[$this->uri->language_string.'_annotation'];?>
 				</div>
 			</header>
-			<?php if(!empty($authors)):?>
+		<?php if(!empty($authors)):?>
 			<div class="authors">
 			<?php for($j=0;$j<count($authors);$j++):?>
 				<a href="<?=site_url('author/'.getTranslit($authors[$j][$this->uri->language_string.'_name']).'/'.$authors[$j]['id']);?>"><?=getInitials($authors[$j][$this->uri->language_string.'_name']);?></a><?php if(isset($authors[$j+1])):?>, <?php endif;?>
 			<?php endfor;?>
 			</div>
-			<?php endif;?>
+		<?php endif;?>
 			<div class="biblio-link">
-				<strong><?=lang('bibliography_link')?></strong>: <?php for($j=0;$j<count($authors);$j++):?><?=$authors[$j][$this->uri->language_string.'_name'];?><?php if(isset($authors[$j+1])):?>, <?php endif;?><?php endfor;?> //<?=$page_content[$this->uri->language_string.'_title']?> – <?=$issue['year'];?>. - № <?=$issue['number'];?>. <?=(!empty($page_content['page']))?'– '.$page_content['page'].' '.lang('page_char').'.':'';?>
-				– <?=lang('ejournal');?>. – <?=site_url(uri_string())?><a class="no-clickable" href=""> [B<span class="capital">ib</span>T<span class="lower">E</span>X]</a>
+				<strong><?=lang('bibliography_link')?></strong>: 
+				<?=getInitials($authors[0][$this->uri->language_string.'_name']).' '.$page_content[$this->uri->language_string.'_title'];?> /
+			<?php for($j=1;$j<count($authors);$j++):?>
+				<?=getInitials($authors[$j][$this->uri->language_string.'_name']);?>
+				<?php if(isset($authors[$j+1])):?>, <?php endif;?>
+			<?php endfor;?> 
+				// <?=$page_content[$this->uri->language_string.'_title']?>: <?=lang('ejournal');?>. - <?=$issue['year'];?>. - № <?=$issue['number'];?>.
+			<?=(!empty($page_content['page']))?'– '.lang('page_char').' '.$page_content['page'].'.':'';?>
+				URL: <?=site_url(uri_string())?><a class="no-clickable" href=""> [B<span class="capital">ib</span>T<span class="lower">E</span>X]</a>
 			</div>
 			<?php if(!empty($keywords)):?>
 			<div class="key-words">
