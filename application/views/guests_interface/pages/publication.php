@@ -44,7 +44,7 @@
 			<?php endfor;?> 
 				// <?=$page_content[$this->uri->language_string.'_title']?>: <?=lang('ejournal');?>. - <?=$issue['year'];?>. - № <?=$issue['number'];?>.
 			<?=(!empty($page_content['page']))?'– '.lang('page_char').' '.$page_content['page'].'.':'';?>
-				URL: <?=site_url(uri_string())?><a class="no-clickable" href=""> [B<span class="capital">ib</span>T<span class="lower">E</span>X]</a>
+				URL: <?=site_url(uri_string())?><a class="no-clickable show-bibText" href="<?=site_url(uri_string().'/bibtext');?>"> [B<span class="capital">ib</span>T<span class="lower">E</span>X]</a>
 			</div>
 			<?php if(!empty($keywords)):?>
 			<div class="key-words">

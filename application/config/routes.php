@@ -80,6 +80,7 @@ $route[ADMIN_START_PAGE.'/publications/resources'] = "admin_interface/resourcesP
 $route['issues'] = "guests_interface/issues";
 $route['issue/:num/:num/:num'] = "guests_interface/issue";
 $route['issue/:num/:num/:num/publication/:num'] = "guests_interface/publication";
+$route['issue/:num/:num/:num/publication/:num/bibtext'] = "guests_interface/publicationBibText";
 
 $route['publication/get-resource'] = "guests_interface/getFileResource";
 $route['publication/get-publication'] = "guests_interface/getFilePublication";

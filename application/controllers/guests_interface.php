@@ -116,6 +116,22 @@ class Guests_interface extends MY_Controller{
 		$this->load->view("guests_interface/pages/publication",$pagevar);
 	}
 	
+	public function publicationBibText(){
+		
+		$this->load->model(array('issues','publications'));
+		$pagevar = array(
+			'page_content' => $this->publications->getWhere($this->uri->segment(6)),
+			'issue' => $this->issues->getWhere($this->uri->segment(4)),
+			'authors' => array(),
+		);
+		if(empty($pagevar)):
+			show_404();
+		endif;
+		$pagevar['authors'] = $this->getAuthorsByIDs($pagevar['page_content']['authors']);
+		$this->load->helper(array('date','text'));
+		$this->load->view("guests_interface/pages/publication-bibtext",$pagevar);
+	}
+	
 	public function getFileResource(){
 		
 		$this->load->model('publications_resources');
@@ -285,9 +301,7 @@ class Guests_interface extends MY_Controller{
 		endif;
 		return $commentsList;
 	}
-
 	/********************************************************************************************************************/
-	
 	private function getCountPublication($issues){
 		
 		if($issuesIDs = $this->getDBRecordsIDs($issues)):

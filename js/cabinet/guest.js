@@ -89,4 +89,8 @@ $(function(){
 		$("form.insert-form-comment").remove();$("div.show-answer-form").removeClass('hidden');
 		$("div.div-answer-form").removeClass('hidden');
 	})
+	$("a.show-bibText").click(function(){
+		var href = $(this).attr('href').trim();
+		window.open(href,'bibtext',"top=140,left=150,width=960,height=350,resizable=yes,scrollbars=no,status=no");
+	})
 });

@@ -12,6 +12,7 @@ $lang['menu_keywords'] = "Ключевые слова";
 $lang['menu_usefull_links'] = "Полезные ссылки";
 $lang['menu_institutions'] = "Учреждения";
 
+$lang['journal_name'] = "Фазовые переходы, упорядоченные состояния и новые материалы";
 $lang['not_found_keyword'] = "Не найдено ни одной статьи по указанному ключевому слову.";
 $lang['not_found_authors'] = "Не найдено ни одного автора в данном разделе.";
 $lang['issue_number'] = "номер";

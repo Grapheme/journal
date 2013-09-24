@@ -12,6 +12,7 @@ $lang['menu_keywords'] = "Keywords";
 $lang['menu_usefull_links'] = "Usefull links";
 $lang['menu_institutions'] = "Institutions";
 
+$lang['journal_name'] = "Phase transitions, ordered states and new materials";
 $lang['not_found_authors'] = "Authors Not Found!";
 $lang['not_found_keyword'] = "Keywords Not Found!";
 $lang['issue_number'] = "number";
