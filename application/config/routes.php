@@ -10,11 +10,9 @@ $route['redactor/upload'] = "general_interface/redactorUploadImage";
 $route['redactor/get-uploaded-images'] = "general_interface/redactorUploadedImages";
 $route['publications/view-document/:any'] = "general_interface/showDocumentIco";
 $route['load-image/avatar/:num'] = "general_interface/loadimage";
-
 /********** search *************/
 $route['search-authors-list'] = "general_interface/searchAuthor";
 /*******************************/
-
 /********** sing in by social network *************/
 $route['sign-in/vk'] = "general_interface/signInVK";
 $route['sign-in/facebook'] = "general_interface/signInUpFacebook";
@@ -26,6 +24,9 @@ $route['send-publication-comment'] = "ajax_interface/sendPublicationComment";
 /*********************************************/
 $route['edit/issue/exec-script-1'] = "ajax_interface/execScript1";
 $route['edit/issue/exec-script-2'] = "ajax_interface/execScript2";
+/****************** pages ********************/
+$route[ADMIN_START_PAGE.'/comment/update'] = "ajax_interface/updateComment";
+$route[ADMIN_START_PAGE.'/comment/remove'] = "ajax_interface/removeComment";
 /****************** pages ********************/
 $route[ADMIN_START_PAGE.'/page/:any/update'] = "ajax_interface/updatePage";
 $route[ADMIN_START_PAGE.'/pages/:any/upload/resource'] = "ajax_interface/pageUploadResources";
@@ -52,6 +53,9 @@ $route[ADMIN_START_PAGE.'/publications/remove/resources'] = "ajax_interface/reso
 $route[ADMIN_START_PAGE.'/publications/resources/caption'] = "ajax_interface/resourceCaptionSavePublications";
 /*************************************************** ADMIN INTRERFACE ***********************************************/
 $route[ADMIN_START_PAGE] = "admin_interface/controlPanel";
+/* ----------------------------------------------- Pages ---------------------------------------------------------- */
+$route[ADMIN_START_PAGE.'/comments(\/:any)*?'] = "admin_interface/commentsList";
+$route[ADMIN_START_PAGE.'/comments/edit'] = "admin_interface/editComments";
 /* ----------------------------------------------- Pages ---------------------------------------------------------- */
 $route[ADMIN_START_PAGE.'/pages'] = "admin_interface/pagesList";
 $route[ADMIN_START_PAGE.'/pages/:any/edit'] = "admin_interface/editPages";

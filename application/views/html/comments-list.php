@@ -8,7 +8,7 @@
 			<div class="comment-text">
 				<?=$comment['comment'];?>
 			</div>
-		<?php if($this->loginstatus === TRUE && $comment['id'] != $this->account['id']):?>
+		<?php if($this->loginstatus === TRUE && $this->account['group'] == USER_GROUP_VALUE):?>
 			<div data-comment="<?=$comment['comment_id'];?>" class="answer show-answer-form">ответить</div>
 		<?php endif;?>
 		</div>

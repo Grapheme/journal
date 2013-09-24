@@ -7,6 +7,7 @@
 		<li><a href="<?=site_url(ADMIN_START_PAGE.'/issues');?>">Выпуски</a></li>
 		<li><a href="<?=site_url(ADMIN_START_PAGE.'/publications');?>">Публикации</a></li>
 		<li class="nav-header">Текстовое наполнение</li>
+		<li><a href="<?=site_url(ADMIN_START_PAGE.'/comments');?>">Комментарии</a></li>
 		<li><a href="<?=site_url(ADMIN_START_PAGE.'/pages');?>">Страницы</a></li>
 	</ul>
 </div>

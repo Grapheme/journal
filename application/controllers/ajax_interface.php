@@ -540,7 +540,30 @@ class Ajax_interface extends MY_Controller{
 		else:
 			$json_request['responseText'] = $this->load->view('html/validation-errors',array('alert_header'=>FALSE),TRUE);
 		endif;
+		echo json_encode($json_request);
+	}
+	
+	public function updateComment(){
 		
+		if(!$this->input->is_ajax_request() || !$this->loginstatus || $this->account['group'] > ADMIN_GROUP_VALUE):
+			show_error('В доступе отказано');
+		endif;
+		$json_request = array('status'=>FALSE,'redirect'=>$this->session->userdata('backpath'),'responseText'=>'Сохранено');
+		$this->load->model('publications_comments');
+		$this->publications_comments->updateField($this->input->get('id'),'comment',$this->input->post('comment'));
+		$json_request['status'] = TRUE;
+		echo json_encode($json_request);
+	}
+	
+	public function removeComment(){
+		
+		if(!$this->input->is_ajax_request() || !$this->loginstatus || $this->account['group'] > ADMIN_GROUP_VALUE):
+			show_error('В доступе отказано');
+		endif;
+		$json_request = array('status'=>FALSE,'responseText'=>'Удалено');
+		$this->load->model('publications_comments');
+		$this->publications_comments->delete($this->input->get('id'));
+		$json_request['status'] = TRUE;
 		echo json_encode($json_request);
 	}
 	

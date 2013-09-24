@@ -4,11 +4,17 @@
 
 $(function(){
 	$(".select-issue").change(function(){
-		var url = mt.currentURL.replace(/\?issue=(\d+)?/,'');
+		var url = mt.currentURL.replace(/\?(.+)?/,'');
 		if($(this).emptyValue() == false){
 			url = url+'?issue='+$(this).val();
 		}
 		mt.redirect(url);
-//		alert(url);
+	});
+	$(".select-publication").change(function(){
+		var url = mt.currentURL.replace(/\&publication=(\d+)?/,'');
+		if($(this).emptyValue() == false){
+			url = url+'&publication='+$(this).val();
+		}
+		mt.redirect(url);
 	});
 });

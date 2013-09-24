@@ -5,7 +5,7 @@ class Admin_interface extends MY_Controller{
 	function __construct(){
 		
 		parent::__construct();
-		if(!$this->loginstatus):
+		if(!$this->loginstatus || $this->account['group'] > ADMIN_GROUP_VALUE):
 			redirect('');
 		endif;
 		$this->load->helper('form');
@@ -212,6 +212,37 @@ class Admin_interface extends MY_Controller{
 		$this->load->helper('string');
 		$this->load->view("admin_interface/publications/resources",$pagevar);
 	}
+	/********************************************* comments *********************************************************/
+	public function commentsList(){
+		
+		$this->load->helper(array('date','text'));
+		$this->load->model(array('publications_comments','issues','publications'));
+		if($issues = $this->issues->getAll('year DESC,month DESC,number DESC')):
+			$issueID = $issues[0]['id'];
+		endif;
+		if($this->input->get('issue') !== FALSE && is_numeric($this->input->get('issue'))):
+			$issueID = $this->input->get('issue');
+		endif;
+		$pagevar = array(
+			'comments' => $this->publications_comments->getLimitList(PER_PAGE_DEFAULT,$this->uri->segment(4),$issueID),
+			'pages' => $this->pagination('admin-panel/comments',4,$this->publications_comments->countAllResults(array('issue'=>$issueID)),PER_PAGE_DEFAULT),
+			'issues' => $issues,
+			'publications' => $this->publications->getPublicationList($issueID),
+		);
+		$this->session->set_userdata('backpath',site_url(uri_string()));
+		$this->load->view("admin_interface/comments/list",$pagevar);
+	}
+
+	public function editComments(){
+		
+		if($this->input->get('id') === FALSE || is_numeric($this->input->get('id')) === FALSE):
+			redirect(ADMIN_START_PAGE);
+		endif;
+		$this->load->model('publications_comments');
+		$pagevar = array(
+			'content' => $this->publications_comments->getWhere($this->input->get('id')),
+		);
+		$this->load->view("admin_interface/comments/edit",$pagevar);
+	}
 	/*************************************************************************************************************/
-	
 }

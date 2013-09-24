@@ -96,6 +96,7 @@
 				<header>
 					<h3><?=lang('comments_to_publication')?></h3>
 				</header>
+				<a name="comments"></a>
 				<div class="comments">
 					<?php $this->load->view('html/social-networks');?>
 					<?php $this->load->view('guests_interface/forms/comments');?>

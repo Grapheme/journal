@@ -24,5 +24,26 @@ class Publications_comments extends MY_Model{
 		endif;
 		return NULL;
 	}
+	function getLimitList($limit,$offset = 0,$issueID = FALSE,$publicationID = FALSE){
+		
+		$this->db->select('accounts.id AS account,accounts.name,publications_comments.*,issues.year,issues.month,issues.ru_title AS issue_title,publications.ru_title AS publication_title');
+		$this->db->from('publications_comments');
+		$this->db->join('accounts','accounts.id = publications_comments.account');
+		$this->db->join('issues','issues.id = publications_comments.issue');
+		$this->db->join('publications','publications.id = publications_comments.publication');
+		$this->db->limit($limit,$offset);
+		if(!empty($publicationID)):
+			$this->db->where('publications_comments.publication',$publicationID);
+		endif;
+		if(!empty($issueID)):
+			$this->db->where('publications_comments.issue',$issueID);
+		endif;
+		$this->db->order_by($this->order_by);
+		$query = $this->db->get();
+		if($data = $query->result_array()):
+			return $data;
+		endif;
+		return NULL;
+	}
 	
 }

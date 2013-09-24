@@ -11,6 +11,19 @@ class Publications extends MY_Model{
 		parent::__construct();
 	}
 	
+	function getPublicationList($issue = FALSE){
+		$this->db->select($this->_fields());
+		if(!empty($issue)):
+			$this->db->where('issue',$issue);
+		endif;
+		$this->db->order_by('ru_title');
+		$query = $this->db->get($this->table);
+		if($data = $query->result_array()):
+			return $data;
+		endif;
+		return NULL;
+	}
+	
 	function countPublicationOnIssues($issuesIDs){
 		$this->db->select('COUNT(*) AS publications, issue')->from($this->table)->where_in('issue',$issuesIDs)->group_by('issue');
 		$query = $this->db->get();
