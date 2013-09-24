@@ -72,7 +72,7 @@ class Admin_interface extends MY_Controller{
 			'authors' => array(),
 			'pages' => NULL
 		);
-		if($this->input->get('search') === FALSE):
+		if($this->input->get('search') === FALSE || $this->input->get('search') == ''):
 			$pagevar['authors'] = $this->authors->limit(PER_PAGE_DEFAULT,$this->uri->segment(4),'ru_name,en_name');
 			$pagevar['pages'] = $this->pagination('admin-panel/authors',4,$this->authors->countAllResults(),PER_PAGE_DEFAULT);
 		else:

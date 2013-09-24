@@ -247,6 +247,8 @@ class General_interface extends MY_Controller{
 		$this->load->model('authors');
 		if($authors = $this->authors->searchAuthorsByChar($this->input->get('q'),RUSLAN)):
 			$json_request = json_encode($authors);
+		elseif($authors = $this->authors->searchAuthorsByChar($this->input->get('q'),ENGLAN)):
+			$json_request = json_encode($authors);
 		endif;
 		echo $json_request;
 	}

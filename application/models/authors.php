@@ -22,7 +22,7 @@ class Authors extends MY_Model{
 		return NULL;
 	}
 	function searchAuthorsByChar($char,$lang = RUSLAN){
-
+		
 		$this->db->select('id,'.$lang.'_name AS name');
 		$this->db->order_by($lang.'_name');
 		$this->db->like($lang.'_name',$char,'after');

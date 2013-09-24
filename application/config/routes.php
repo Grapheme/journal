@@ -15,7 +15,6 @@ $route['load-image/avatar/:num'] = "general_interface/loadimage";
 $route['search-authors-list'] = "general_interface/searchAuthor";
 /*******************************/
 
-
 /********** sing in by social network *************/
 $route['sign-in/vk'] = "general_interface/signInVK";
 $route['sign-in/facebook'] = "general_interface/signInUpFacebook";
