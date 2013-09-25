@@ -73,7 +73,6 @@ class Ajax_interface extends MY_Controller{
 	
 	/******************************************** admin interface *******************************************************/
 	/* ------------------------------------- */
-	
 	public function execScript1(){
 		
 		if(!$this->input->is_ajax_request()):
@@ -101,7 +100,6 @@ class Ajax_interface extends MY_Controller{
 		/* -------------------------------*/
 		echo json_encode($json_request);
 	}
-	
 	/* ------------- Pages ----------------- */
 	public function updatePage(){
 		
@@ -505,12 +503,12 @@ class Ajax_interface extends MY_Controller{
 		endif;
 		$json_request = array('status'=>FALSE,'responseText'=>'','parent_comment'=>0);
 		if($this->postDataValidation('publication_comment')):
-			if($publicationInfo = $this->ExecuteInsertingComment($_POST)):
-				$json_request['status'] = TRUE;
+			if($publicationIВD = $this->ExecuteInsertingComment($_POST)):
 				$comment = array(
 					'id' => $this->account['id'],
 					'link' => $this->profile['link'],
 					'name' => $this->profile['name'],
+					'comment_id' => $publicationIВD,
 					'comment' => $this->input->post('comment',TRUE)
 				);
 				if($this->input->post('parent') == 0):
@@ -519,6 +517,7 @@ class Ajax_interface extends MY_Controller{
 					$json_request['responseText'] = $this->load->view('html/comments-answer-list',array('comment'=>$comment),TRUE);
 				endif;
 				$json_request['parent_comment'] = $this->input->post('parent');
+				$json_request['status'] = TRUE;
 			endif;
 		else:
 			$json_request['responseText'] = $this->load->view('html/validation-errors',array('alert_header'=>FALSE),TRUE);

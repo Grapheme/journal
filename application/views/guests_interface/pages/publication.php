@@ -14,9 +14,9 @@
 		<?php $this->load->view('guests_interface/includes/navigation');?>
 		<article>
 			<header>
+				<div class="all-pubs-link"><a href="<?=site_url('issue/'.$issue['year'].'/'.$issue['month'].'/'.$issue['id']);?>"><?=lang('all_publication_issue');?></a></div>
 				<h1 class="article-h1"><?=mb_strtoupper(getMonthName($issue['month'],$this->uri->language_string));?>. <?=$issue['year'];?></h1>
 				<div class="delicate-design-stroke"></div>
-				<a href="<?=site_url('issue/'.$issue['year'].'/'.$issue['month'].'/'.$issue['id']);?>"><?=lang('all_publication_issue');?></a>
 			<?php if(empty($page_content[$this->uri->language_string.'_document']) === FALSE):?>
 				<div class="pdf-dl-link single">
 					<a href="<?=site_url('publication/get-publication?resourse='.$page_content['id']);?>">

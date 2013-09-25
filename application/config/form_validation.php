@@ -72,10 +72,10 @@
 			array('field'=>'en_bibliography','label'=>'Bibliographic list','rules'=>'trim|xss_clean')
 		),
 		'publication_comment' =>array(
-			array('field'=>'issue','label'=>' ','rules'=>'required|trim|integer'),
-			array('field'=>'publication','label'=>' ','rules'=>'required|trim|integer'),
-			array('field'=>'comment','label'=>' ','rules'=>'required|trim|xss_clean'),
-			array('field'=>'parent','label'=>' ','rules'=>'required|trim|numeric')
+			array('field'=>'issue','label'=>'Выпуск','rules'=>'required|trim|integer'),
+			array('field'=>'publication','label'=>'Публикацю','rules'=>'required|trim|integer'),
+			array('field'=>'comment','label'=>'Тест комментария','rules'=>'required|trim|xss_clean'),
+			array('field'=>'parent','label'=>'Родителя','rules'=>'required|trim|numeric')
 		),
 		'resources_caption' =>array(
 			array('field'=>'id','label'=>'ID','rules'=>'required|trim|numeric'),

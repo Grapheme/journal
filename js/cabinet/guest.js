@@ -64,7 +64,7 @@ $(function(){
 			if(response.status){
 				if(response.parent_comment == 0){
 					$(_form).find('textarea').val('');
-					$("ul.ul-publication-comments-list").prepend(response.responseText);
+					$("ul.ul-publication-comments-list").prepend(response.responseText).find('li .show-answer-form:first').on('click',function(){setShowCommentForm(this)});
 				}else{
 					$("form.insert-form-comment").parents('li').after(response.responseText);
 				}
@@ -78,13 +78,7 @@ $(function(){
 		$(_form).ajaxSubmit(options);
 		return false;
 	})
-	$("div.show-answer-form").click(function(){
-		$("form.insert-form-comment").remove();$("div.show-answer-form").removeClass('hidden');
-		$("div.div-answer-form form").clone(true).insertAfter(this).addClass('insert-form-comment').find('button.btn-cancel-comment').removeClass('hidden');
-		$("form.insert-form-comment").find('.input-parent-comment').val($(this).attr('data-comment'));
-		$(this).addClass('hidden');
-		$("div.div-answer-form").addClass('hidden');
-	})
+	$("div.show-answer-form").click(function(){setShowCommentForm(this);})
 	$("button.btn-cancel-comment").click(function(){
 		$("form.insert-form-comment").remove();$("div.show-answer-form").removeClass('hidden');
 		$("div.div-answer-form").removeClass('hidden');
@@ -93,4 +87,12 @@ $(function(){
 		var href = $(this).attr('href').trim();
 		window.open(href,'bibtext',"top=140,left=150,width=960,height=350,resizable=yes,scrollbars=no,status=no");
 	})
+
+	function setShowCommentForm(answer){
+		$("form.insert-form-comment").remove();$("div.show-answer-form").removeClass('hidden');
+		$("div.div-answer-form form").clone(true).insertAfter(answer).addClass('insert-form-comment').find('button.btn-cancel-comment').removeClass('hidden');
+		$("form.insert-form-comment").find('.input-parent-comment').val($(answer).attr('data-comment'));
+		$(answer).addClass('hidden');
+		$("div.div-answer-form").addClass('hidden');
+	}
 });
