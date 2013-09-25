@@ -44,7 +44,7 @@
 						<a href="<?=site_url('issue/'.$publications[$i]['year'].'/'.$publications[$i]['month'].'/'.$publications[$i]['issue'].'/publication/'.$publications[$i]['id'])?>"><?=$publications[$i][$this->uri->language_string.'_title']?></a>
 					</h2>
 					<div class="publications-date">
-						<?=mb_strtolower(getMonthName($publications[$i]['month'],$this->uri->language_string));?>. <?=$publications[$i]['year'];?> (<?=lang('page_char').' '.$publications[$i]['page'];?>)
+						<?=mb_strtolower(getMonthName($publications[$i]['month'],$this->uri->language_string));?>. <?=$publications[$i]['year'];?><?php if(!empty($publications[$i]['page'])):?> (<?=lang('page_char').' '.$publications[$i]['page'];?>)<?php endif;?>
 					</div>
 					<div class="authors">
 					<?php for($j=0;$j<count($publications[$i]['authors']);$j++):?>
