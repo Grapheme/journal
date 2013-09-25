@@ -1,4 +1,4 @@
-<?php if($this->loginstatus === FALSE):?>
+<?php if($this->loginstatus === FALSE || $this->account['group'] == ADMIN_GROUP_VALUE):?>
 <div class="auth-to-comment">
 	<?=lang('signin_for_comment')?>
 </div>
