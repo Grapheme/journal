@@ -2,8 +2,6 @@
 
 class Guests_interface extends MY_Controller{
 	
-	var $offset = 0;
-	
 	function __construct(){
 
 		parent::__construct();
@@ -247,7 +245,8 @@ class Guests_interface extends MY_Controller{
 		$pagevar = array(
 			'page_content' => $this->pages->getWhere(NULL,array('page_url'=>uri_string())),
 			'images' => $this->page_resources->getWhere(NULL,array('page_url'=>uri_string()),TRUE),
-			'publications' => array()
+			'publications' => array(),
+			'search_text' => ''
 		);
 		if($this->input->get() !== FALSE):
 			$searchParameters = array(
@@ -258,6 +257,7 @@ class Guests_interface extends MY_Controller{
 				'author' => $this->input->get('author')
 			);
 			$pagevar['publications'] = $this->searchIssues($searchParameters);
+			$pagevar['search_text'] = $this->getSearchTitleText($searchParameters);
 			for($i=0;$i<count($pagevar['publications']);$i++):
 				$pagevar['publications'][$i]['authors'] = $this->getAuthorsByIDs($pagevar['publications'][$i]['authors']);
 			endfor;
@@ -278,6 +278,17 @@ class Guests_interface extends MY_Controller{
 			return $this->publications->getPublicationByIssue($parameters);
 		endif;
 		return NULL;
+	}
+	
+	private function getSearchTitleText($parameters){
+		
+		$this->load->model(array('keywords','authors'));
+		if(!empty($parameters['word'])):
+			return $this->keywords->value(NULL,'word',array('word_hash'=>$parameters['word']));
+		elseif(!empty($parameters['author']) && is_numeric($parameters['author'])):
+			return $this->authors->getWhere($parameters['author']);
+		endif;
+		return '';
 	}
 	
 	private function getPublicationComments($publicationID){

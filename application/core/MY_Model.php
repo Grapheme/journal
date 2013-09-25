@@ -147,18 +147,17 @@ class MY_Model extends CI_Model{
 		return FALSE;
 	}
 	
-	function value($primary_key = NULL,$field = NULL,$where = NULL){
+	function value($primary_key = NULL,$field = 'id',$where = NULL){
 		
-		if(!is_null($primary_key) || !is_null($field)):
+		if(!is_null($primary_key)):
 			$this->db->where($this->primary_key,$primary_key);
-			if(!is_null($where) && is_array($where)):
-				$this->db->where($where);
-			endif;
-			$query = $this->db->get($this->table,1);
-			$data = $query->result_array();
-			if($data):
-				return $data[0][$field];
-			endif;
+		endif;
+		if(!is_null($where) && is_array($where)):
+			$this->db->where($where);
+		endif;
+		$query = $this->db->get($this->table,1);
+		if($data = $query->result_array()):
+			return $data[0][$field];
 		endif;
 		return FALSE;
 	}

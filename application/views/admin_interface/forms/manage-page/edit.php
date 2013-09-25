@@ -30,7 +30,7 @@
 	</div>
 	<hr/>
 	<div class="div-form-operation">
-		<button type="submit" value="" name="submit" class="btn btn-submit btn-success no-clickable btn-loading">Сохранить</button>
-		<a class="btn btn-info" href="<?=site_url(ADMIN_START_PAGE.'/pages');?>">Завершить</a>
+		<button type="submit" value="" name="submit" class="btn btn-submit btn-success btn-loading no-clickable">Сохранить</button>
+		<a class="btn btn-info" href="<?=site_url(ADMIN_START_PAGE.'/pages');?>">Вернуться к списку</a>
 	</div>
 <?= form_close(); ?>

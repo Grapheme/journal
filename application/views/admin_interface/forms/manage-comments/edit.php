@@ -5,6 +5,6 @@
 	</div>
 	<div class="div-form-operation">
 		<button type="submit" value="" name="submit" class="btn btn-submit btn-success no-clickable btn-loading">Сохранить</button>
-		<a class="btn btn-info" href="<?=$this->session->userdata('backpath');?>">Завершить</a>
+		<a class="btn btn-info" href="<?=$this->session->userdata('backpath');?>">Вернуться назад</a>
 	</div>
 <?= form_close(); ?>

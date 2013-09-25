@@ -13,11 +13,21 @@
 		<?php $this->load->view('guests_interface/includes/header');?>
 		<?php $this->load->view('guests_interface/includes/navigation');?>
 		<article>
+	<?php if($this->input->get('author') === FALSE && $this->input->get('word') === FALSE):?>
 			<?=(isset($page_content[$this->uri->language_string.'_content']))?$page_content[$this->uri->language_string.'_content']:'';?>
 			<?php $this->load->view('guests_interface/forms/search');?>
+	<?php endif;?>
 		<?php if(!empty($publications)):?>
 			<div class="search-page-form">
-				<div class="form-header"><?=lang('form_search_results');?></div>
+				<div class="form-header">
+			<?php if($this->input->get('author') === FALSE && $this->input->get('word') === FALSE):?>
+				<?=lang('form_search_results');?>
+			<?php elseif($this->input->get('author') === FALSE && $this->input->get('word') != '' && !is_array($search_text)):?>
+				<?=$search_text;?>
+			<?php elseif($this->input->get('word') === FALSE && $this->input->get('author') != '' && is_array($search_text)):?>
+				<?=$search_text[$this->uri->language_string.'_name'];?>
+			<?php endif;?>
+				</div>
 				<div class="publications-num"><?=lang('form_search_found');?>: <?=count($publications).' '.pluralPublications(count($publications),$this->uri->language_string);?>.</div>
 			</div>
 			<ol class="month-list search-page">

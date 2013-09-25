@@ -38,4 +38,5 @@ $lang['form_search_found'] = "Найдено";
 $lang['author'] = "Автор";
 $lang['link_institution_site'] = "Ссылка на сайт";
 $lang['all_publication_issue'] = "Все статьи выпуска";
+$lang['all_authors'] = "Все авторы";
 ?>

@@ -38,7 +38,7 @@ class Ajax_interface extends MY_Controller{
 			if($authors = $this->authors->getAuthorsByChar($this->input->post('char'),$lang)):
 				$this->load->helper('text');
 				$this->config->set_item('base_url',baseURL($this->uri->language_string.'/'));
-				$json_request['responseText'] = $this->load->view('html/authors-list',array('authors'=>$authors,'langName'=>$this->input->post('lang')),TRUE);
+				$json_request['responseText'] = $this->load->view('html/authors-list',array('authors'=>$authors,'langName'=>$this->input->post('lang'),'abbr'=>TRUE),TRUE);
 			else:
 				$this->lang->load('localization/interface',$this->languages[$this->input->post('lang')]);
 				$this->load->helper('language');

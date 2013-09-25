@@ -13,6 +13,7 @@
 		<?php $this->load->view('guests_interface/includes/navigation');?>
 		<article>
 			<header>
+				<div class="all-pubs-link"><a href="<?=site_url('authors');?>"><?=lang('all_authors');?></a></div>
 				<h1 class="article-h1"><?=lang('author')?></h1>
 				<div class="delicate-design-stroke"></div>
 			</header>

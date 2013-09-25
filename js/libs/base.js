@@ -233,7 +233,7 @@ $.fn.formSubmitInServer = function(){
 		target: null,dataType:'json',type:'post',
 		beforeSubmit: mt.ajaxBeforeSubmit,
 		success: function(response,status,xhr,jqForm){
-			mt.ajaxSuccessSubmit();
+			mt.ajaxSuccessSubmit(response,status,xhr,jqForm);
 			if(response.status == true){
 				if(response.responseText != ''){
 					$("div.div-form-operation").after('<div class="msg-alert">'+response.responseText+'</div>');
