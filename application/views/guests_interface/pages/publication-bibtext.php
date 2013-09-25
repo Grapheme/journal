@@ -17,7 +17,8 @@
 	title = {[<?=$page_content[$this->uri->language_string.'_title']?>]},
 	journal = {[<?=lang('ejournal');?> "<?=lang('journal_name');?>", <?=site_url();?>]},
 	year = {[<?=$issue['year'];?>]},
-	number = {[<?=$issue['number'];?>]},
+	number = {[<?=$issue['number'];?>]}<?php if(!empty($page_content['page'])):?>,<?php endif;?>
+	
 <?php if(!empty($page_content['page'])):?>
 	pages = {[<?=$page_content['page'];?>]}
 <?php endif;?>
