@@ -51,8 +51,11 @@ $route[ADMIN_START_PAGE.'/publications/remove'] = "ajax_interface/removePublicat
 $route[ADMIN_START_PAGE.'/publications/upload/resources'] = "ajax_interface/uploadResourcePublication";
 $route[ADMIN_START_PAGE.'/publications/remove/resources'] = "ajax_interface/resourceDeletePublications";
 $route[ADMIN_START_PAGE.'/publications/resources/caption'] = "ajax_interface/resourceCaptionSavePublications";
+
+$route[ADMIN_START_PAGE.'/password-save'] = "ajax_interface/adminSavePassword";
 /*************************************************** ADMIN INTRERFACE ***********************************************/
 $route[ADMIN_START_PAGE] = "admin_interface/controlPanel";
+$route[ADMIN_START_PAGE.'/password'] = "admin_interface/changePassword";
 /* ----------------------------------------------- Pages ---------------------------------------------------------- */
 $route[ADMIN_START_PAGE.'/comments(\/:any)*?'] = "admin_interface/commentsList";
 $route[ADMIN_START_PAGE.'/comments/edit'] = "admin_interface/editComments";

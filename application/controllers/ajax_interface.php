@@ -72,6 +72,36 @@ class Ajax_interface extends MY_Controller{
 	}
 	
 	/******************************************** admin interface *******************************************************/
+	
+	public function adminSavePassword(){
+		
+		if(!$this->input->is_ajax_request() && $this->loginstatus === FALSE):
+			show_error('В доступе отказано');
+		endif;
+		$json_request = array('status'=>FALSE,'responseText'=>'','redirect'=>FALSE);
+		if($this->postDataValidation('password')):
+			if($this->validOldPassword($this->input->post('oldpassword'))):
+				$this->accounts->updateField($this->account['id'],'password',md5($this->input->post('password')));
+				$json_request['redirect'] = site_url(ADMIN_START_PAGE.'/pages');
+				$json_request['status'] = TRUE;
+				$json_request['responseText'] = 'Пароль сохранен';
+			else:
+				$json_request['responseText'] = 'Не верный старый пароль';
+			endif;
+		else:
+			$json_request['responseText'] = $this->load->view('html/validation-errors',array('alert_header'=>FALSE),TRUE);
+		endif;
+		echo json_encode($json_request);
+	}
+	
+	public function validOldPassword($password = ''){
+		
+		if($this->accounts->getWhere(NULL,array('id'=>$this->account['id'],'password'=>md5($password)))):
+			return TRUE;
+		endif;
+		return FALSE;
+	}
+	
 	/* ------------------------------------- */
 	public function execScript1(){
 		

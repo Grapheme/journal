@@ -18,13 +18,9 @@ class Admin_interface extends MY_Controller{
 		$this->load->view("admin_interface/cabinet/control-panel",$pagevar);
 	}
 	
-	public function profile(){
+	public function changePassword(){
 		
-		$pagevar = array(
-			'languages' => array(),
-			'profile' => array(),
-		);
-		$this->load->view("admin_interface/cabinet/profile",$pagevar);
+		$this->load->view("admin_interface/cabinet/profile");
 	}
 	/********************************************* menu **********************************************************/
 

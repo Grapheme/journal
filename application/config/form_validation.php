@@ -13,6 +13,11 @@
 			array('field'=>'char','label'=>'char','rules'=>'required|trim'),
 			array('field'=>'lang','label'=>'lang','rules'=>'trim')
 		),
+		'password' =>array(
+			array('field'=>'oldpassword','label'=>'Cтарый пароль','rules'=>'required|min_length[6]|trim'),
+			array('field'=>'password','label'=>'Новый пароль','rules'=>'required|min_length[6]|trim'),
+			array('field'=>'confirm','label'=>'Повтор пароля','rules'=>'required|min_length[6]|matches[password]|trim')
+		),
 		'author' =>array(
 			array('field'=>'ru_page_title','label'=>'Title страницы','rules'=>'trim|xss_clean'),
 			array('field'=>'ru_page_description','label'=>'Description страницы','rules'=>'trim|xss_clean'),
