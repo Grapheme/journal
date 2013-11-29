@@ -36,7 +36,7 @@ var acceptedDocTypes = {
 	'video/avi': true,
 	'video/mpeg': true,
 	'video/mp4': true,
-	'video/webm': true,
+	'video/webm': true
 };
 var doc_progress = document.getElementById('uploadDocProgress');
 var fileupload = document.getElementById('uploadDocument');

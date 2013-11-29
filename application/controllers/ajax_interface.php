@@ -101,7 +101,6 @@ class Ajax_interface extends MY_Controller{
 		endif;
 		return FALSE;
 	}
-	
 	/* ------------------------------------- */
 	public function execScript1(){
 		
