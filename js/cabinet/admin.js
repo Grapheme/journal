@@ -53,18 +53,6 @@ $(function(){
 		$(_form).ajaxSubmit(uploadDocuments.multyDocuments);
 		return false;
 	});
-	$("button.btn-exec-script-1").click(function(){
-		$.ajax({
-			url: mt.getBaseURL('edit/issue/exec-script-1'),type: 'POST',dataType: 'json',
-			beforeSend: function(){
-				return confirm('Выполнить скрипт №1?');
-			},
-			success: function(response,textStatus,xhr){
-				if(response.status){alert(response.responseText)}
-			},
-			error: function(xhr,textStatus,errorThrown){}
-		});
-	});
 	$("button.btn-exec-script-2").click(function(){
 		$.ajax({
 			url: mt.getBaseURL('edit/issue/exec-script-2'),type: 'POST',dataType: 'json',

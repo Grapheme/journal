@@ -22,7 +22,6 @@ $route['get-authors-list'] = "ajax_interface/getAuthorsList";
 $route['get-keywords-list'] = "ajax_interface/getKeyWordsList";
 $route['send-publication-comment'] = "ajax_interface/sendPublicationComment";
 /*********************************************/
-$route['edit/issue/exec-script-1'] = "ajax_interface/execScript1";
 $route['edit/issue/exec-script-2'] = "ajax_interface/execScript2";
 /****************** pages ********************/
 $route[ADMIN_START_PAGE.'/comment/update'] = "ajax_interface/updateComment";
@@ -56,6 +55,7 @@ $route[ADMIN_START_PAGE.'/password-save'] = "ajax_interface/adminSavePassword";
 /*************************************************** ADMIN INTRERFACE ***********************************************/
 $route[ADMIN_START_PAGE] = "admin_interface/controlPanel";
 $route[ADMIN_START_PAGE.'/password'] = "admin_interface/changePassword";
+$route[ADMIN_START_PAGE.'/issue/:num/download-xml'] = "admin_interface/createXML";
 /* ----------------------------------------------- Pages ---------------------------------------------------------- */
 $route[ADMIN_START_PAGE.'/comments(\/:any)*?'] = "admin_interface/commentsList";
 $route[ADMIN_START_PAGE.'/comments/edit'] = "admin_interface/editComments";

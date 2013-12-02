@@ -42,5 +42,16 @@ class Authors extends MY_Model{
 		endif;
 		return NULL;
 	}
-	
+	function authorsFullInfo($IDs){
+
+		$this->db->select('authors.ru_name,authors.en_name,authors.email,institutions.ru_title,institutions.en_title');
+		$this->db->from('authors');
+		$this->db->join('institutions','authors.institution = institutions.id');
+		$this->db->where_in('authors.id',$IDs);
+		$query = $this->db->get();
+		if($data = $query->result_array()):
+			return $data;
+		endif;
+		return NULL;
+	}
 }

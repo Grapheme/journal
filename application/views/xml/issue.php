@@ -1,4 +1,4 @@
-<?xml version='1.0' standalone='no' ?>
+<?=doctype('xml_title');?>
 <journal>
 	<operCard>
 		<operator>Articulus_2008</operator>
@@ -14,85 +14,70 @@
 	<journalInfo lang="RUS">
 		<title>Фазовые переходы, упорядоченные состояния и новые материалы</title>
 	</journalInfo>
+	<journalInfo lang="ENG">
+		<title>Phase transitions, ordered states and new materials</title>
+	</journalInfo>
 	<issue>
 		<volume></volume>
-		<number>89</number>
+		<number><?=$issue['id'];?></number>
 		<altNumber></altNumber>
 		<part></part>
-		<dateUni>201309</dateUni>
+		<dateUni><?=$issue['year'].str_pad($issue['month'],2,'0',STR_PAD_LEFT)?></dateUni>
 		<issTitle></issTitle>
-		<pages>1-50</pages>
+		<pages></pages>
 		<articles>
+		<?php for($i=0;$i<count($publications);$i++):?>
 			<article>
-				<pages>1-5</pages>
+				<pages><?=$publications[$i]['page'];?></pages>
 				<artType>RAR</artType>
 				<authors>
-					<author num="001">
+				<?php foreach($publications[$i]['authors'] as $key => $autor):?>
+					<author num="<?=str_pad($key+1,3,'0',STR_PAD_LEFT);?>">
 						<individInfo lang="RUS">
-							<surname>Магомедов</surname>
-							<initials>Я. Б.</initials>
-							<orgName>Институт физики ДНЦ РАН</orgName>
+							<surname><?=$autor['ru_name'];?></surname>
+							<initials><?=getInitials($autor['ru_name']);?></initials>
+							<email><?=$autor['email']?></email>
+							<orgName><?=$autor['ru_title']?></orgName>
+						</individInfo>
+						<individInfo lang="ENG">
+							<surname><?=$autor['en_name'];?></surname>
+							<initials><?=getInitials($autor['en_name']);?></initials>
+							<email><?=$autor['email']?></email>
+							<orgName><?=$autor['en_title']?></orgName>
 						</individInfo>
 					</author>
-					<author num="002">
-						<individInfo lang="RUS">
-							<surname>Гаджиев</surname>
-							<initials>Г. Г.</initials>
-							<email>Gadjiev@mail.ru</email>
-							<orgName>Институт физики ДНЦ РАН</orgName>
-						</individInfo>
-					</author>
-					<author num="003">
-						<individInfo lang="RUS">
-							<surname>Омаров</surname>
-							<initials>З. М.</initials>
-							<orgName>Институт физики ДНЦ РАН</orgName>
-						</individInfo>
-					</author>
+				<?php endforeach;?>
 				</authors>
 				<artTitles>
-					<artTitle lang="RUS">ТЕМПЕРАТУРНАЯ ЗАВИСИМОСТЬ ТЕПЛОПРОВОДНОСТИ И ЭЛЕКТРОПРОВОДНОСТИ Bi2Te3 И ЕГО РАСПЛАВА</artTitle>
+					<artTitle lang="RUS"><?=htmlspecialchars($publications[$i]['ru_title']);?></artTitle>
+					<artTitle lang="ENG"><?=htmlspecialchars($publications[$i]['en_title']);?></artTitle>
 				</artTitles>
 				<abstracts>
-					<abstract lang="RUS">Исследована температурная зависимость теплопроводности и электропроводности теллурида висмута и его расплава. Установлено, что основными механизмами теплопроводности как в твердом, так и в жидком состоянии являются фононный (молекулярный в расплаве), электронный и биполяр- ный. В области собственной проводимости и в расплаве значительный вклад в теплопроводность вно- сит биполярная теплопроводность. При плавлении Bi2Te3 полупроводниковые свойства сохраняются.</abstract>
+					<abstract lang="RUS"><?=htmlspecialchars(strip_tags($publications[$i]['ru_annotation']));?></abstract>
+					<abstract lang="ENG"><?=htmlspecialchars(strip_tags($publications[$i]['en_annotation']));?></abstract>
 				</abstracts>
-				<text lang="RUS">
-					Как известно, основой зонной теории полупроводников является представление о стро- гойпериодичностикристаллическихрешеток.
-					Однако,исследованиеэлектропроводности,тер- моэдс и ряда других свойств некоторых полупроводников и их расплавов [2, 3] 
-					показало, что полупроводниковые свойства сохраняются и при структурном разупорядочении после плавле- ния.
-					Всвязисэтимисследованиекинетическихсвойствполупроводниковвобластиплавления и жидкого состояния имеет важное значение для 
-					теории для выяснения влияния структурного разупорядочения на зонную структуру и механизмы переноса заряда и тепла в 
-				</text>
+				<text lang="RUS"></text>
+				<text lang="ENG"></text>
 				<keywords>
 					<kwdGroup lang="ANY">
-						<keyword>Принципиальная схема установки</keyword>
+					<?php foreach($publications[$i]['keywords'] as $key => $keyword):?>
+						<keyword><?=$keyword;?></keyword>
+					<?php endforeach;?>
 					</kwdGroup>
 				</keywords>
 				<references>
-					<reference>Иоффе А. Ф. Полупроводниковые термоэлементы. – М.: Из-во АН СССР, 1956. – 150 с.</reference>
-					<reference>IoffeA. F, RegelA. R. Progress in Semiconductors. – London: Pergamon Press, 1960. – V. 4. – P. 237.</reference>
-					<reference>Глазов В. М., Чижевская С. Н., Глаголева Н. Н. Жидкие полупроводники. – М.: Наука, 1967. – 240 с.</reference>
-					<reference>Глазов В. М., Крестовников А. Н., Глаголева Н. Н. // Изв. АН СССР. Серия неорганич. материалы. – 1966. – Т. 2. – Вып. 3. – С. 453.</reference>
-					<reference>Федоров В. И., Стильбанс Л. С. // ТВТ. – 1967. – Т. 5. – Вып. 2.   Температурная зависимость теплопровод- ности и электропроводности bi2te3 и его расплава</reference>
-					<reference>Кутасов В. А., Смирнов И. А. // Изв. АН СССР. Серия неорганич. материалы. – 1967. – Т. 3. – С. 380.</reference>
-					<reference>Гуриева Е. А., Кутасов В. А., Смирнов И. А. // ФТТ. – 1964. – Т. 6. – С. 3002.</reference>
-					<reference>Охотин А. С., Пушкарский А. С., Горбачев В. В. Теплофизические свойства полупровод- ников. – М.: Атомиздат, 1972. – 197 с.</reference>
-					<reference>Драбл Дж., Голдсмид Г. Теплопроводность полупроводников. – М.: Из-во ИЛ, 1963. – 260 с.</reference>
-					<reference>Магомедов Я. Б., Алиев С. Н., Айдамиров М. А., Лугуева Н. В. // ПТЭ. – 2003. – № 6. – С. 117.</reference>
-					<reference>Магомедов Я. Б. // ТВТ.– 1990. – Т. 28. – С. 3965.</reference>
-					<reference>Регель А. Р., Глазов В. М. Закономерности формирования структуры электронных рас- плавов. – М.: Наука, 1982. – 320 с.</reference>
+					<reference></reference>
 				</references>
 				<files>
-					<file>gadjiev121x1.jpg</file>
-					<file>gadjiev122x1.jpg</file>
-					<file>gadjiev123x1.jpg</file>
-					<file>gadjiev124x1.jpg</file>
-					<file>gadjiev125x1.jpg</file>
+				<?php foreach($publications[$i]['files'] as $key => $file):?>
+					<file><?=$file;?></file>
+				<?php endforeach;?>
 				</files>
 				<dates>
-					<dateReceived>12.08.2013</dateReceived>
+					<dateReceived><?=date("d.m.Y")?></dateReceived>
 				</dates>
 			</article>
+		<?php endfor;?>
 		</articles>
 	</issue>
 </journal>

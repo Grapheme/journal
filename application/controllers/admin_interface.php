@@ -22,6 +22,81 @@ class Admin_interface extends MY_Controller{
 		
 		$this->load->view("admin_interface/cabinet/profile");
 	}
+
+	public function createXML(){
+		
+		if($filePath = $this->createIssueXML()):
+			if(file_exists($filePath)):
+				$this->downloadIssueXML($filePath);
+				exit();
+			endif;
+		endif;
+		show_404();
+	}
+	
+	private function createIssueXML(){
+		
+		$this->load->model(array('issues','publications'));
+		$xml_vars = array(
+			'issue' => $this->issues->getWhere($this->uri->segment(3)),
+			'publications' => $this->publications->getWhere(NULL,array('issue'=>$this->uri->segment(3)),TRUE)
+		);
+		for($i=0;$i<count($xml_vars['publications']);$i++):
+			$xml_vars['publications'][$i]['authors'] = $this->authorsFullInfo($xml_vars['publications'][$i]['authors']);
+			$xml_vars['publications'][$i]['keywords'] = array();
+			if($keywords = $this->getProductKeyWords($xml_vars['publications'][$i]['id'])):
+				$xml_vars['publications'][$i]['keywords'] = explode(',',$keywords);
+			endif;
+			$xml_vars['publications'][$i]['files'] = $this->getPublicationFiles($xml_vars['publications'][$i]['id'],$this->uri->segment(3));
+		endfor;
+		
+//		print_r($xml_vars['issue']);exit;
+//		print_r($xml_vars['publications']);exit;
+		
+		$this->load->helper(array('html','text','file'));
+		$xml_data = $this->load->view('xml/issue',$xml_vars,TRUE);
+		write_file(TEMPORARY.'/isseu_xml.xml',$xml_data);
+		return TEMPORARY.'/isseu_xml.xml';
+	}
+	
+	private function authorsFullInfo($authors){
+		
+		$authorsList = array();
+		if($authorsIDs = explode(',',$authors)):
+			$this->load->model('authors');
+			$authorsList = $this->authors->authorsFullInfo($authorsIDs);
+		endif;
+		return $authorsList;
+	}
+	
+	private function getPublicationFiles($publicationID,$issueID){
+		
+		$resources_list = array();
+		$this->load->model('publications_resources');
+		if($resources = $this->publications_resources->getWhere(NULL,array('publication'=>$publicationID,'issue'=>$issueID),TRUE)):
+			for($i=0;$i<count($resources);$i++):
+				if($resource = json_decode($resources[$i]['resource'],TRUE)):
+					$resources_list[] = $resource['file_name'];
+				endif;
+			endfor;
+		endif;
+		return $resources_list;
+	}
+	
+	private function downloadIssueXML($filePath){
+		
+		header('Pragma: public');
+		header('Expires: 0');
+		header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+		header('Last-Modified: '.gmdate('D, d M Y H:i:s', filemtime($filePath)).' GMT');
+		header('Cache-Control: private',false);
+		header("Content-Type: text/xml");
+		header('Content-Disposition: attachment; filename="'.basename($filePath).'"');
+		header('Content-Transfer-Encoding: binary');
+		header('Content-Length: '.filesize($filePath));
+		header('Connection: close');
+		readfile($filePath);
+	}
 	/********************************************* menu **********************************************************/
 
 	/********************************************* pages *********************************************************/

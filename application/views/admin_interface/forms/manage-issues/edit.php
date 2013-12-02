@@ -42,7 +42,7 @@
 		<?=getYearsList(2013,2006,TRUE,$issue['year']);?>
 	</div>
 	<div class="div-form-operation">
-		<button type="button" class="btn btn-info btn-exec-script-1 no-clickable">Запуск скрипта №1</button>
+		<a href="<?=site_url(ADMIN_START_PAGE.'/issue/'.$this->input->get('id').'/download-xml');?>" class="btn btn-info">Сформировать XML</a>
 		<button type="button" class="btn btn-danger btn-exec-script-2 no-clickable">Запуск скрипта №2</button>
 		<button type="submit" value="" name="submit" class="btn btn-success btn-submit no-clickable btn-loading">Сохранить</button>
 	</div>

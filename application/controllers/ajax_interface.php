@@ -102,20 +102,6 @@ class Ajax_interface extends MY_Controller{
 		return FALSE;
 	}
 	/* ------------------------------------- */
-	public function execScript1(){
-		
-		if(!$this->input->is_ajax_request()):
-			show_error('В доступе отказано');
-		endif;
-		$json_request = array('status'=>FALSE,'responseText'=>'');
-		/* -------------------------------*/
-		include_once(getcwd().'/scripts/script1.php');
-		$json_request['status'] = TRUE;
-		$json_request['responseText'] = 'Скрипт №1 выполнен успешно';
-		/* -------------------------------*/
-		echo json_encode($json_request);
-	}
-	
 	public function execScript2(){
 		
 		if(!$this->input->is_ajax_request()):
@@ -129,6 +115,7 @@ class Ajax_interface extends MY_Controller{
 		/* -------------------------------*/
 		echo json_encode($json_request);
 	}
+
 	/* ------------- Pages ----------------- */
 	public function updatePage(){
 		
