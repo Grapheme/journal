@@ -1,16 +1,16 @@
 <?=doctype('xml_title');?>
 <journal>
 	<operCard>
-		<operator>Articulus_2008</operator>
-		<pid>136378</pid>
-		<date>2013-11-1 0:34:01</date>
-		<cntArticle>1</cntArticle>
+		<operator></operator>
+		<pid></pid>
+		<date></date>
+		<cntArticle></cntArticle>
 		<cntNode></cntNode>
-		<cs>0</cs>
+		<cs></cs>
 	</operCard>
-	<titleid>32527</titleid>
+	<titleid></titleid>
 	<issn>2073-0373</issn>
-	<codeNEB>20730373</codeNEB>
+	<codeNEB></codeNEB>
 	<journalInfo lang="RUS">
 		<title>Фазовые переходы, упорядоченные состояния и новые материалы</title>
 	</journalInfo>
@@ -74,7 +74,7 @@
 				<?php endforeach;?>
 				</files>
 				<dates>
-					<dateReceived><?=date("d.m.Y")?></dateReceived>
+					<dateReceived>01.<?=str_pad($issue['month'],2,'0',STR_PAD_LEFT).'.'.$issue['year'];?></dateReceived>
 				</dates>
 			</article>
 		<?php endfor;?>
