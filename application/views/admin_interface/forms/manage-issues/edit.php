@@ -39,7 +39,7 @@
 		<input type="text" name="number" class="span1 valid-required valid-numeric" value="<?=$issue['number']?>" placeholder="" />
 		<?php $this->load->helper('date');?>
 		<?=getMonthList(0,12,$issue['month']);?>
-		<?=getYearsList(2013,2006,TRUE,$issue['year']);?>
+		<?=getYearsList(date("Y"),2006,TRUE,$issue['year']);?>
 	</div>
 	<div class="div-form-operation">
 		<a href="<?=site_url(ADMIN_START_PAGE.'/issue/'.$this->input->get('id').'/download-xml');?>" class="btn btn-info">Сформировать XML</a>

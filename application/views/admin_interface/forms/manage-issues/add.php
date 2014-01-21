@@ -39,7 +39,7 @@
 		<input type="text" name="number" class="span1 valid-required valid-numeric" value="" placeholder="" />
 		<?php $this->load->helper('date');?>
 		<?=getMonthList();?>
-		<?=getYearsList(2013,2006,TRUE);?>
+		<?=getYearsList(date("Y"),2006,TRUE);?>
 	</div>
 	<div class="div-form-operation">
 		<button type="submit" value="" name="submit" class="btn btn-success btn-submit no-clickable btn-loading">Добавить</button>
