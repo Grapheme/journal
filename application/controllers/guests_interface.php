@@ -255,7 +255,7 @@ class Guests_interface extends MY_Controller{
 		);
 		foreach($this->issues->getAll() as $issue):
 			$pagevar['years'][$issue['year']] = $issue['year'];
-			$pagevar['numbers'][$issue['numbers']] = $issue['numbers'];
+			$pagevar['numbers'][$issue['number']] = $issue['number'];
 		endforeach;
 		if($this->input->get() !== FALSE):
 			$searchParameters = array(
