@@ -166,6 +166,7 @@ $(function(){
 		//buttonsAdd: ['button_undo','button_redo','|'],
 		//buttonsCustom: buttonsCustom,
 		lang: 'ru',
+		visual: false,
 		plugins: ['fontsize','fullscreen'],
 		imageUpload: mt.baseURL+'redactor/upload',
 		imageGetJson: mt.baseURL+'redactor/get-uploaded-images',
