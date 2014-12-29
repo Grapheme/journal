@@ -637,7 +637,7 @@ class Ajax_interface extends MY_Controller{
 		$this->load->model(array('issues','publications'));
 		if($this->input->get('issue') !== FALSE):
 			if($issue = $this->issues->getWhere($this->input->get('issue'))):
-				$issueUploadPath = $issue['year'].'/'.$issue['month'];
+				$issueUploadPath = $issue['year'];
 			endif;
 		endif;
 		$resultUpload = $this->uploadSingleDocument($uploadPath.'/'.$issueUploadPath,$document,'pdf');

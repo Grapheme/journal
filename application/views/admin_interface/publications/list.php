@@ -41,7 +41,11 @@
 					<?php for($i=0;$i<count($publications);$i++):?>
 						<tr>
 							<td><?=$publications[$i]['id'];?></td>
-							<td><?=$publications[$i]['ru_title'].' ('.$publications[$i]['en_title'].')';?></td>
+							<td>
+								<a href="<?=site_url(ADMIN_START_PAGE.'/publications/edit?issue='.$this->input->get('issue').'&id='.$publications[$i]['id'])?>">
+									<?=$publications[$i]['ru_title'].' ('.$publications[$i]['en_title'].')';?>
+								</a>
+							</td>
 							<td>
 								<a href="<?=site_url(ADMIN_START_PAGE.'/publications/edit?issue='.$this->input->get('issue').'&id='.$publications[$i]['id'])?>" class="btn btn-link" ><i class="icon-pencil"></i></a>
 								<a href="<?=site_url(ADMIN_START_PAGE.'/publications/resources?mode=files&issue='.$this->input->get('issue').'&publication='.$publications[$i]['id'])?>" title="Дополнительные материалы" class="btn btn-link" ><i class="icon-list"></i></a>

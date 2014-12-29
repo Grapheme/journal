@@ -41,7 +41,10 @@
 					<tbody>
 					<?php for($i=0;$i<count($authors);$i++):?>
 						<tr>
-							<td><?=$authors[$i]['ru_name'].' ('.$authors[$i]['en_name'].')';?></td>
+							<td>
+								<a href="<?=site_url(ADMIN_START_PAGE.'/authors/edit?mode=text&id='.$authors[$i]['id'])?>">
+									<?=$authors[$i]['ru_name'].' ('.$authors[$i]['en_name'].')';?></td>
+								</a>
 							<td>
 								<a <?=($this->input->get('search') != '' && count($authors) > 1)?'target="_blank"':''?> href="<?=site_url(ADMIN_START_PAGE.'/authors/edit?mode=text&id='.$authors[$i]['id'])?>" class="btn btn-link" ><i class="icon-pencil"></i></a>
 								<button data-item="<?=$authors[$i]['id'];?>" class="btn btn-link remove-item"><i class="icon-remove"></i></button>

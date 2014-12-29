@@ -39,7 +39,11 @@
 					<?php for($i=0;$i<count($issues);$i++):?>
 						<tr>
 							<td><?=$issues[$i]['id'];?></td>
-							<td><?=$issues[$i]['ru_title'].' ('.$issues[$i]['en_title'].')';?></td>
+							<td>
+								<a href="<?=site_url(ADMIN_START_PAGE.'/issues/edit?mode=text&id='.$issues[$i]['id'])?>">
+									<?=$issues[$i]['ru_title'].' ('.$issues[$i]['en_title'].')';?>
+								</a>
+							</td>
 							<td>
 								<a href="<?=site_url(ADMIN_START_PAGE.'/issues/edit?mode=text&id='.$issues[$i]['id'])?>" class="btn btn-link" ><i class="icon-pencil"></i></a>
 								<button data-item="<?=$issues[$i]['id'];?>" class="btn btn-link remove-item"><i class="icon-remove"></i></button>
