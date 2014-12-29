@@ -30,7 +30,7 @@
 						</h2>
 						<div class="authors">
 						<?php for($j=0;$j<count($publication['authors']);$j++):?>
-							<a href="<?=site_url('author/'.getTranslit($publications[$i]['authors'][$j][$this->uri->language_string.'_name']).'/'.$publication['authors'][$j]['id']);?>"><?=getInitials($publication['authors'][$j][$this->uri->language_string.'_name']);?></a><?php if(isset($publication['authors'][$j+1])):?>, <?php endif;?>
+							<a href="<?=site_url('author/'.getTranslit($publication['authors'][$j][$this->uri->language_string.'_name']).'/'.$publication['authors'][$j]['id']);?>"><?=getInitials($publication['authors'][$j][$this->uri->language_string.'_name']);?></a><?php if(isset($publication['authors'][$j+1])):?>, <?php endif;?>
 						<?php endfor;?>
 						</div>
 					</li>
