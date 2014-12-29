@@ -1,6 +1,6 @@
 <?php if(!defined('BASEPATH')) exit('No direct script access allowed');
 
-$config['base_url'] 			= "http://ptosnm/";
+$config['base_url'] 			= "http://pti-nt.ru/";
 $config['index_page'] 			= '';
 $config['uri_protocol']			= 'AUTO';
 $config['url_suffix'] 			= '';
@@ -19,7 +19,7 @@ $config['log_path'] 			= '';
 $config['log_date_format'] 		= 'Y-m-d H:i:s';
 $config['cache_path'] 			= '';
 $config['encryption_key'] 		= '9fca5ef2eeb2d513a09302e130298b6';
-$config['sess_cookie_name']		= 'ptosnm';
+$config['sess_cookie_name']		= 'pti-nt';
 $config['sess_expiration']		= 28800; //2 часа сессия
 $config['sess_expire_on_close']	= TRUE;
 $config['sess_encrypt_cookie']	= FALSE;

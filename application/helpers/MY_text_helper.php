@@ -26,7 +26,7 @@
 	function getInitials($FIO){
 		
 		if(!empty($FIO)):
-			list($lastname,$name,$middlename) = explode(' ',$FIO,3);
+			@list($lastname,$name,$middlename) = explode(' ',$FIO,3);
 			return $lastname.' '.mb_substr($name,0,1,'UTF-8').'. '.mb_substr($middlename,0,1,'UTF-8').'.';
 		endif;
 		return '';

@@ -54,6 +54,8 @@
 				</li>
 			<?php endfor;?>
 			</ol>
+		<?php else:?>
+			<div>К сожалению, по указанным вами параметрам не найдено ни одной публикации.</div>
 		<?php endif;?>
 		</article>
 		<?php $this->load->view('guests_interface/includes/footer');?>
