@@ -333,7 +333,7 @@ class MY_Controller extends CI_Controller{
 		return $uploadStatus;
 	}
 	
-	public function uploadSingleDocument($uploadPath = NULL,$document = 'file',$allowed_types = ALLOWED_TYPES_DOCUMENTS){
+	public function uploadSingleDocument($uploadPath = NULL,$document = 'file',$allowed_types = ALLOWED_TYPES_DOCUMENTS,$filename = NULL){
 		
 		$uploadStatus = array('status'=>FALSE,'message'=>'','uploadData'=>array());
 		if(is_null($uploadPath) || ($this->createDir($uploadPath) === FALSE)):
@@ -348,7 +348,11 @@ class MY_Controller extends CI_Controller{
 				$config['remove_spaces'] = TRUE;
 				$config['overwrite'] = FALSE;
 				$config['max_size'] = 50000;
-				$config['file_name'] = $this->translite(substr($_FILES[$document]['name'],0,strripos($_FILES[$document]['name'],'.'))).'.'.substr(strrchr($_FILES[$document]['name'],'.'),1);
+				if (is_null($filename)):
+					$config['file_name'] = $this->translite(substr($_FILES[$document]['name'],0,strripos($_FILES[$document]['name'],'.'))).'.'.substr(strrchr($_FILES[$document]['name'],'.'),1);
+				else:
+					$config['file_name'] = $filename;
+				endif;
 				$this->upload->initialize($config);
 				if(!$this->upload->do_upload($document)):
 					$uploadStatus['message'] = $this->load->view('html/print-error',array('alert_header'=>'Файл: '.$_FILES[$document]['name'],'message'=>$this->upload->display_errors()),TRUE);

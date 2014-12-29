@@ -640,7 +640,7 @@ class Ajax_interface extends MY_Controller{
 				$issueUploadPath = $issue['year'];
 			endif;
 		endif;
-		$resultUpload = $this->uploadSingleDocument($uploadPath.'/'.$issueUploadPath,$document,'pdf');
+		$resultUpload = $this->uploadSingleDocument($uploadPath.'/'.$issueUploadPath,$document,'pdf','pti-nt-'.$issue['number'].'-'.$issue['year'].'-'.$publicationID.'.pdf');
 		if($resultUpload['status'] == TRUE):
 			$responseDocumentSrc = $issueUploadPath.'/'.$resultUpload['uploadData']['file_name'];
 			$this->publications->updateField($publicationID,$document,$responseDocumentSrc);
