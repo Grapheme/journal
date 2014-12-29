@@ -15,7 +15,7 @@
 		<select name="number" class="styled-select">
 			<option value="">--</option>
 		<?php foreach ($numbers as $numbers_index => $number): ?>
-			<option value="<?=$numbers_index;?>"<?=($numbers_index == $this->input->get('number'))?'selected':'';?>><?=$numbers_index;?></option>
+			<option value="<?=$number;?>"<?=($number == $this->input->get('number'))?'selected':'';?>><?=$number;?></option>
 		<?php endforeach;?>
 		</select>
 	</div>
