@@ -257,6 +257,7 @@ class Guests_interface extends MY_Controller{
 			$pagevar['years'][$issue['year']] = $issue['year'];
 			$pagevar['numbers'][$issue['number']] = $issue['number'];
 		endforeach;
+		$pagevar['numbers'] = sort($pagevar['numbers']);
 		if($this->input->get() !== FALSE):
 			$searchParameters = array(
 				'text' => $this->input->get('text'),
