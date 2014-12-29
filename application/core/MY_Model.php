@@ -95,7 +95,7 @@ class MY_Model extends CI_Model{
 	}
 	
 	function getAll($orderby = NULL){
-		
+
 		if(is_null($orderby)):
 			$orderby = $this->order_by;
 		endif;

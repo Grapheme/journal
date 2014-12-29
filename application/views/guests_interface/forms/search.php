@@ -5,10 +5,9 @@
 		<div class="select-caption"><?=lang('form_search_year');?>:</div>
 		<select name="year" class="styled-select">
 			<option value="">--</option>
-		<?php $year = date("Y");?>
-		<?php for($i=$year;$i>=2007;$i--):?>
-			<option value="<?=$i;?>" <?=($i == $this->input->get('year'))?'selected':'';?>><?=$i;?></option>
-		<?php endfor;?>
+		<?php foreach ($years as $years_index => $year): ?>
+			<option value="<?=$years_index;?>" <?=($years_index == $this->input->get('year'))?'selected':'';?>><?=$years_index;?></option>
+		<?php endforeach;?>
 		</select>
 	</div>
 	<div class="num-select">

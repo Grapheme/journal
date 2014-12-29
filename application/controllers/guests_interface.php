@@ -243,14 +243,18 @@ class Guests_interface extends MY_Controller{
 	
 	public function search(){
 		
-		$this->load->model(array('pages','page_resources'));
+		$this->load->model(array('pages','page_resources','issues'));
 		$this->load->helper(array('text','date'));
 		$pagevar = array(
 			'page_content' => $this->pages->getWhere(NULL,array('page_url'=>uri_string())),
 			'images' => $this->page_resources->getWhere(NULL,array('page_url'=>uri_string()),TRUE),
 			'publications' => array(),
-			'search_text' => ''
+			'search_text' => '',
+			'years' => array()
 		);
+		foreach($this->issues->getAll() as $issue):
+			$pagevar['years'][$issue['year']] = $issue['year'];
+		endforeach;
 		if($this->input->get() !== FALSE):
 			$searchParameters = array(
 				'text' => $this->input->get('text'),

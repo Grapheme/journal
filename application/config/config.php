@@ -1,6 +1,6 @@
 <?php if(!defined('BASEPATH')) exit('No direct script access allowed');
 
-$config['base_url'] 			= "http://pti-nt.ru/";
+$config['base_url'] 			= "http://journal/";
 $config['index_page'] 			= '';
 $config['uri_protocol']			= 'AUTO';
 $config['url_suffix'] 			= '';
