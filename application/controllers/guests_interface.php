@@ -250,10 +250,12 @@ class Guests_interface extends MY_Controller{
 			'images' => $this->page_resources->getWhere(NULL,array('page_url'=>uri_string()),TRUE),
 			'publications' => array(),
 			'search_text' => '',
-			'years' => array()
+			'years' => array(),
+			'numbers' => array(),
 		);
 		foreach($this->issues->getAll() as $issue):
 			$pagevar['years'][$issue['year']] = $issue['year'];
+			$pagevar['numbers'][$issue['numbers']] = $issue['numbers'];
 		endforeach;
 		if($this->input->get() !== FALSE):
 			$searchParameters = array(

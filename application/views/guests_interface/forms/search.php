@@ -14,9 +14,9 @@
 		<div class="select-caption"><?=lang('form_search_number');?>:</div>
 		<select name="number" class="styled-select">
 			<option value="">--</option>
-		<?php for($i=1;$i<=12;$i++):?>
-			<option value="<?=$i;?>"<?=($i == $this->input->get('number'))?'selected':'';?>><?=$i;?></option>
-		<?php endfor;?>
+		<?php foreach ($numbers as $numbers_index => $number): ?>
+			<option value="<?=$years_index;?>"<?=($years_index == $this->input->get('number'))?'selected':'';?>><?=$years_index;?></option>
+		<?php endforeach;?>
 		</select>
 	</div>
 	<input class="btn-loading btn-submit" type="submit" value="<?=lang('form_search_button');?>">
