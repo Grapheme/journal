@@ -13,7 +13,7 @@
 		<?php $this->load->view('guests_interface/includes/navigation');?>
 		<article>
 			<?=(isset($page_content[$this->uri->language_string.'_content']))?$page_content[$this->uri->language_string.'_content']:'';?>
-			<?php $this->load->view('html/select-years');?>
+			<?php $this->load->view('html/select-years',array('issues'=>$issues));?>
 			<section class="section-all-issues">
 				<ul class="month-issues">
 				<?php $this->load->helper(array('date','text'));?>
