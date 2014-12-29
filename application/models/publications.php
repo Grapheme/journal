@@ -35,7 +35,7 @@ class Publications extends MY_Model{
 	
 	function getPublicationByKeyWord($wordID){
 		
-		$this->db->select('issues.id AS issue,issues.year,issues.month,issues.number,issues.ru_title AS issue_ru_title,issues.en_title AS issue_en_title,publications.*');
+		$this->db->select('issues.id AS issue,issues.year,issues.number,issues.ru_title AS issue_ru_title,issues.en_title AS issue_en_title,publications.*');
 		$this->db->from('publications');
 		$this->db->join('issues','issues.id = publications.issue');
 		$this->db->join('matching','publications.id = matching.publication');
@@ -49,7 +49,7 @@ class Publications extends MY_Model{
 	
 	function getPublicationByAuthor($author){
 		
-		$this->db->select('issues.id AS issue,issues.year,issues.month,issues.number,issues.ru_title AS issue_ru_title,issues.en_title AS issue_en_title,publications.*');
+		$this->db->select('issues.id AS issue,issues.year,issues.number,issues.ru_title AS issue_ru_title,issues.en_title AS issue_en_title,publications.*');
 		$this->db->from('publications');
 		$this->db->join('issues','issues.id = publications.issue');
 		$this->db->where('(publications.authors = \''.$author.'\' OR publications.authors LIKE \'%'.','.$author.'\' OR publications.authors LIKE \'%,'.$author.',%\' OR publications.authors LIKE \''.$author.',%\')',NULL);
@@ -62,7 +62,7 @@ class Publications extends MY_Model{
 	
 	function getPublicationByString($string){
 		
-		$this->db->select('issues.id AS issue,issues.year,issues.month,issues.number,issues.ru_title AS issue_ru_title,issues.en_title AS issue_en_title,publications.*');
+		$this->db->select('issues.id AS issue,issues.year,issues.number,issues.ru_title AS issue_ru_title,issues.en_title AS issue_en_title,publications.*');
 		$this->db->from('publications');
 		$this->db->join('issues','issues.id = publications.issue');
 		if($string !== FALSE):
@@ -80,7 +80,7 @@ class Publications extends MY_Model{
 
 	function getPublicationByIssue($parameters){
 		
-		$this->db->select('issues.id AS issue,issues.year,issues.month,issues.number,issues.ru_title AS issue_ru_title,issues.en_title AS issue_en_title,publications.*');
+		$this->db->select('issues.id AS issue,issues.year,issues.ru_title AS issue_ru_title,issues.en_title AS issue_en_title,publications.*');
 		$this->db->from('publications');
 		$this->db->join('issues','issues.id = publications.issue');
 		if(!empty($parameters['year'])):

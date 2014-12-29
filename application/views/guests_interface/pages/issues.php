@@ -17,25 +17,31 @@
 			<section class="section-all-issues">
 				<ul class="month-issues">
 				<?php $this->load->helper(array('date','text'));?>
-				<?php for($i=0;$i<count($issues);$i++):?>
+				<?php foreach($issues as $issue): ?>
 					<li class="month-issues-item">
 						<div class="panel">
 							<figure class="front">
-								<div><?=lang('issue_number')?><span class="big"><?=$issues[$i]['number']?></span></div>
+								<div><?=lang('issue_number')?><span class="big"><?=$issue['number']?></span></div>
 							</figure>
 							<figure class="back">
-								<a href="<?=site_url('issue/'.$issues[$i]['year'].'/'.$issues[$i]['month'].'/'.$issues[$i]['id'])?>">
+								<a href="<?=site_url('issue/'.$issue['id'].'-'.getTranslit($issue[$this->uri->language_string.'_title']));?>">
 									<div class="back-date">
-										<span class="back-month"><?=mb_strtolower(getMonthName($issues[$i]['month'],$this->uri->language_string),'UTF-8');?></span>
-										<span class="back-year"><?=$issues[$i]['year']?></span>
+										<span class="back-month">
+										<?php if(!empty($issue[$this->uri->language_string.'_title'])):?>
+											<?=$issue[$this->uri->language_string.'_title'];?>
+										<?php else: ?>
+											Выпуск №<?=$issue['number'];?>. <?=$issue['year'];?>
+										<?php endif;?>
+										</span>
+										<span class="back-year"><?=$issue['year']?></span>
 										<div class="delicate-design-stroke"></div>
 									</div>
-									<div class="publications-num"><?=$issues[$i]['publication'].' '.pluralPublications($issues[$i]['publication'],$this->uri->language_string);?></div>
+									<div class="publications-num"><?=$issue['publication'].' '.pluralPublications($issue['publication'],$this->uri->language_string);?></div>
 								</a>
 							</figure>
 						</div>
 					</li>
-				<?php endfor;?>
+				<?php endforeach;?>
 				</ul>
 			</section>
 		</article>

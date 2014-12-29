@@ -38,7 +38,6 @@
 		<label>Номер выпуска:</label>
 		<input type="text" name="number" class="span1 valid-required valid-numeric" value="" placeholder="" />
 		<?php $this->load->helper('date');?>
-		<?=getMonthList();?>
 		<?=getYearsList(date("Y"),2006,TRUE);?>
 	</div>
 	<div class="div-form-operation">

@@ -26,7 +26,7 @@ class Publications_comments extends MY_Model{
 	}
 	function getLimitList($limit,$offset = 0,$issueID = FALSE,$publicationID = FALSE){
 		
-		$this->db->select('accounts.id AS account,accounts.name,publications_comments.*,issues.year,issues.month,issues.ru_title AS issue_title,publications.ru_title AS publication_title');
+		$this->db->select('accounts.id AS account,accounts.name,publications_comments.*,issues.year,issues.ru_title AS issue_title,publications.ru_title AS publication_title');
 		$this->db->from('publications_comments');
 		$this->db->join('accounts','accounts.id = publications_comments.account');
 		$this->db->join('issues','issues.id = publications_comments.issue');

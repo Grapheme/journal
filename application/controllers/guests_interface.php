@@ -42,7 +42,7 @@ class Guests_interface extends MY_Controller{
 		$this->load->model('issues');
 		$issue_number = FALSE; $issue_link = FALSE;
 		if($issue = $this->issues->getLast()):
-			$issue_link = site_url('issue/'.$issue['year'].'/'.$issue['number'].'/'.$issue['id']);
+			$issue_link = site_url('issue/'.$issue['id'].'-'.$this->translite($issue[$this->uri->language_string.'_title']));
 			$issue_number = $issue['number'].'/'.substr($issue['year'],2,2);
 		endif;
 		$this->pages('home',array('issue_number'=>$issue_number,'issue_link'=>$issue_link));
@@ -70,9 +70,10 @@ class Guests_interface extends MY_Controller{
 	public function issue(){
 		
 		$this->load->model(array('issues','publications'));
+		$issueID = (int) $this->uri->segment(2);
 		$pagevar = array(
-			'page_content' => $this->issues->getWhere($this->uri->segment(4)),
-			'publications' => $this->publications->getWhere(NULL,array('issue'=>$this->uri->segment(4)),TRUE)
+			'page_content' => $this->issues->getWhere($issueID),
+			'publications' => $this->publications->getWhere(NULL,array('issue'=>$issueID),TRUE)
 		);
 		for($i=0;$i<count($pagevar['publications']);$i++):
 			$pagevar['publications'][$i]['authors'] = $this->getAuthorsByIDs($pagevar['publications'][$i]['authors']);
@@ -84,9 +85,11 @@ class Guests_interface extends MY_Controller{
 	public function publication(){
 		
 		$this->load->model(array('issues','publications','publications_resources','publications_comments'));
+		$publicationID = (int) $this->uri->segment(3);
+		$publication = $this->publications->getWhere($publicationID);
 		$pagevar = array(
-			'page_content' => $this->publications->getWhere($this->uri->segment(6)),
-			'issue' => $this->issues->getWhere($this->uri->segment(4)),
+			'page_content' => $publication,
+			'issue' => $this->issues->getWhere($publication['issue']),
 			'publication_resources' => array(),
 			'keywords' => array(),
 			'authors' => array(),
@@ -95,10 +98,10 @@ class Guests_interface extends MY_Controller{
 		if(empty($pagevar)):
 			show_404();
 		endif;
-		if($keywords = $this->getProductKeyWords($pagevar['page_content']['id'])):
+		if($keywords = $this->getProductKeyWords($publication['issue'])):
 			$pagevar['keywords'] = explode(',',$keywords);
 		endif;
-		if($resources = $this->publications_resources->getWhere(NULL,array('publication'=>$this->uri->segment(6),'issue'=>$this->uri->segment(4)),TRUE)):
+		if($resources = $this->publications_resources->getWhere(NULL,array('publication'=>$publicationID,'issue'=>$publication['issue']),TRUE)):
 			for($i=0;$i<count($resources);$i++):
 				$pagevar['publication_resources'][$i]['id'] = $resources[$i]['id'];
 				$pagevar['publication_resources'][$i]['publication'] = $resources[$i]['publication'];
@@ -108,7 +111,7 @@ class Guests_interface extends MY_Controller{
 			endfor;
 		endif;
 		$pagevar['authors'] = $this->getAuthorsByIDs($pagevar['page_content']['authors']);
-		$pagevar['comments'] = $this->getPublicationComments($this->uri->segment(6));
+		$pagevar['comments'] = $this->getPublicationComments($publicationID);
 		$this->load->helper(array('date','text'));
 		$this->session->set_userdata('current_page',site_url(uri_string()));
 		$this->load->view("guests_interface/pages/publication",$pagevar);

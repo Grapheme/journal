@@ -230,7 +230,7 @@ class Admin_interface extends MY_Controller{
 		
 		$this->load->model(array('publications','issues'));
 		$issue = 0;
-		if($issues = $this->issues->getAll('year DESC,month DESC,number DESC')):
+		if($issues = $this->issues->getAll('year DESC,number DESC')):
 			$issue = $issues[0]['id'];
 		endif;
 		if($this->input->get('issue') !== FALSE && is_numeric($this->input->get('issue'))):
@@ -288,7 +288,7 @@ class Admin_interface extends MY_Controller{
 		
 		$this->load->helper(array('date','text'));
 		$this->load->model(array('publications_comments','issues','publications'));
-		if($issues = $this->issues->getAll('year DESC,month DESC,number DESC')):
+		if($issues = $this->issues->getAll('year DESC, number DESC')):
 			$issueID = $issues[0]['id'];
 		endif;
 		if($this->input->get('issue') !== FALSE && is_numeric($this->input->get('issue'))):

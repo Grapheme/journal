@@ -56,7 +56,6 @@
 			array('field'=>'en_name','label'=>'Name','rules'=>'trim|xss_clean'),
 			array('field'=>'number','label'=>'Номер','rules'=>'required|trim|numeric'),
 			array('field'=>'year','label'=>'Год','rules'=>'required|trim|numeric'),
-			array('field'=>'month','label'=>'Месяц','rules'=>'required|trim|numeric'),
 		),
 		'publication' =>array(
 			array('field'=>'ru_page_title','label'=>'Title страницы','rules'=>'trim|xss_clean'),

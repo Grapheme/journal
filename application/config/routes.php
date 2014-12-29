@@ -80,10 +80,10 @@ $route[ADMIN_START_PAGE.'/publications/add'] = "admin_interface/insertPublicatio
 $route[ADMIN_START_PAGE.'/publications/edit'] = "admin_interface/editPublications";
 $route[ADMIN_START_PAGE.'/publications/resources'] = "admin_interface/resourcesPublications";
 /*************************************************** GUEST INTRERFACE ***********************************************/
+$route['issue/publication/:any'] = "guests_interface/publication";
+$route['issue/publication/:any/bibtext'] = "guests_interface/publicationBibText";
 $route['issues'] = "guests_interface/issues";
-$route['issue/:num/:num/:num'] = "guests_interface/issue";
-$route['issue/:num/:num/:num/publication/:num'] = "guests_interface/publication";
-$route['issue/:num/:num/:num/publication/:num/bibtext'] = "guests_interface/publicationBibText";
+$route['issue/:any'] = "guests_interface/issue";
 
 $route['publication/get-resource'] = "guests_interface/getFileResource";
 $route['publication/get-publication'] = "guests_interface/getFilePublication";

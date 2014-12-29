@@ -13,28 +13,28 @@
 		<?php $this->load->view('guests_interface/includes/navigation');?>
 		<article>
 			<header>
-				<h1 class="article-h1"><?=mb_strtoupper(getMonthName($page_content['month'],$this->uri->language_string));?>. <?=$page_content['year'];?></h1>
+				<h1 class="article-h1"><?=$page_content[$this->uri->language_string.'_page_h1'];?></h1>
 				<div class="delicate-design-stroke"> </div>
 				<ol class="month-list">
-				<?php for($i=0;$i<count($publications);$i++):?>
+				<?php foreach((array)$publications as $publication):?>
 					<li>
-					<?php if(empty($publications[$i][$this->uri->language_string.'_document']) === FALSE):?>
+					<?php if(empty($publication[$this->uri->language_string.'_document']) === FALSE):?>
 						<div class="pdf-dl-link">
-							<a href="<?=site_url('publication/get-publication?resourse='.$publications[$i]['id']);?>">
+							<a href="<?=site_url('publication/get-publication?resourse='.$publication['id']);?>">
 								<img src="<?=BaseURL('img/pdf.png');?>"><?=lang('publication_download');?>
 							</a>
 						</div>
 					<?php endif;?>
 						<h2 class="article-h2">
-							<a href="<?=site_url('issue/'.$page_content['year'].'/'.$page_content['month'].'/'.$page_content['id'].'/publication/'.$publications[$i]['id'])?>"><?=$publications[$i][$this->uri->language_string.'_title']?></a>
+							<a href="<?=site_url('issue/publication/'.$publication['id'].'-'.getTranslit($publication[$this->uri->language_string.'_title']))?>"><?=$publication[$this->uri->language_string.'_title']?></a>
 						</h2>
 						<div class="authors">
-						<?php for($j=0;$j<count($publications[$i]['authors']);$j++):?>
-							<a href="<?=site_url('author/'.getTranslit($publications[$i]['authors'][$j][$this->uri->language_string.'_name']).'/'.$publications[$i]['authors'][$j]['id']);?>"><?=getInitials($publications[$i]['authors'][$j][$this->uri->language_string.'_name']);?></a><?php if(isset($publications[$i]['authors'][$j+1])):?>, <?php endif;?>
+						<?php for($j=0;$j<count($publication['authors']);$j++):?>
+							<a href="<?=site_url('author/'.getTranslit($publications[$i]['authors'][$j][$this->uri->language_string.'_name']).'/'.$publication['authors'][$j]['id']);?>"><?=getInitials($publication['authors'][$j][$this->uri->language_string.'_name']);?></a><?php if(isset($publication['authors'][$j+1])):?>, <?php endif;?>
 						<?php endfor;?>
 						</div>
 					</li>
-				<?php endfor;?>
+				<?php endforeach;?>
 				</ol>
 			</header>
 		</article>
