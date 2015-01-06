@@ -485,7 +485,7 @@ class Ajax_interface extends MY_Controller{
 				$issueUploadPath = $issue['year'].'/'.$issue['month'];
 			endif;
 		endif;
-		$resultUpload = $this->uploadSingleDocument($uploadPath.'/'.$issueUploadPath,'file',ALLOWED_TYPES_DOCUMENTS.'|'.ALLOWED_TYPES_IMAGES.'|'.ALLOWED_TYPES_MEDIA);
+		$resultUpload = $this->uploadSingleDocument($uploadPath.'/'.$issueUploadPath,'file',ALLOWED_TYPES_DOCUMENTS.'|'.ALLOWED_TYPES_IMAGES.'|'.ALLOWED_TYPES_MEDIA,'pti-nt-'.$issue['number'].'-'.$issue['year'].'-'.$this->input->get('issue').'-'.time().'.pdf');
 		if($resultUpload['status'] == TRUE):
 			$json_request['responsePhotoSrc'] = $this->saveDocumentPublication($this->input->get('issue'),$this->input->get('publication'),$resultUpload['uploadData']);
 			$json_request['status'] = TRUE;
