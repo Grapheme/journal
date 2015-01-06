@@ -483,7 +483,7 @@ class Ajax_interface extends MY_Controller{
 		$filename = NULL;
 		if($this->input->get('issue') !== FALSE):
 			if($issue = $this->issues->getWhere($this->input->get('issue'))):
-				$issueUploadPath = $issue['year'].'/'.$issue['month'];
+				$issueUploadPath = $issue['year'];
 				$filename = 'pti-nt-'.$issue['number'].'-'.$issue['year'].'-'.time().'.pdf';
 			endif;
 		endif;
