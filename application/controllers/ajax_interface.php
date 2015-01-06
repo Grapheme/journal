@@ -484,7 +484,7 @@ class Ajax_interface extends MY_Controller{
 		if($this->input->get('issue') !== FALSE):
 			if($issue = $this->issues->getWhere($this->input->get('issue'))):
 				$issueUploadPath = $issue['year'].'/'.$issue['month'];
-				$filename = 'pti-nt-'.$issue['number'].'-'.$issue['year'].'-'.$this->input->get('issue').'-'.time().'.pdf';
+				$filename = 'pti-nt-'.$issue['number'].'-'.$issue['year'].'-'.time().'.pdf';
 			endif;
 		endif;
 		$resultUpload = $this->uploadSingleDocument($uploadPath.'/'.$issueUploadPath,'file',ALLOWED_TYPES_DOCUMENTS.'|'.ALLOWED_TYPES_IMAGES.'|'.ALLOWED_TYPES_MEDIA,$filename);
