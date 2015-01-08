@@ -1,7 +1,7 @@
 <?
 $years = array();
-if (!empty($issues)):
-	foreach($issues as $issue):
+if (isset($all_issues) &&!empty($all_issues)):
+	foreach($all_issues as $issue):
 		$years[$issue['year']] = $issue['year'];
 	endforeach;
 endif;

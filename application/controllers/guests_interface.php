@@ -58,7 +58,8 @@ class Guests_interface extends MY_Controller{
 		$pagevar = array(
 			'page_content' => $this->pages->getWhere(NULL,array('page_url'=>uri_string())),
 			'images' => $this->page_resources->getWhere(NULL,array('page_url'=>uri_string()),TRUE),
-			'issues' => $this->issues->getWhere(NULL,array('year'=>$year),TRUE)
+			'issues' => $this->issues->getWhere(NULL,array('year'=>$year),TRUE),
+			'all_issues' =>$this->issues->getAll()
 		);
 		if(!empty($pagevar['issues'])):
 			$pagevar['issues'] = $this->getCountPublication($pagevar['issues']);
