@@ -11,7 +11,7 @@ endif;
 	<ul class="production-years-list">
 <?php foreach($years as $year_index => $year):?>
 	<?php if(!$year):?>
-		<li><?=$year_index?></li>
+		<li class="disabled"><?=$year_index?></li>
 	<?php else:?>
 		<li><a <?=($this->input->get('year') == $year_index)?'class="active"':''?> href="<?=site_url(uri_string().'?year='.$year_index);?>"><?=$year_index?></a></li>
 	<?php endif;?>
