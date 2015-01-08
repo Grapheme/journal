@@ -1,5 +1,5 @@
 <?
-$years = array();
+$years = array('2015'=>2015);
 if (isset($all_issues) &&!empty($all_issues)):
 	foreach($all_issues as $issue):
 		$years[$issue['year']] = $issue['year'];
