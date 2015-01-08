@@ -45,6 +45,8 @@
 				<?php endforeach;?>
 				</ul>
 			</section>
+		<?php else: ?>
+			<p>На данный момент список публикаций этого года пуст.</p>
 		<?php endif; ?>
 		</article>
 		<?php $this->load->view('guests_interface/includes/footer');?>
