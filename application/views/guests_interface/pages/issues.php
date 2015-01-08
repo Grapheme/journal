@@ -14,6 +14,7 @@
 		<article>
 			<?=(isset($page_content[$this->uri->language_string.'_content']))?$page_content[$this->uri->language_string.'_content']:'';?>
 			<?php $this->load->view('html/select-years',array('issues'=>$issues));?>
+		<?php if(!empty($issues)):?>
 			<section class="section-all-issues">
 				<ul class="month-issues">
 				<?php $this->load->helper(array('date','text'));?>
@@ -44,6 +45,7 @@
 				<?php endforeach;?>
 				</ul>
 			</section>
+		<?php endif; ?>
 		</article>
 		<?php $this->load->view('guests_interface/includes/footer');?>
 	</div>
