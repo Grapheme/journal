@@ -46,7 +46,9 @@
 		else:
 			for($i=$begin;$i>=$end;$i--):
 				$html .= '<option value="'.$i.'"';
-				if($i==date('Y')):
+				if(is_null($value) && $i==date('Y')):
+					$html .= ' selected ';
+				elseif(!is_null($value) && $i == $value):
 					$html .= ' selected ';
 				endif;
 				$html .= '>'.$i.'</option>';
