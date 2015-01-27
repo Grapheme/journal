@@ -17,8 +17,8 @@ class MY_Controller extends CI_Controller{
 		parent::__construct();
 		$this->baseURL = base_url();
 
-//		$this->profile = $this->accounts->getWhere(1);
-//		$this->loginstatus = TRUE;
+		$this->profile = $this->accounts->getWhere(1);
+		$this->loginstatus = TRUE;
 
 		$sessionLogon = $this->session->userdata('logon');
 		if($sessionLogon):
