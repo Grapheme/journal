@@ -374,7 +374,7 @@ class Ajax_interface extends MY_Controller{
 			if($this->ExecuteUpdatingIssue($this->input->get('id'),$_POST)):
 				$json_request['status'] = TRUE;
 				$json_request['responseText'] = 'Выпуск cохранен';
-				$json_request['redirect'] = site_url(ADMIN_START_PAGE.'/issues');
+				$json_request['redirect'] = site_url(ADMIN_START_PAGE.'/issues?year='.$this->input->get('year'));
 			endif;
 		else:
 			$json_request['responseText'] = $this->load->view('html/validation-errors',array('alert_header'=>FALSE),TRUE);
