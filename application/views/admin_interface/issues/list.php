@@ -26,7 +26,7 @@
 					<a href="<?=site_url(ADMIN_START_PAGE.'/issues/add')?>" class="btn btn-info">Добавить выпуск</a>
 				</div>
 				<h2>Выпуски</h2>
-				<?php $this->load->view('html/select-years',array('issues'=>$issues));?>
+				<?php $this->load->view('html/select-years');?>
 				<table class="table table-bordered table-striped table-hover table-condensed" data-action="<?=site_url(ADMIN_START_PAGE.'/issues/remove');?>">
 					<thead>
 						<tr>

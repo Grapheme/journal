@@ -206,7 +206,8 @@ class Admin_interface extends MY_Controller{
 		endif;
 		$this->load->model('issues');
 		$pagevar = array(
-			'issues' => $this->issues->getWhere(NULL,array('year'=>$year),TRUE)
+			'issues' => $this->issues->getWhere(NULL,array('year'=>$year),TRUE),
+			'all_issues' =>$this->issues->getAll()
 		);
 		$this->load->view("admin_interface/issues/list",$pagevar);
 	}
